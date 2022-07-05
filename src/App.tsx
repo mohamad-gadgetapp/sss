@@ -5,20 +5,24 @@ import './App.css';
 import Header from "./components/Header";
 
 
-
 /** pages */
 import HomePage from './pages/Home';
+import AboutUsPage from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 function App() {
 
   return (
-    <div>
-      <Header title={"hello"} />
-      <Router>
+    <div >
+      <Header />
+      <div style={{ padding: '10px' }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/aboutUsPage" element={<AboutUsPage />} />
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
-      </Router>
+      </div>
+
     </div>
   );
 }
