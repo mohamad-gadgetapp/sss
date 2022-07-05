@@ -15,11 +15,11 @@ interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
 const ContractBooking: FC<ContractProps> = (props) => {
   return (
     <div>
-        <SubHeader title="Contract Booking"/>
+      <SubHeader title="Contract Booking" />
       <div className="contractMainDiv">
         <div className="mb-3 inputFieldDiv">
           <label htmlFor="exampleInputEmail1" className="form-label inputLabelHeight">
-           <img src={inputLogo}/>
+            <img src={inputLogo} />
           </label>
           <input
             className="form-control inputBorderNone"

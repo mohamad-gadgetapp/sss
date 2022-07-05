@@ -5,6 +5,8 @@ import { AgGridReact } from 'ag-grid-react';
 import { colors } from "../../common/color"
 import "./style.css"
 import TextField from "../../components/TextField/index"
+import AgGrid from "../../components/AgGrid";
+
 const HomePage = () => {
     const [columnDefs, setColumnDefs] = useState<Array<object>>([
         { headerName: "Type", field: "type", floatingFilter: true, cellStyle: { 'background-color': colors.primary_light_grey, } },
@@ -34,23 +36,7 @@ const HomePage = () => {
             <div className='textFieldDiv'>
                 <TextField name="hello" label="input" quantity='Quantity' rate='Rate' counterParty='Counter Party' annotation='Annotation' />
             </div>
-            <div
-                className="ag-theme-balham"
-                style={{
-                    height: '100vh',
-                    width: '100%'
-                }}
-            >
-                <AgGridReact
-                    rowStyle={{ justifyContent: "center", 'border-bottom': 'white 5px solid' }}
-                    rowHeight={50}
-                    columnDefs={columnDefs}
-                    rowData={rowData}
-                    floatingFiltersHeight={50}
-                    defaultColDef={defaultColDef}>
-
-                </AgGridReact>
-            </div>
+            <AgGrid columnDefs={columnDefs} rowData={rowData} />
         </>
     )
 }
