@@ -2,21 +2,31 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 /** component */
-// import Header from "./components/Header";
+import Header from "./components/Header";
+
 
 /** pages */
-import ContractBooking from './pages/Home/ContractBooking';
+// import HomePage from './pages/Home';
+import ContractBooking from "./pages/ContractBooking/index";
+
+import HomePage from './pages/Home';
+import AboutUsPage from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 function App() {
 
   return (
-    <div>
-      {/* <Header title={"hello"} /> */}
-      <Router>
+    <div >
+      <Header />
+      <div style={{ padding: '10px' }}>
         <Routes>
-          <Route path="/" element={<ContractBooking />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contractBooking" element={<ContractBooking />} />
+          <Route path="/aboutUsPage" element={<AboutUsPage />} />
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
-      </Router>
+      </div>
+
     </div>
   );
 }

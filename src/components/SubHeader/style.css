@@ -1,0 +1,35 @@
+.SubHeaderMainDiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.SubHeaderMatch{
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+.SubHeaderNonMatch{
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+
+}
+
+.matchMainDiv{
+    display: flex;
+    margin-left: 1rem;
+}
+
+.match{
+    margin-right: 1rem;
+}
+
+.nonmatch{
+    margin-right: 1rem;
+}
+
+.subHeaderTitle{
+    padding: 2rem 2rem
+}

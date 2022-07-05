@@ -1,0 +1,37 @@
+.contractMainDiv{
+    display: flex;
+    width: 100%;
+}
+.inputPlaceholder{
+
+}
+
+input{
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+.inputFieldDiv{
+    width: 20%;
+    padding: 0rem 2rem;
+    height: 5rem;
+}
+
+.submit-Btn{
+    width: 14rem;
+    height: 3.8rem;
+    border-radius: 0.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    background-color: #1E355E;
+    color: #ffffff;
+}
+
+.inputBorderNone:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+.inputLabelHeight{
+    height: 1.6rem;
+}
