@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
@@ -31,7 +31,8 @@ const HomePage = () => {
             <AgGridReact
                 columnDefs={columnDefs}
                 rowData={rowData}
-                defaultColDef={defaultColDef}>
+                defaultColDef={defaultColDef}
+                >
             </AgGridReact>
         </div>
     )

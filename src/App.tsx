@@ -7,7 +7,9 @@ import Header from "./components/Header";
 
 
 /** pages */
-import HomePage from './pages/Home';
+// import HomePage from './pages/Home';
+import ContractBooking from "./pages/ContractBooking/index";
+
 
 function App() {
 
@@ -16,7 +18,7 @@ function App() {
       <Header title={"hello"} />
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ContractBooking />} />
         </Routes>
       </Router>
     </div>
