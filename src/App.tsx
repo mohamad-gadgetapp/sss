@@ -2,21 +2,19 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 /** component */
-import Header from "./components/Header";
-
-
+// import Header from "./components/Header";
 
 /** pages */
-import HomePage from './pages/Home';
+import ContractBooking from './pages/Home/ContractBooking';
 
 function App() {
 
   return (
     <div>
-      <Header title={"hello"} />
+      {/* <Header title={"hello"} /> */}
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ContractBooking />} />
         </Routes>
       </Router>
     </div>

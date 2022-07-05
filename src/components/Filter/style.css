@@ -1,0 +1,31 @@
+.textSMBSLG {
+    font-size: 1rem;
+}
+
+.mainDivFilter {
+    background-color: #6A7587;
+    padding: 2.75rem;
+}
+
+.filterTable {
+    width: 100%;
+}
+
+.filterContent {
+    color: #FFFFFF;
+    width: 9%;
+}
+
+.filterInput {
+    background-color: transparent;
+    border: 1px solid #EAECEF;
+    color: #FFFFFF;
+    border-radius: 12px;
+    width: 80%;
+    padding: .65rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.filterInput:focus {
+    outline: none;
+}
