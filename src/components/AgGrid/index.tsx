@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
+import "./style.css"
 
 interface AgGridProps {
     title?: string;
