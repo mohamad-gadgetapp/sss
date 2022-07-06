@@ -1,22 +1,43 @@
-// import React from 'react'
+import React from 'react'
 import "./style.css";
 
 interface SubHeaderProps {
   title?: string;
+  value?:string | 'match';
+  handleClick:(event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const SubHeader = ({ title }: SubHeaderProps) => {
+const SubHeader = ({ title,handleClick }: SubHeaderProps ) => {
+
   return (
     <div className="SubHeaderMainDiv">
       <div className="subHeaderTitle">{title}</div>
       <div className="matchMainDiv">
         <div className="SubHeaderMatch">
-          <input type="radio" name="match" id="match" className="match"/>
-          <label htmlFor="match">Match</label>
+          <input
+            type="radio"
+            name="match"
+            id="match"
+            className="matchRadio"
+            onChange={handleClick}
+            value="match"
+          />
+          <label htmlFor="match" className="match">
+            Match
+          </label>
         </div>
         <div className="SubHeaderNonMatch">
-          <input type="radio" name="match" id="nonmatch" className="nonmatch"/>
-          <label htmlFor="nonmatch">Non Match</label>
+          <input
+            type="radio"
+            name="match"
+            id="nonmatch"
+            className="nonMatchRadio"
+            onChange={handleClick}
+            value="nonmatch"
+          />
+          <label htmlFor="nonmatch" className="nonmatch">
+            Non Match
+          </label>
         </div>
       </div>
     </div>

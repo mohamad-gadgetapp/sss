@@ -1,7 +1,6 @@
 import React, { FC, InputHTMLAttributes } from "react";
 import inputLogo from "./Inputlogo.svg";
-import "./style.css"
-import SubHeader from "../SubHeader/index"
+import "./style.css";
 
 interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -15,11 +14,10 @@ interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
 const ContractBooking: FC<ContractProps> = (props) => {
   return (
     <div>
-        <SubHeader title="Contract Booking"/>
       <div className="contractMainDiv">
         <div className="mb-3 inputFieldDiv">
           <label htmlFor="exampleInputEmail1" className="form-label inputLabelHeight">
-           <img src={inputLogo}/>
+            <img src={inputLogo}/>
           </label>
           <input
             className="form-control inputBorderNone"
@@ -58,7 +56,6 @@ const ContractBooking: FC<ContractProps> = (props) => {
           />
         </div>
       </div>
-      <button type="submit" className="submit-Btn">Submit</button>
     </div>
   );
 };
