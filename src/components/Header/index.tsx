@@ -2,13 +2,13 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./style.css";
 import { styles } from "./style.js";
 import logo from "../../assets/southLogo.png";
-import user from "../../assets/user.png";
+import user from "../../assets/user.svg";
 import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
@@ -26,27 +26,21 @@ const Header = ({ title }: HeaderProps) => {
 			<Toolbar>
 				<Typography onClick={() => onClickNavigate("/")} variant="h6"
 					component="div" sx={{ flexGrow: 1 }}>
-					<img src={logo} className="img-style" />
+					<img src={logo} className="img-style"/>
 				</Typography>
 				<div className="nav-bar-container">
-					<Button style={styles.navBarButton} className="btn-text-style" color="inherit" onClick={() => onClickNavigate("/aboutUsPage")}>About Us</Button>
-					<Button style={styles.navBarButton} className="btn-text-style" color="inherit" onClick={() => onClickNavigate("/contactUs")}>Contact Us</Button>
+					<div style={styles.navBarButton} className="btn-text-style" color="inherit" onClick={() => onClickNavigate("/aboutUsPage")}>About Us</div>
+					<div style={styles.navBarButton} className="btn-text-style" color="inherit" onClick={() => onClickNavigate("/contactUs")}>Contact Us</div>
 					<div style={styles.userBar}>
 						<div style={styles.userBarIcon}>
-							<img src={user} style={styles.imgContainer} />
+							<img src={user} className="profileHeaderIcon"/>
 						</div>
 						<span style={styles.userName} className="btn-text-style">John Smith</span>
 					</div>
 				</div>
-				<IconButton
-					size="medium"
-					edge="start"
-					color="inherit"
-					aria-label="menu"
-					sx={{ mr: 2 }}
-				>
+					<div className="hamBurgerIcon">
 					<MenuIcon />
-				</IconButton>
+					</div>
 			</Toolbar>
 		</AppBar>
 	);

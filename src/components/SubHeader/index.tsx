@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./style.css";
 
 interface SubHeaderProps {
@@ -8,6 +8,7 @@ interface SubHeaderProps {
 }
 
 const SubHeader = ({ title,handleClick }: SubHeaderProps ) => {
+  const [selected, setSelected] = useState("yes");
 
   return (
     <div className="SubHeaderMainDiv">
@@ -21,6 +22,7 @@ const SubHeader = ({ title,handleClick }: SubHeaderProps ) => {
             className="matchRadio"
             onChange={handleClick}
             value="match"
+           defaultChecked
           />
           <label htmlFor="match" className="match">
             Match

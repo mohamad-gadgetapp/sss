@@ -70,7 +70,15 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
         {
             headerName: "Status",
             field: "status",
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            cellStyle: function(params:any) {
+                if (params.node.data.status == 'Complete') {
+                    return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#039100" };
+                } else if(params.node.data.status == 'Error') {
+                    return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#E90909" };
+                } else if(params.node.data.status == 'Pending') {
+                    return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#0D34FF" };
+                }
+            },
         },
         {
             headerName: "",
@@ -99,7 +107,9 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
                 columnDefs={columnDefs}
                 rowData={rowData}
                 floatingFiltersHeight={50}
-                defaultColDef={defaultColDef}>
+                defaultColDef={defaultColDef}
+                pagination={true}
+                paginationPageSize={10}>
             </AgGridReact>
         </div>
     )

@@ -6,9 +6,12 @@ import SubHeader from "../../components/SubHeader"
 
 const ContractBooking = ()  => {
   const [checkedRadio, setCheckedRadio] = useState("");
+  
+  
 
   const handleClick_ = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedRadio(event.target.value);
+    
   }
 
   return (
@@ -22,6 +25,7 @@ const ContractBooking = ()  => {
           rate="Rate"
           counterParty="Counter Party"
           annotation="Annotation"
+          
         />
        {checkedRadio === "nonmatch" && <TextField
           name="hello"
@@ -30,6 +34,7 @@ const ContractBooking = ()  => {
           rate="Rate"
           counterParty="Counter Party"
           annotation="Annotation"
+          
         />}
         <Button/>
       </div>

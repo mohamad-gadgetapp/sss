@@ -1,21 +1,23 @@
 import { colors } from "./../../common/color";
+
 export const styles = {
-  appBar: { background: colors.header_color },
-  navBarButton: { marginRight: 10 },
+  appBar: { background: colors.header_color, "box-shadow": "none"},
+  navBarButton: { marginRight: 40},
   userBar: {
     display: "flex",
-    width: "100px",
-    justifyContent: "space-between",
+    width: "170px",
     alignItems: "center",
+    justifyContent: 'space-between'
+    
   },
   userBarIcon: {
     background: colors.primary_light_grey,
     borderRadius: 5,
-  },
-  imgContainer: {
-    height: "2rem",
-    width: "2rem",
-    padding: "10px",
+    width: '3.125rem',
+    height: '3.125rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   userName: {
     fontSize: "12px",
