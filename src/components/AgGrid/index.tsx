@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
+import symbol from '../../assets/Symbol.svg';
+import inputLogo from "../TextField/Inputlogo.svg";
 import { colors } from "../../common/color"
 import "./style.css"
 
@@ -17,65 +19,76 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
             headerName: "Type",
             field: "type",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "ID",
             field: "id",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
-            headerName: "TSLA",
-            field: "tsla",
+            headerName: "",
+            field: "symbol",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            headerComponentParams: { template: `<img src="${symbol}"/>` },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center', justifyContent: 'center' },
         },
         {
             headerName: "Quantity",
             field: "quantity",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Rate",
             field: "rate",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Counter Party",
             field: "counter_party",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Create Date",
             field: "create_date",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Settle Date",
             field: "settle_date",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Annotation",
             field: "annotation",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Status",
             field: "status",
-            cellStyle: function(params:any) {
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: function (params: any) {
                 if (params.node.data.status == 'Complete') {
                     return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#039100" };
-                } else if(params.node.data.status == 'Error') {
+                } else if (params.node.data.status == 'Error') {
                     return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#E90909" };
-                } else if(params.node.data.status == 'Pending') {
+                } else if (params.node.data.status == 'Pending') {
                     return { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center', 'color': "#0D34FF" };
                 }
             },
@@ -83,7 +96,7 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
         {
             headerName: "",
             field: "redrive",
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
     ]);
 
@@ -92,6 +105,9 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
         flex: 1,
         filter: true,
         floatingFliter: true,
+        suppressFilterButton: false,
+        editable: true,
+        resizable: true,
     }
     return (
         <div
