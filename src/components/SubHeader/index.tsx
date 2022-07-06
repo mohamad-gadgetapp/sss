@@ -3,11 +3,11 @@ import "./style.css";
 
 interface SubHeaderProps {
   title?: string;
-  value?:string | 'match';
-  handleClick:(event: React.ChangeEvent<HTMLInputElement>) => void
+  value?: string | 'match';
+  handleClick: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const SubHeader = ({ title,handleClick }: SubHeaderProps ) => {
+const SubHeader = ({ title, handleClick }: SubHeaderProps) => {
 
   return (
     <div className="SubHeaderMainDiv">

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
+import symbol from '../../assets/Symbol.svg';
+import inputLogo from "../TextField/Inputlogo.svg";
 import { colors } from "../../common/color"
 import "./style.css"
 
@@ -17,65 +19,76 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
             headerName: "Type",
             field: "type",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "ID",
             field: "id",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
-            headerName: "TSLA",
-            field: "tsla",
+            headerName: "",
+            field: "symbol",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            headerComponentParams: { template: `<img src="${symbol}"/>` },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center', justifyContent: 'center' },
         },
         {
             headerName: "Quantity",
             field: "quantity",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Rate",
             field: "rate",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Counter Party",
             field: "counter_party",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Create Date",
             field: "create_date",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Settle Date",
             field: "settle_date",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Annotation",
             field: "annotation",
             floatingFilter: true,
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
         {
             headerName: "Status",
             field: "status",
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            floatingFilterComponentParams: { suppressFilterButton: true },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' }
         },
         {
             headerName: "",
             field: "redrive",
-            cellStyle: { "background-color": colors.primary_light_grey, display: "flex", 'align-items': 'center' },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
         },
     ]);
 
@@ -84,6 +97,9 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
         flex: 1,
         filter: true,
         floatingFliter: true,
+        suppressFilterButton: false,
+        editable: true,
+        resizable: true,
     }
     return (
         <div
@@ -99,6 +115,8 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
                 columnDefs={columnDefs}
                 rowData={rowData}
                 floatingFiltersHeight={50}
+                pagination={true}
+                paginationPageSize={10}
                 defaultColDef={defaultColDef}>
             </AgGridReact>
         </div>

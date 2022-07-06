@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
-.ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell{
+
+.ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
     background-color: #6A7587;
     border-color: #6A7587
 }
-.ag-theme-material .ag-header{
+
+.ag-theme-material .ag-header {
     margin-bottom: 12px;
 }
 
@@ -11,10 +13,12 @@
     color: #1b6d85;
     font-weight: bold;
 }
+
 .ag-pivot-off .ag-header-cell-label {
     color: #fff;
 }
-.ag-input-field-input{
+
+.ag-input-field-input {
     height: 41px;
     border-radius: 9px;
     border: 1px solid white;
@@ -23,18 +27,23 @@
 }
 
 .ag-theme-balham .ag-header-row:not(:first-child) .ag-header-cell, .ag-theme-balham .ag-header-row:not(:first-child) .ag-header-group-cell.ag-header-group-cell-with-group {
-    border-top: none!important;
+    border-top: none !important;
 }
 
 .ag-icon {
-  display: none!important;
-  speak: none;
+    /* display: none !important; */
+    speak: none;
 }
+
 .ag-header-cell-text {
     font-family: 'Cairo';
-} 
+}
 
-.ag-cell{
+.ag-cell {
     font-family: 'Cairo';
 }
 
+.ag-theme-alpine .ag-paging-button {
+    opacity: 1 !important;
+    border: 1px solid red;
+}
