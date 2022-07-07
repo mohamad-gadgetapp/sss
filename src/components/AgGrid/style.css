@@ -2,7 +2,9 @@
 
 .ag-theme-balham .ag-header-cell, .ag-theme-balham .ag-header-group-cell {
     background-color: #6A7587;
-    border-color: #6A7587
+    border-color: #6A7587;
+    display: flex;
+    justify-content: center;
 }
 
 .ag-theme-material .ag-header {
@@ -12,6 +14,7 @@
 .ag-pivot-on .ag-header-cell-label {
     color: #1b6d85;
     font-weight: bold;
+    
 }
 
 .ag-pivot-off .ag-header-cell-label {

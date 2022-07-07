@@ -113,7 +113,7 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
         <div
             className="ag-theme-balham"
             style={{
-                height: '100vh',
+                height: '52vh',
                 width: '100%'
             }}
         >
