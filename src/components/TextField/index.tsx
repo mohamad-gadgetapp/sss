@@ -1,5 +1,5 @@
 import React, { FC, InputHTMLAttributes } from "react";
-import inputLogo from "./Inputlogo.svg";
+import inputLogo from "./InputLogo.svg";
 import "./style.css";
 
 interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,11 +9,12 @@ interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
   rate: string;
   counterParty: string;
   annotation: string;
+  height?: number;
 }
 
 const ContractBooking: FC<ContractProps> = (props) => {
   return (
-    <div>
+    <div style={{ height: `${props.height}rem` }}>
       <div className="contractMainDiv">
         <div className="mb-3 inputFieldDiv">
           <label htmlFor="exampleInputEmail1" className="form-label inputLabelHeight">

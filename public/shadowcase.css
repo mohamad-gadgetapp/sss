@@ -5,9 +5,7 @@ body {
   #content {
     width: 100%;
   }
-  .react-grid-layout {
- 
-  }
+
   .layoutJSON {
     margin-top: 10px;
     padding: 10px;
@@ -19,10 +17,12 @@ body {
   }
   .react-grid-item {
     box-sizing: border-box;
+    border: 1px solid var(--primary_grey);
+    box-shadow: 0px 2px 5px var(--primary_grey);
   }
   .react-grid-item:not(.react-grid-placeholder) {
     margin-top: 10px;
-    overflow: auto;
+    overflow: hidden;
   }
   .react-grid-item.resizing {
     opacity: 0.9;
@@ -52,6 +52,12 @@ body {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
+  }
+  .drag-handle{
+    height:50px;
+    width:100%;
+    background-color: var(--secondary_white);
+    cursor: all-scroll;
   }
   li b {
     font-size: 19px;

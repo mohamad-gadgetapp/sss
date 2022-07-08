@@ -1,7 +1,7 @@
 import { colors } from "./../../common/color";
 
 export const styles = {
-  appBar: { background: colors.header_color, "box-shadow": "none"},
+  appBar: { background: colors.header_color, boxShadow: "none"},
   navBarButton: { marginRight: 40},
   userBar: {
     display: "flex",

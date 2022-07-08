@@ -11,8 +11,10 @@ const SubHeader = ({ title, handleClick }: SubHeaderProps) => {
   const [selected, setSelected] = useState("yes");
 
   return (
-    <div className="SubHeaderMainDiv">
-      <div className="subHeaderTitle">{title}</div>
+    <div className="SubHeaderMainDiv ">
+      <div className="drag-handle">
+        <div className="subHeaderTitle">{title}</div>
+      </div>
       <div className="matchMainDiv">
         <div className="SubHeaderMatch">
           <input

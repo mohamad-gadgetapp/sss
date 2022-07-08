@@ -27,14 +27,10 @@ export default class ShowcaseLayout extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ mounted: true }, () => {
-      console.log("range  ", this.props.range);
-      console.log("range  ", this.state.range);
-      console.log("range  ", this.state.children);
-    });
+    this.setState({ mounted: true });
   }
 
-  generateDOM(lauout, list) {
+  generateDOM(layout, list) {
     return list.map(function (l, i) {
       return <div key={i}>{l}</div>;
     });
@@ -63,6 +59,9 @@ export default class ShowcaseLayout extends React.Component {
           useCSSTransforms={this.state.mounted}
           compactType={this.state.compactType}
           preventCollision={!this.state.compactType}
+          draggableHandle=".drag-handle"
+          autoSize={true}
+          allowOverlap={false}
         >
           {this.generateDOM(this.state.children, this.props.child_list)}
         </ResponsiveReactGridLayout>
@@ -88,10 +87,11 @@ ShowcaseLayout.defaultProps = {
 
 function generateLayout(range, child, height) {
   return child.map(function (item, i) {
+    // var y = Math.ceil(Math.random() * 4) + 1;
     var y = height;
     return {
-      x: (_.random(0, 2) * 2) % 12,
-      y: Math.floor(i / 2) * y,
+      x: (_.random(0, 5) * 2) % 12,
+      y: Math.floor(i / 6) * y,
       w: 100,
       h: y,
       i: i.toString(),

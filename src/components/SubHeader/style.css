@@ -22,6 +22,7 @@
 .matchMainDiv{
     display: flex;
     margin-left: 1rem;
+    width: 30%;
 }
 
 .match{
@@ -44,8 +45,8 @@
     font-family: 'Cairo';
     font-weight: 600;
     font-size: 2.1rem;
-    line-height: 4.25rem;
-    padding: 2rem 2rem;
+    /* line-height: 4.25rem; */
+    padding: 0rem 2rem;
 }
 
 [type="radio"]:checked,
