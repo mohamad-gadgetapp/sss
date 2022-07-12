@@ -4,7 +4,7 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
 import { ColumnDefs } from "../../common/columDef"
 import "./style.css"
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ColumnResizedEvent } from 'ag-grid-community';
 
 interface AgGridProps {
     title?: string;
@@ -18,13 +18,13 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
 
     const defaultColDef = useMemo<ColDef>(() => {
         return {
+            flex: 1,
             sortable: true,
             filter: true,
             floatingFilter: true,
             suppressFilterButton: false,
             editable: true,
             resizable: true,
-            flex: 0.5
         }
     }, []);
 
@@ -32,10 +32,15 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
         console.log("height ", height)
     }, [height])
 
-    const autoSizeAll = useCallback((skipHeader: boolean) => {
-        // gridRef.current!.columnApi.autoSizeColumns(skipHeader);
+
+
+    const onColumnResized = useCallback((params: ColumnResizedEvent) => {
+        console.log("params ", JSON.stringify(params))
     }, []);
 
+    const onGridReady = (params: any) => {
+        params.api.sizeColumnsToFit();
+    }
     return (
         <div
             className="ag-theme-balham"
@@ -54,10 +59,13 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
                 floatingFiltersHeight={30}
                 defaultColDef={defaultColDef}
                 pagination={true}
-                paginationPageSize={10}>
+                paginationPageSize={10}
+                onGridReady={onGridReady}
+                onColumnResized={onColumnResized}>
 
             </AgGridReact>
         </div>
     )
 }
+
 export default AgGrid
