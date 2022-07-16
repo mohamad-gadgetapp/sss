@@ -1,19 +1,18 @@
 {
   "contractsData": [
     {
-      "no": 1,
       "dtc_no": "1002002",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
       "cusip": "@37833100",
       "b/l": "Borrow",
-      "quantity": 125.0,
+      "quantity": "125.0",
       "rate": "1.9",
       "value": "18.25.000",
       "trade_date": "06/14/2022",
       "settle_date": "06/14/2022",
       "status": "Complete",
-      "daily_debits": 956.22,
+      "daily_debits": " 956.22",
       "contract_id": "14-JUN 22-C2257-1"
     },
     {

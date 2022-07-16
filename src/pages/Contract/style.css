@@ -1,58 +1,77 @@
 .react-grid-item-contract {
-  box-sizing: border-box;
-  border: 1px solid var(--primary_grey);
-  box-shadow: 0px 2px 5px var(--primary_grey);
+    box-sizing: border-box;
+    border: 1px solid var(--primary_grey);
+    box-shadow: 0px 2px 5px var(--primary_grey);
 }
 
 .contractBooking-Button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem 1rem;
 }
 
 .clear-submit-btn-div {
-  display: flex;
-  align-items: center;
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
 }
 
-.excel-upload-btn{
-  border-style: dashed;
-  height: 3rem;
-  width: 12rem;
-  border-radius: 0.5rem;
-  background: #ffffff;
+.uploadSheet-submit-Btn {
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    background-color: #1E355E;
+    color: #ffffff;
+    font-family: 'Cairo';
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 2.25rem;
+    text-align: center;
 }
 
 .clearAll-Btn {
-  height: 3rem;
-  width: 9rem;
-  border-radius: 0.5rem;
-  border: 2px solid red;
-  color: red;
-  background-color: white;
-  outline: none;
+    height: 3rem;
+    width: 9rem;
+    border-radius: 0.5rem;
+    border: 2px solid red;
+    color: red;
+    background-color: white;
+    outline: none;
 }
 
-.subHeaderContract{
-  box-sizing: border-box;
-  border: 1px solid var(--primary_grey);
-  box-shadow: 0px 2px 5px var(--primary_grey);
-  margin-bottom: 1rem;
+.subHeaderContract {
+    box-sizing: border-box;
+    border: 1px solid var(--primary_grey);
+    box-shadow: 0px 2px 5px var(--primary_grey);
+    margin-bottom: 1rem;
+}
+
+.excel-upload-btn {
+    border-style: dashed;
+    height: 3rem;
+    width: 12rem;
+    border-radius: 0.5rem;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .FileUpload {
-  opacity: 0;
-  position: relative;
-  z-index: 1;
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
 .dropZoneOverlay {
-  /* border: dotted 1px; */
-  /* font-family: cursive; */
-  /* color: #7066fb; */
-  position: absolute;
-  /* top: 0px; */
-  text-align: center;
-  top: 34rem;
+    position: absolute;
+    text-align: center;
+}
+
+.file-name {
+    font-size: small;
+    margin-top: 0.5rem;
 }
