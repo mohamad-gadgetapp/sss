@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
 
 .SubHeaderMainDiv{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    height: 375px;
 }
 
 .SubHeaderMatch{
@@ -15,14 +13,14 @@
 .SubHeaderNonMatch{
     display: flex;
     align-items: center;
-    padding-right: 1rem;
-
+    /* padding-right: 1rem; */
+    /* margin-right: -11rem; */
 }
 
 .matchMainDiv{
     display: flex;
-    margin-left: 1rem;
-    width: 30%;
+    margin-right: 3rem;
+    margin-top: 1rem;
 }
 
 .match{
@@ -47,6 +45,12 @@
     font-size: 2.1rem;
     /* line-height: 4.25rem; */
     padding: 0rem 2rem;
+    margin: 1rem 0rem;
+}
+
+.subheaderChildDiv{
+    display: flex;
+    /* align-items: center; */
 }
 
 [type="radio"]:checked,

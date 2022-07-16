@@ -1,6 +1,6 @@
 import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
-export const ColumnDefs = [
+export const ColumnLoanDefs = [
   {
     headerName: "DTC NO",
     field: "dtc_no",
@@ -140,6 +140,21 @@ export const ColumnDefs = [
   {
     headerName: "SETTLE_DATE",
     field: "settle_date",
+    floatingFilter: true,
+    floatingFilterComponentParams: { suppressFilterButton: true },
+    cellStyle: {
+      backgroundColor: colors.primary_light_grey,
+      display: "flex",
+      alignItems: "center",
+    },
+    width: 200,
+    minWidth: 100,
+    maxWidth: 220,
+    suppressSizeToFit: false,
+  },
+  {
+    headerName: "TERM_DATE",
+    field: "term_date",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {

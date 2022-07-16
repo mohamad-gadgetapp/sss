@@ -63,7 +63,9 @@
     font-size: 1.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 1rem;
+
 }
 
 /* .ag-cell-label-container{

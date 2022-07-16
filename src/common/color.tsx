@@ -5,5 +5,5 @@ export const colors = {
     secondary_black: "#000000",
     secondary_light_navi_blue: "#2D496A",
     secondary_white: "#fffff",
-    header_color: "#A1ADBF"
+    header_color: "#1E355E"
 };

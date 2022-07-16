@@ -1,6 +1,7 @@
 .contractMainDiv{
     display: flex;
-    width: 100%;
+    align-items: center;
+    width: fit-content;
 }
 
 input{
@@ -21,4 +22,12 @@ input{
 
 .inputLabelHeight{
     height: 1.6rem;
+}
+
+.textField-button-div{
+    display: flex;
+}
+
+.nonmatch{
+    width: 8rem;
 }

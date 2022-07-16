@@ -22,8 +22,8 @@ const ContractBooking = ({ height }: ContractProps) => {
   return (
     <>
       <div style={{ height: `${height}rem`, overflow: 'auto' }}>
-        <SubHeader title="Contract Booking" handleClick={(e) => { handleClick_(e) }} />
-        <TextField
+        <SubHeader title="Contract Booking"  />
+        {/* <TextField
           name="hello"
           label="input"
           quantity="Quantity"
@@ -41,7 +41,7 @@ const ContractBooking = ({ height }: ContractProps) => {
           annotation="Annotation"
 
         />}
-        <Button />
+        <Button /> */}
       </div>
     </>
   );

@@ -2,19 +2,23 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
-import { ColumnDefs } from "../../common/columDef"
-import "./style.css"
+import { ColumnDefs } from "../../common/columDef";
+import { ColumnLoanDefs } from "../../common/columnLoan";
+import "./style.css";
 import { ColDef, ColumnResizedEvent } from 'ag-grid-community';
+import 'ag-grid-enterprise';
+
 
 interface AgGridProps {
     title?: string;
     rowData: Array<object>;
     height?: number;
+    type?:string
 }
 
-const AgGrid = ({ title, rowData, height }: AgGridProps) => {
+const AgGrid = ({ title, rowData, height,type }: AgGridProps) => {
     const gridRef = useRef(null)
-    const [columnDefs, setColumnDefs] = useState<any>([...ColumnDefs]);
+    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ?[...ColumnLoanDefs] : [...ColumnDefs]);
 
     const defaultColDef = useMemo<ColDef>(() => {
         return {
@@ -29,8 +33,8 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
     }, []);
 
     useEffect(() => {
-        console.log("height ", height)
-    }, [height])
+        console.log("type ", type)
+    }, [type])
 
 
 
@@ -49,7 +53,7 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
                 width: '100%'
             }}
         >
-            <div className="drag-handle title-subHeaderTitle"> {title} </div>
+            {title != undefined &&<div className="drag-handle title-subHeaderTitle"> {title} </div>}
             <AgGridReact
                 ref={gridRef}
                 rowStyle={{ justifyContent: "center", borderBottom: '0.5px solid #6A7587', backgroundColor: '#EAECEF' }}
@@ -62,7 +66,6 @@ const AgGrid = ({ title, rowData, height }: AgGridProps) => {
                 paginationPageSize={10}
                 onGridReady={onGridReady}
                 onColumnResized={onColumnResized}>
-
             </AgGridReact>
         </div>
     )
