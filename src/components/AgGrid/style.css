@@ -30,6 +30,10 @@
     border-top: none !important;
 }
 
+.ag-theme-balham .ag-header-row:not(:first-child) .ag-header-cell {
+    border: none !important;
+}
+
 .ag-icon {
     /* display: none !important; */
     speak: none;

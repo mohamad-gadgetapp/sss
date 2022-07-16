@@ -1,0 +1,57 @@
+{
+  "contractsData": [
+    {
+      "no": 1,
+      "dtc_no": "1002002",
+      "cpty_name": "FUTU CLEARING INC.",
+      "tb_ticker": "AAPL",
+      "cusip": "@37833100",
+      "b/l": "Borrow",
+      "quantity": 125.0,
+      "rate": "1.9",
+      "value": "18.25.000",
+      "trade_date": "06/14/2022",
+      "settle_date": "06/14/2022",
+      "status": "Complete",
+      "daily_debits": 956.22,
+      "contract_id": "14-JUN 22-C2257-1"
+    },
+    {
+      "no": 2,
+      "dtc_no": "1002002",
+      "cpty_name": "FUTU CLEARING INC.",
+      "tb_ticker": "AAPL",
+      "cusip": "@37833100",
+      "b/l": "Borrow",
+      "quantity": 125.0,
+      "rate": "1.9",
+      "value": "18.25.000",
+      "trade_date": "06/14/2022",
+      "settle_date": "06/14/2022",
+      "status": "Error",
+      "daily_debits": 956.22,
+      "contract_id": "14-JUN 22-C2257-1"
+    },
+    {
+      "no": 3,
+      "dtc_no": "1002002",
+      "cpty_name": "FUTU CLEARING INC.",
+      "tb_ticker": "AAPL",
+      "cusip": "@37833100",
+      "b/l": "Borrow",
+      "quantity": 125.0,
+      "rate": "1.9",
+      "value": "18.25.000",
+      "trade_date": "06/14/2022",
+      "settle_date": "06/14/2022",
+      "status": "Pending",
+      "daily_debits": 956.22,
+      "contract_id": "14-JUN 22-C2257-1"
+    }
+  ],
+  "totals": {
+    "quantity": 25343.256,
+    "value": 25343.256,
+    "daily_debits": 25343.256
+  }
+}

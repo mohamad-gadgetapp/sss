@@ -21,6 +21,7 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
             floatingFilter: true,
             floatingFilterComponentParams: { suppressFilterButton: true },
             cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' },
+
         },
         {
             headerName: "ID",
@@ -35,7 +36,7 @@ const AgGrid = ({ title, rowData }: AgGridProps) => {
             floatingFilter: true,
             floatingFilterComponentParams: { suppressFilterButton: true },
             headerComponentParams: { template: `<img src="${symbol}"/>` },
-            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center', justifyContent: 'center' },
+            cellStyle: { backgroundColor: colors.primary_light_grey, display: "flex", alignItems: 'center' }
         },
         {
             headerName: "Quantity",

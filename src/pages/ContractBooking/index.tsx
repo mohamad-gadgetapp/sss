@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useState} from "react";
 import TextField from "../../components/TextField";
 import "./style.css";
 import Button from "../../components/Button"
