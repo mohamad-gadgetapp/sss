@@ -6,16 +6,28 @@
 
 .contractBooking-Button {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin: 0rem 1rem;
+  padding: 1.25rem 1rem;
 }
-
-
 
 .clear-submit-btn-div {
   display: flex;
-  align-items: center;
+  /* margin: 0rem 1rem; */
+  /* width: 50%; */
+  /* justify-content: space-evenly; */
+}
+
+.uploadSheet-submit-Btn {
+  width: 9rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: #1E355E;
+  color: #ffffff;
+  font-family: 'Cairo';
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+  text-align: center;
 }
 
 .clearAll-Btn {
@@ -26,6 +38,8 @@
   color: red;
   background-color: white;
   outline: none;
+  margin-left: 2rem;
+  margin-right: 1rem;
 }
 
 .subHeaderContract {
@@ -34,6 +48,7 @@
   box-shadow: 0px 2px 5px var(--primary_grey);
   margin-bottom: 1rem;
 }
+
 .excel-upload-btn {
   border-style: dashed;
   height: 3rem;
@@ -44,6 +59,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0rem 2rem;
 }
 
 .FileUpload {
@@ -57,4 +73,10 @@
 .dropZoneOverlay {
   position: absolute;
   text-align: center;
+}
+
+.file-name {
+  font-size: small;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
 }

@@ -7,7 +7,7 @@ import data from "../../contractsData.json";
 import ContractBooking from '../ContractBooking';
 import ShowcaseLayout from "../../components/ShowcaseLayout";
 const HomePage = () => {
-  const [rowData, setRowData] = useState<Array<object>>([...data.data]);
+  const [rowData, setRowData] = useState<Array<object>>([...data.contractsData]);
   const [layout, setLayout] = useState<Array<object>>([]);
   const [heightC, setHeightC] = useState(0);
   const [heightAG_1, setHeightAG_1] = useState(20.3);

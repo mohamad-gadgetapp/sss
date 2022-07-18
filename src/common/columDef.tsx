@@ -4,10 +4,6 @@ import symbol from "../assets/Symbol.svg";
 export const ColumnDefs = [
   {
     headerName: "DTC NO",
-    children : [
-      {
-        headerName: 'TOTAL',
-      }],
     field: "dtc_no",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -24,10 +20,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "CPTY_NAME",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "contractsData.cpty_name",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -43,10 +35,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "TB_TICKER",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "tb_ticker",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -64,10 +52,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "CUSIP",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "cusip",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -89,10 +73,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "B/L",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "b/l",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -108,10 +88,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "QUANTITY",
-    children : [
-      {
-        field: 'totals.quantity',
-      }],
     field: "contractsData.quantity",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -127,10 +103,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "RATE",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "rate",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -142,10 +114,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "VALUE",
-    children : [
-      {
-        headerName: 'totals.value',
-      }],
     field: "contractsData.value",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -157,10 +125,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "TRADE_DATE",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "trade_date",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -176,10 +140,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "SETTLE_DATE",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "settle_date",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -195,10 +155,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "DAILY DEBITS",
-    children : [
-      {
-        field: 'totals.daily_debits',
-      }],
     field: "contractsData.daily_debits",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -214,10 +170,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "CONTRACT_ID",
-    children : [
-      {
-        headerName: '',
-      }],
     field: "contract_id",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
@@ -233,11 +185,6 @@ export const ColumnDefs = [
   },
   {
     headerName: "STATUS",
-    // headerGroupComponent: CustomHeaderGroup,
-    children : [
-        {
-          headerName: '',
-        }],
         field: "status",
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: function (params: any) {
