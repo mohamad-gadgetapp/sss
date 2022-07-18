@@ -1,5 +1,48 @@
+.loanPage-MainDiv{
+    background-color: #EAECEF;
+}
+
 .react-grid-item-loan {
     box-sizing: border-box;
     border: 1px solid var(--primary_grey);
     box-shadow: 0px 2px 5px var(--primary_grey);
+    margin-bottom: 3rem;
+}
+
+
+.loanLogo-img{
+    height: 5rem;
+    width: 17rem;
+    background-color: #ffffff;
+    border: 2px solid black;
+    padding: 1rem;
+}
+
+.logo-main-HeaderPart{
+    display: flex;
+    padding: 1rem 0rem;
+}
+
+.borrow-ticket{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 0rem 1rem;
+    margin: 0rem 0.5rem;
+    font-family: 'Cairo';
+}
+
+.loanHeader-price{
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #1E355E;
+}
+
+.loanHeader-title{
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: #6A7587;
+    line-height: 1.8rem;
 }

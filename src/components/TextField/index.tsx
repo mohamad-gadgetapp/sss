@@ -1,5 +1,5 @@
 import React, { FC, InputHTMLAttributes, useState } from "react";
-import inputLogo from "./Inputlogo.svg";
+import inputLogo from "./InputLogo.svg";
 import "./style.css";
 import Button from "../../components/Button";
 
