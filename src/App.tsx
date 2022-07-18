@@ -15,6 +15,7 @@ import ContactUs from './pages/ContactUs';
 import Contract from './pages/Contract';
 import Loan from './pages/Loan';
 
+
 function App() {
 
     // @ts-ignore
@@ -30,8 +31,7 @@ function App() {
                     <Route path="/contactUs" element={<ContactUs/>}/>
                     <Route path="/contract" element={<Contract/>}/>
                     <Route path="/loan" element={<Loan/>}/>
-                    {/* <Route path="/borrow" element={<Borrow />} />
-          <Route path="/match" element={<Match />} /> */}
+                   
                 </Routes>
             </div>
 
