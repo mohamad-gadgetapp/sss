@@ -52,6 +52,8 @@ const Contract = ({height}: ContractPageProps) => {
         };
         httpRequest.send();
     }
+
+    
     const convertDataToWorkbook = (dataRows: any) => {
         /* convert data to binary string */
         var data = new Uint8Array(dataRows);

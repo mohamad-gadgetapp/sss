@@ -5,7 +5,7 @@ import {AgGridReact} from 'ag-grid-react';
 import {ColumnDefs} from "../../common/columDef";
 import {ColumnLoanDefs} from "../../common/columnLoan";
 import "./style.css";
-import {ColDef, ColumnResizedEvent} from 'ag-grid-community';
+import {ColDef, ColumnResizedEvent, ValueFormatterParams} from 'ag-grid-community';
 import 'ag-grid-enterprise';
 
 
@@ -38,12 +38,35 @@ const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
 
 
     const onColumnResized = useCallback((params: ColumnResizedEvent) => {
-        console.log("params ", JSON.stringify(params))
+        console.log("params ", params)
     }, []);
 
     const onGridReady = (params: any) => {
         params.api.sizeColumnsToFit();
     }
+    const formatNumber = (params: ValueFormatterParams) => {
+        var number = params.value;
+        console.log("param ", number)
+        return Math.floor(number)
+            .toString()
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    }
+    const columnTypes = useMemo<{
+        [key: string]: ColDef;
+    }>(() => {
+        return {
+            quarterFigure: {
+                editable: true,
+                cellClass: 'number-cell',
+                aggFunc: 'sum',
+                valueFormatter: formatNumber,
+                valueParser: function numberParser(params) {
+                    return Number(params.newValue);
+                },
+            },
+        };
+    }, []);
+
     return (
         <div
             className="ag-theme-balham"
@@ -61,6 +84,10 @@ const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
                 rowData={rowData}
                 floatingFiltersHeight={30}
                 defaultColDef={defaultColDef}
+                columnTypes={columnTypes}
+                suppressAggFuncInHeader={true}
+                enableCellChangeFlash={true}
+                enableRangeSelection={true}
                 pagination={true}
                 paginationPageSize={10}
                 onGridReady={onGridReady}

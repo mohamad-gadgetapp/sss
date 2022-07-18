@@ -6,7 +6,7 @@
       "tb_ticker": "AAPL",
       "cusip": "@37833100",
       "b/l": "Borrow",
-      "quantity": "125.0",
+      "quantity": 125.0,
       "rate": "1.9",
       "value": "18.25.000",
       "trade_date": "06/14/2022",
