@@ -15,7 +15,7 @@ import ContactUs from './pages/ContactUs';
 import Contract from './pages/Contract';
 import Loan from './pages/Loan';
 import Borrow from './pages/Borrow';
-import Match from './pages/Match';
+import Match from './pages/Match'; 
 
 function App() {
 

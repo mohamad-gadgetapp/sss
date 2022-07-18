@@ -20,7 +20,6 @@ const SubHeader = ({ title }: SubHeaderProps) => {
     <div className="SubHeaderMainDiv">
       <div className="">
         <div className="subHeaderTitle drag-handle">{title}</div>
-
         <div className="subheaderChildDiv">
           <div>
             <TextField
