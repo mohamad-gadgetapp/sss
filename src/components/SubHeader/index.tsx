@@ -9,7 +9,6 @@ interface SubHeaderProps {
 }
 
 const SubHeader = ({ title }: SubHeaderProps) => {
-  const [selected, setSelected] = useState("yes");
   const [checkedRadio, setCheckedRadio] = useState("");
 
   const handleClick = (event: any) => {
@@ -20,7 +19,6 @@ const SubHeader = ({ title }: SubHeaderProps) => {
     <div className="SubHeaderMainDiv">
       <div className="">
         <div className="subHeaderTitle drag-handle">{title}</div>
-
         <div className="subheaderChildDiv">
           <div>
             <TextField

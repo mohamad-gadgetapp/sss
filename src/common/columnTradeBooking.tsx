@@ -2,9 +2,19 @@ import { colors } from "./color";
 export const ColumnDefsTradeBooking = [
     {
         headerName: "",
+        headerCheckboxSelection: true,
+        headerCheckboxSelectionFilteredOnly: true,
         checkboxSelection: true,
         floatingFilter: false,
-        floatingFilterComponentParams: { suppressFilterButton: true }
+        floatingFilterComponentParams: { suppressFilterButton: true },
+        width: 30,
+        cellStyle: {
+            display: "flex",
+            alignItems: "center", justifyContent: "center"
+        },
+        minWidth: 30,
+        maxWidth: 30,
+        suppressSizeToFit: false,
     },
     {
         headerName: "Status",

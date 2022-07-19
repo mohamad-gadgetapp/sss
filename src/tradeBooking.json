@@ -15,7 +15,7 @@
     },
     {
       "no": 2,
-      "status": "Send",
+      "status": "Sent",
       "trade_type": "Loan",
       "cparty": "0001",
       "security": "GOOG",

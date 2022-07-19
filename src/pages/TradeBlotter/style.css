@@ -95,7 +95,7 @@
         width: 33.333333%;
     }
 
-    .counter-inner-style{
+    .counter-inner-style {
         margin-bottom: 0.75rem;
     }
 }
@@ -193,7 +193,7 @@
         padding: 0 0.5rem;
     }
 
-    .counter-inner-style{
+    .counter-inner-style {
         margin-bottom: 0.75rem;
     }
 }
@@ -257,7 +257,7 @@
         width: 60%;
     }
 
-    .counter-inner-style{
+    .counter-inner-style {
         margin-bottom: 1rem;
     }
 }
@@ -384,4 +384,9 @@
 .counter-main-div {
     padding: 0 1rem;
     margin-bottom: 1rem;
+}
+
+.select-style {
+    display: flex;
+    align-items: center;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import './App.css';
 /** component */
 import Header from "./components/Header";
@@ -15,13 +15,12 @@ import Contract from './pages/Contract';
 import Loan from './pages/Loan';
 import TradeBlotter from "./pages/TradeBlotter";
 
-import Borrow from './pages/Borrow';
-import Match from './pages/Match';
-
 function App() {
 
+  // @ts-ignore
+  // @ts-ignore
   return (
-    <div >
+    <div>
       <Header />
       <div style={{ padding: '10px' }}>
         <Routes>
@@ -31,9 +30,7 @@ function App() {
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/contract" element={<Contract />} />
           <Route path="/loan" element={<Loan />} />
-            <Route path="/tradeBlotter" element={<TradeBlotter />} />
-            {/* <Route path="/borrow" element={<Borrow />} />
-          <Route path="/match" element={<Match />} /> */}
+          <Route path="/tradeBlotter" element={<TradeBlotter />} />
         </Routes>
       </div>
 

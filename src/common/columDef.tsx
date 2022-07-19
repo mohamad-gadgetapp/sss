@@ -1,5 +1,6 @@
 import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
+
 export const ColumnDefs = [
   {
     headerName: "DTC NO",
@@ -15,11 +16,10 @@ export const ColumnDefs = [
     minWidth: 60,
     maxWidth: 130,
     suppressSizeToFit: false,
-    
   },
   {
     headerName: "CPTY_NAME",
-    field: "cpty_name",
+    field: "contractsData.cpty_name",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
@@ -87,7 +87,7 @@ export const ColumnDefs = [
   },
   {
     headerName: "QUANTITY",
-    field: "quantity",
+    field: "contractsData.quantity",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
@@ -113,7 +113,7 @@ export const ColumnDefs = [
   },
   {
     headerName: "VALUE",
-    field: "value",
+    field: "contractsData.value",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
@@ -154,7 +154,7 @@ export const ColumnDefs = [
   },
   {
     headerName: "DAILY DEBITS",
-    field: "daily_debits",
+    field: "contractsData.daily_debits",
     floatingFilter: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
@@ -184,24 +184,24 @@ export const ColumnDefs = [
   },
   {
     headerName: "STATUS",
-    field: "status",
+        field: "status",
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: function (params: any) {
-      if (params.node.data.status == "Complete") {
+      if (params.node.data.status === "Complete") {
         return {
           backgroundColor: colors.primary_light_grey,
           display: "flex",
           alignItems: "center",
           color: "#039100",
         };
-      } else if (params.node.data.status == "Error") {
+      } else if (params.node.data.status === "Error") {
         return {
           backgroundColor: colors.primary_light_grey,
           display: "flex",
           alignItems: "center",
           color: "#E90909",
         };
-      } else if (params.node.data.status == "Pending") {
+      } else if (params.node.data.status === "Pending") {
         return {
           backgroundColor: colors.primary_light_grey,
           display: "flex",
@@ -211,13 +211,5 @@ export const ColumnDefs = [
       }
     },
   },
-  // {
-  //   headerName: "",
-  //   field: "redrive",
-  //   cellStyle: {
-  //     backgroundColor: colors.primary_light_grey,
-  //     display: "flex",
-  //     alignItems: "center",
-  //   },
-  // },
 ];
+

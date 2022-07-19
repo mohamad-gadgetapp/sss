@@ -1,13 +1,13 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import {AgGridReact} from 'ag-grid-react';
-import {ColumnDefs} from "../../common/columDef";
-import {ColumnLoanDefs} from "../../common/columnLoan";
-import {ColumnDefsTradeBooking} from "../../common/columnTradeBooking";
+import { AgGridReact } from 'ag-grid-react';
+import { ColumnDefs } from "../../common/columDef";
+import { ColumnLoanDefs } from "../../common/columnLoan";
+import { ColumnDefsTradeBooking } from "../../common/columnTradeBooking";
 import ButtonCellRenderer from "../../common/ButtonCellRenderer";
 import "./style.css";
-import {ColDef, ColumnResizedEvent,  } from 'ag-grid-community';
+import { ColDef, ColumnResizedEvent, } from 'ag-grid-community';
 import 'ag-grid-enterprise';
 
 
@@ -16,12 +16,12 @@ interface AgGridProps {
     rowData: Array<object>;
     height?: number;
     type?: string;
-    onClickHan?:(e: React.MutableRefObject<any>)=>void;
+    onClickHan?: (e: React.MutableRefObject<any>) => void;
 }
 
-const AgGrid = ({title, rowData, height, type, onClickHan}: AgGridProps) => {
+const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     const gridRef = useRef<any>(null)
-    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ? [...ColumnLoanDefs] : type === "trade"? [...ColumnDefsTradeBooking] : [...ColumnDefs]);
+    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ? [...ColumnLoanDefs] : type === "trade" ? [...ColumnDefsTradeBooking] : [...ColumnDefs]);
     let gridApi: any;
     const defaultColDef = useMemo<ColDef>(() => {
         return {
@@ -36,12 +36,13 @@ const AgGrid = ({title, rowData, height, type, onClickHan}: AgGridProps) => {
     }, []);
 
     useEffect(() => {
-        console.log("rowData in aggrid ", rowData)
-    }, [rowData])
+        console.log("type ", type)
+    }, [type])
+
 
 
     const onColumnResized = useCallback((params: ColumnResizedEvent) => {
-        console.log("params ", JSON.stringify(params))
+        console.log("params ", params)
     }, []);
 
     const onGridReady = (params: any) => {
@@ -52,7 +53,7 @@ const AgGrid = ({title, rowData, height, type, onClickHan}: AgGridProps) => {
 
     const getData = () => {
         let selectedNodes = gridApi.getSelectedNodes();
-        let selectedData = selectedNodes.map((node:any) => node.data);
+        let selectedData = selectedNodes.map((node: any) => node.data);
         alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
         return selectedData;
     }
@@ -81,12 +82,16 @@ const AgGrid = ({title, rowData, height, type, onClickHan}: AgGridProps) => {
             {/*<button onClick={() => getData ()}>Check</button>*/}
             <AgGridReact
                 ref={gridRef}
-                rowStyle={{justifyContent: "center", borderBottom: '0.5px solid #6A7587', backgroundColor: '#EAECEF'}}
+                rowStyle={{ justifyContent: "center", borderBottom: '0.5px solid #6A7587', backgroundColor: '#EAECEF' }}
                 rowHeight={23}
                 columnDefs={columnDefs}
                 rowData={rowData}
+                suppressRowClickSelection={true}
                 floatingFiltersHeight={30}
                 defaultColDef={defaultColDef}
+                suppressAggFuncInHeader={true}
+                enableCellChangeFlash={true}
+                enableRangeSelection={true}
                 pagination={true}
                 paginationPageSize={10}
                 onGridReady={onGridReady}

@@ -10,7 +10,7 @@ import logo from "../../assets/southLogo.png";
 import user from "../../assets/user.svg";
 import { useNavigate } from "react-router-dom";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 interface HeaderProps {
   title?: string;
@@ -22,7 +22,11 @@ const Header = ({ title }: HeaderProps) => {
     navigate(`${page}`);
   };
   const handleClickNewTab = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, "_blank", 'toolbar=0,location=0,menubar=0');
+  };
+
+  const video = () => {
+    
   }
   return (
     <AppBar style={styles.appBar} position="static" className="header-style">
@@ -42,26 +46,17 @@ const Header = ({ title }: HeaderProps) => {
             className="btn-text-style"
             onClick={() => onClickNavigate("/aboutUsPage")}
           >
-            <div className="stagingDiv">
-            Staging
-              </div>
+            <div className="stagingDiv" onClick={video}>Staging</div>
           </div>
-          {/* <div
-            style={styles.navBarButton}
-            className="btn-text-style"
-            color="inherit"
-            onClick={() => onClickNavigate("/contactUs")}
-          >
-            Contact Us
-          </div> */}
           <div style={styles.userBar} className="appBar">
             <div className="userBarIcon" onClick={() => onClickNavigate("/tradeBlotter")}>
               <img src={user} className="profileHeaderIcon" />
             </div>
             <span style={styles.userName} className="btn-text-style">
               <div>
-              John Doe<ArrowDropDownIcon/>
-                </div>
+                John Doe
+                <ArrowDropDownIcon />
+              </div>
             </span>
           </div>
         </div>
@@ -95,9 +90,9 @@ const Header = ({ title }: HeaderProps) => {
                     <div onClick={() => onClickNavigate("/contract")}>
                       Contract
                     </div>
-                    <div onClick={() => handleClickNewTab("/contract")}>
+                    <a onClick={() => handleClickNewTab("/contract")}>
                       <OpenInNewIcon />
-                    </div>
+                    </a>
                   </div>
                 </div>
                 <div
@@ -114,34 +109,6 @@ const Header = ({ title }: HeaderProps) => {
                     </div>
                   </div>
                 </div>
-                {/* <div
-                  className="dropdown-item ai-icon"
-                  style={{ marginBottom: "0.2rem" }}
-                >
-                  <div
-                    className="ms-2"
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <div onClick={() => onClickNavigate("/borrow")}>Borrow</div>
-                    <div onClick={() => handleClickNewTab("/borrow")}>
-                      <OpenInNewIcon />
-                    </div>
-                  </div>
-                </div> */}
-                {/* <div
-                  className="dropdown-item ai-icon"
-                  style={{ marginBottom: "0.1rem" }}
-                >
-                  <div
-                    className="ms-2"
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <div onClick={() => onClickNavigate("/match")}>Match</div>
-                    <div onClick={() => handleClickNewTab("/match")}>
-                      <OpenInNewIcon />
-                    </div>
-                  </div>
-                </div> */}
                 <div
                   className="dropdown-item ai-icon hamburgerMenu-dropdown"
                   style={{ marginBottom: "0.1rem" }}
