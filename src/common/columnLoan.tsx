@@ -226,13 +226,4 @@ export const ColumnLoanDefs = [
       }
     },
   },
-  // {
-  //   headerName: "",
-  //   field: "redrive",
-  //   cellStyle: {
-  //     backgroundColor: colors.primary_light_grey,
-  //     display: "flex",
-  //     alignItems: "center",
-  //   },
-  // },
 ];

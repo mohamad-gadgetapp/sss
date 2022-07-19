@@ -8,12 +8,13 @@ import Header from "./components/Header";
 /** pages */
 // import HomePage from './pages/Home';
 import ContractBooking from "./pages/ContractBooking/index";
-
 import HomePage from './pages/Home';
 import AboutUsPage from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Contract from './pages/Contract';
 import Loan from './pages/Loan';
+import TradeBlotter from "./pages/TradeBlotter";
+
 import Borrow from './pages/Borrow';
 import Match from './pages/Match';
 
@@ -30,7 +31,8 @@ function App() {
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/contract" element={<Contract />} />
           <Route path="/loan" element={<Loan />} />
-          {/* <Route path="/borrow" element={<Borrow />} />
+            <Route path="/tradeBlotter" element={<TradeBlotter />} />
+            {/* <Route path="/borrow" element={<Borrow />} />
           <Route path="/match" element={<Match />} /> */}
         </Routes>
       </div>

@@ -55,7 +55,7 @@ const Header = ({ title }: HeaderProps) => {
             Contact Us
           </div> */}
           <div style={styles.userBar} className="appBar">
-            <div className="userBarIcon">
+            <div className="userBarIcon" onClick={() => onClickNavigate("/tradeBlotter")}>
               <img src={user} className="profileHeaderIcon" />
             </div>
             <span style={styles.userName} className="btn-text-style">

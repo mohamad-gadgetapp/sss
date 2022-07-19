@@ -33,6 +33,10 @@
   justify-content: center;
 }
 
+.userBarIcon:hover {
+  cursor: pointer;
+}
+
 .appBar {
   box-shadow: none;
   background: #1e355e;

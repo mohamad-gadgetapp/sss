@@ -9,9 +9,10 @@ import data from "../../contractsData.json";
 interface ContractPageProps {
     height?: number;
     columns?: object;
+    title?: string;
 }
 
-const Contract = ({height}: ContractPageProps) => {
+const Contract = ({height, title}: ContractPageProps) => {
     const [rowData, setRowData] = useState<Array<object>>([...data.contractsData,]);
     const [heightAG_1] = useState(30);
     const [excelFileName, setExcelFileName] = useState("");

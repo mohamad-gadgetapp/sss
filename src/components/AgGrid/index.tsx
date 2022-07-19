@@ -4,8 +4,10 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import {AgGridReact} from 'ag-grid-react';
 import {ColumnDefs} from "../../common/columDef";
 import {ColumnLoanDefs} from "../../common/columnLoan";
+import {ColumnDefsTradeBooking} from "../../common/columnTradeBooking";
+import ButtonCellRenderer from "../../common/ButtonCellRenderer";
 import "./style.css";
-import {ColDef, ColumnResizedEvent} from 'ag-grid-community';
+import {ColDef, ColumnResizedEvent, GridOptionsWrapper} from 'ag-grid-community';
 import 'ag-grid-enterprise';
 
 
@@ -13,13 +15,14 @@ interface AgGridProps {
     title?: string;
     rowData: Array<object>;
     height?: number;
-    type?: string
+    type?: string;
+    onClick?:(e:object)=>void;
 }
 
-const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
-    const gridRef = useRef(null)
-    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ? [...ColumnLoanDefs] : [...ColumnDefs]);
-
+const AgGrid = ({title, rowData, height, type, onClick}: AgGridProps) => {
+    const gridRef = useRef<any>(null)
+    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ? [...ColumnLoanDefs] : type === "trade"? [...ColumnDefsTradeBooking] : [...ColumnDefs]);
+    let gridApi: any;
     const defaultColDef = useMemo<ColDef>(() => {
         return {
             flex: 1,
@@ -43,7 +46,24 @@ const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
 
     const onGridReady = (params: any) => {
         params.api.sizeColumnsToFit();
+        console.log("params", params);
+        gridApi = params.api;
     }
+
+    const getData = () => {
+        let selectedNodes = gridApi.getSelectedNodes();
+        let selectedData = selectedNodes.map((node:any) => node.data);
+        alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
+        return selectedData;
+    }
+
+    const onSelectionChanged = useCallback(() => {
+        const selectedRows = gridRef.current!.api.getSelectedRows();
+        console.log("selectedRows 01: ", selectedRows);
+        onClick?.(selectedRows);
+    }, []);
+    // @ts-ignore
+    //  var ButtonCellRenderer = useMemo<any>(() => ButtonCellRenderer,[]);
     return (
         <div
             className="ag-theme-balham"
@@ -53,6 +73,7 @@ const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
             }}
         >
             {title != undefined && <div className="drag-handle title-subHeaderTitle"> {title} </div>}
+            {/*<button onClick={() => getData ()}>Check</button>*/}
             <AgGridReact
                 ref={gridRef}
                 rowStyle={{justifyContent: "center", borderBottom: '0.5px solid #6A7587', backgroundColor: '#EAECEF'}}
@@ -64,7 +85,12 @@ const AgGrid = ({title, rowData, height, type}: AgGridProps) => {
                 pagination={true}
                 paginationPageSize={10}
                 onGridReady={onGridReady}
-                onColumnResized={onColumnResized}>
+                onColumnResized={onColumnResized}
+                onSelectionChanged={onSelectionChanged}
+                rowSelection={'multiple'}
+                frameworkComponents={{
+                    ButtonCellRenderer
+                }}>
             </AgGridReact>
         </div>
     )
