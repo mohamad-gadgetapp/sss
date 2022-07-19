@@ -5,11 +5,11 @@ import "./style.css";
 import logo from "../../assets/SouthLogoLoan.png";
 
 const Loan = () => {
-  const [rowData, setRowData] = useState<Array<object>>([...data.loansData]);
-  const [heightAG_1, setHeightAG_1] = useState(30);
+  const [rowData] = useState<Array<object>>([...data.loansData]);
+  const [heightAG_1] = useState(30);
   console.log("loandata ",rowData)
 
-  const [card, setCard] = useState([
+  const [card] = useState([
     { title: "Borrow Ticket", price: "123" },
     { title: "Borrow Ticket", price: "123" },
     { title: "Borrow Balance", price: "$869,367,559" },
@@ -25,7 +25,7 @@ const Loan = () => {
       <div className="loanPage-MainDiv">
         <div className="logo-main-HeaderPart">
           <div>
-            <img src={logo} className="loanLogo-img" />
+            <img src={logo} className="loanLogo-img" alt="loanLogoImage"/>
           </div>
           {card.map((item, index) => {
             return (

@@ -5,6 +5,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SubHeader from "../../components/SubHeader";
 import * as XLSX from "xlsx";
 import data from "../../contractsData.json";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface ContractPageProps {
   height?: number;
@@ -27,13 +28,11 @@ const Contract = ({ height }: ContractPageProps) => {
     makeRequest(
       "GET",
       `${URL.createObjectURL(e.target.files[0])}`,
-      // success
       function (data) {
         var workbook = convertDataToWorkbook(data);
         setExcelData(workbook);
         setExcelFileName(e.target.files[0].name);
       },
-      // error
       function (error) {
         throw error;
       }
@@ -60,7 +59,6 @@ const Contract = ({ height }: ContractPageProps) => {
     httpRequest.send();
   };
   const convertDataToWorkbook = (dataRows: any) => {
-    /* convert data to binary string */
     var data = new Uint8Array(dataRows);
     var arr = [];
 
@@ -70,17 +68,16 @@ const Contract = ({ height }: ContractPageProps) => {
     var bstr = arr.join("");
     return XLSX.read(bstr, { type: "binary" });
   };
+
   const onSubmit = () => {
     console.log("excelFile ", excelData);
     populateGrid(excelData);
   };
   const populateGrid = (workbook: any) => {
-    // our data is in the first sheet
     console.log("workbook ", workbook);
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
     console.log("workbook ", worksheet);
-    // we expect the following columns to be present
     const columns: Record<string, string> = {
       A: "dtc_no",
       B: "cpty_name",
@@ -146,7 +143,7 @@ const Contract = ({ height }: ContractPageProps) => {
                     Upload Excel File
                   </div>
                 </button>
-                <div className="file-name">{excelFileName}</div>
+                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon style={{color: "#E90909", height: "0.9rem"}}/>}</div>
               </div>
               <button
                 type="submit"
@@ -156,7 +153,7 @@ const Contract = ({ height }: ContractPageProps) => {
                 Submit
               </button>
               {/* <Button title="Submit" onClick={onSubmit}/> */}
-              <button type="submit" className="clearAll-Btn" onClick={onClear}>
+              <button className="clearAll-Btn" onClick={onClear}>
                 Clear All
               </button>
             </div>

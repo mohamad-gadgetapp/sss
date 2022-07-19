@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {AgGridReact} from 'ag-grid-react';
@@ -37,8 +37,6 @@ var total10ValueGetter = function (params: ValueGetterParams) {
 
 function formatNumber(params: ValueFormatterParams) {
     var number = params.value;
-    // this puts commas into the number eg 1000 goes to 1,000,
-    // i pulled this from stack overflow, i have no idea how it works
     return Math.floor(number)
         .toString()
         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -48,8 +46,8 @@ const GridExample = () => {
     const gridRef = useRef<AgGridReact>(null);
     const containerStyle = useMemo(() => ({width: '100%', height: '100%'}), []);
     const gridStyle = useMemo(() => ({height: '100%', width: '100%'}), []);
-    const [rowData, setRowData] = useState<any[]>(getData());
-    const [columnDefs, setColumnDefs] = useState<ColDef[]>([
+    const [rowData] = useState<any[]>(getData());
+    const [columnDefs] = useState<ColDef[]>([
         {field: 'q1', type: 'quarterFigure'},
         {field: 'q2', type: 'quarterFigure'},
         {field: 'q3', type: 'quarterFigure'},

@@ -204,21 +204,21 @@ export const ColumnLoanDefs = [
         field: "status",
         floatingFilterComponentParams: {suppressFilterButton: true},
         cellStyle: function (params: any) {
-            if (params.node.data.status == "Complete") {
+            if (params.node.data.status === "Complete") {
                 return {
                     backgroundColor: colors.primary_light_grey,
                     display: "flex",
                     alignItems: "center",
                     color: "#039100",
                 };
-            } else if (params.node.data.status == "Error") {
+            } else if (params.node.data.status === "Error") {
                 return {
                     backgroundColor: colors.primary_light_grey,
                     display: "flex",
                     alignItems: "center",
                     color: "#E90909",
                 };
-            } else if (params.node.data.status == "Pending") {
+            } else if (params.node.data.status === "Pending") {
                 return {
                     backgroundColor: colors.primary_light_grey,
                     display: "flex",
@@ -228,13 +228,4 @@ export const ColumnLoanDefs = [
             }
         },
     },
-    // {
-    //   headerName: "",
-    //   field: "redrive",
-    //   cellStyle: {
-    //     backgroundColor: colors.primary_light_grey,
-    //     display: "flex",
-    //     alignItems: "center",
-    //   },
-    // },
 ];

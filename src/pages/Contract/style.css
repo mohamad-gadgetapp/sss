@@ -12,9 +12,6 @@
 
 .clear-submit-btn-div {
   display: flex;
-  /* margin: 0rem 1rem; */
-  /* width: 50%; */
-  /* justify-content: space-evenly; */
 }
 
 .uploadSheet-submit-Btn {
@@ -34,8 +31,8 @@
   height: 3rem;
   width: 9rem;
   border-radius: 0.5rem;
-  border: 2px solid red;
-  color: red;
+  border: 2px solid #E90909;
+  color: #E90909;
   background-color: white;
   outline: none;
   margin-left: 2rem;
@@ -73,10 +70,14 @@
 .dropZoneOverlay {
   position: absolute;
   text-align: center;
+  font-size: 0.9rem;
+  color: grey;
+  font-family: 'Cairo';
+  font-weight: 400;
 }
 
 .file-name {
-  font-size: small;
+  font-size: 0.7rem;
   margin-top: 0.5rem;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }

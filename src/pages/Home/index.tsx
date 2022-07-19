@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import "./style.css"
 import AgGrid from "../../components/AgGrid";
 import data from "../../contractsData.json";
 import ContractBooking from '../ContractBooking';
 import ShowcaseLayout from "../../components/ShowcaseLayout";
 const HomePage = () => {
-  const [rowData, setRowData] = useState<Array<object>>([...data.contractsData]);
+  const [rowData] = useState<Array<object>>([...data.contractsData]);
   const [layout, setLayout] = useState<Array<object>>([]);
   const [heightC, setHeightC] = useState(0);
   const [heightAG_1, setHeightAG_1] = useState(20.3);

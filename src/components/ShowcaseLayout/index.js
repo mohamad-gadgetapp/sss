@@ -87,7 +87,6 @@ ShowcaseLayout.defaultProps = {
 
 function generateLayout(range, child, height) {
   return child.map(function (item, i) {
-    // var y = Math.ceil(Math.random() * 4) + 1;
     var y = height;
     return {
       x: (_.random(0, 5) * 2) % 12,
