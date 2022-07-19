@@ -1,0 +1,392 @@
+@media only screen and (max-width: 575.98px) {
+
+    .font-style {
+        font-size: 0.8rem;
+    }
+
+    .title-style {
+        font-size: 1.5rem;
+    }
+
+    .upArrow-TradeBooking {
+        height: 2.25rem;
+        width: 2.25rem;
+    }
+
+    .search-table {
+        flex-wrap: wrap;
+    }
+
+    .checkbox-div {
+        width: 20%;
+        font-size: 0.8rem;
+    }
+
+    .table-div {
+        width: 80%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .table-style {
+        width: 800px;
+        font-size: 0.8rem;
+    }
+
+    .table-data-cell {
+        width: 10%;
+    }
+
+    .date-table-div {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 0 0.25rem;
+    }
+
+    .date-table-style {
+        width: 800px;
+        font-size: 0.8rem;
+    }
+
+    .date-table-data-cell {
+        width: 25%;
+    }
+
+    .security-table-data-cell {
+        width: 25%;
+    }
+
+    .input-table-data-cell {
+        width: 11%;
+    }
+
+    .query-table-data-cell {
+        width: 14%;
+    }
+
+    .date-input-style {
+        width: 75%;
+        margin-left: 0.25rem;
+    }
+
+    .book-div {
+        width: 100%;
+        margin-top: 0.75rem;
+        justify-content: center;
+    }
+
+    .button-div {
+        width: 80%;
+        justify-content: end;
+        flex-wrap: wrap;
+    }
+
+    .button-style {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+        margin-left: 0.25rem;
+        margin-bottom: 0.15rem;
+        width: 45%;
+    }
+
+    .securityInfo-table-data-cell {
+        width: 33.333333%;
+    }
+
+    .counter-inner-style{
+        margin-bottom: 0.75rem;
+    }
+}
+
+@media only screen and (min-width: 576px) {
+
+    .font-style {
+        font-size: 1rem;
+    }
+
+    .title-style {
+        font-size: 1.5rem;
+    }
+
+    .upArrow-TradeBooking {
+        height: 2.25rem;
+        width: 2.25rem;
+    }
+
+    .checkbox-div {
+        width: 20%;
+        font-size: 1rem;
+    }
+
+    .table-div {
+        width: 80%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .table-style {
+        width: 900px;
+        font-size: 1rem;
+    }
+
+    .table-data-cell {
+        width: 10%;
+    }
+
+    .date-table-div {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 0 0.5rem;
+    }
+
+    .date-table-style {
+        width: 990px;
+    }
+
+    .date-table-data-cell {
+        width: 25%;
+    }
+
+    .security-table-data-cell {
+        width: 25%;
+    }
+
+    .input-table-data-cell {
+        width: 18%;
+    }
+
+    .query-table-data-cell {
+        width: 7%;
+    }
+
+    .date-input-style {
+        width: 75%;
+        margin-left: 0.25rem;
+    }
+
+    .book-div {
+        width: 10%;
+    }
+
+    .button-div {
+        width: 80%;
+        justify-content: end;
+    }
+
+    .button-style {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+        margin-left: 0.25rem;
+    }
+
+    .securityInfo-table-data-cell {
+        width: 33.333333%;
+        padding-left: 0.5rem;
+    }
+
+    .security-input-style {
+        width: 60%;
+        padding: 0 0.5rem;
+    }
+
+    .counter-inner-style{
+        margin-bottom: 0.75rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    .title-style {
+        font-size: 1.8rem;
+    }
+
+    .upArrow-TradeBooking {
+        height: 2.75rem;
+        width: 2.75rem;
+    }
+
+    .checkbox-div {
+        width: 10%;
+    }
+
+    .table-div {
+        width: 80%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .table-style {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .table-data-cell {
+        width: 10%;
+    }
+
+    .date-table-div {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .date-table-style {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .button-div {
+        width: 90%;
+        justify-content: end;
+    }
+
+    .button-style {
+        font-size: 1.25rem;
+        padding: 0.25rem 0.75rem;
+        margin-left: 0.5rem;
+    }
+
+    .security-input {
+        width: 60%
+    }
+
+    .security-input-style {
+        width: 60%;
+    }
+
+    .counter-inner-style{
+        margin-bottom: 1rem;
+    }
+}
+
+.main-div-TradeBlotter {
+    padding: 0.5rem;
+    display: flex;
+}
+
+.left-part {
+    width: 70%;
+}
+
+.main-div-TradeBooking {
+    font-family: 'Cairo';
+    box-sizing: border-box;
+    border: 1px solid var(--primary_grey);
+    box-shadow: 0 2px 5px var(--primary_grey);
+}
+
+.main-div-TradeBrowser {
+    font-family: 'Cairo';
+    box-sizing: border-box;
+    border: 1px solid var(--primary_grey);
+    box-shadow: 0 2px 5px var(--primary_grey);
+    margin-top: 2rem;
+}
+
+.header-TradeBooking {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.title-style {
+    font-weight: 600;
+}
+
+.upArrow-TradeBooking {
+    cursor: pointer;
+}
+
+.search-table {
+    width: 100%;
+    display: flex;
+    padding: 0 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.table-style {
+    overflow-x: hidden;
+}
+
+.input-style {
+    width: 90%;
+    padding: 0.25rem 0.5rem;
+}
+
+.book-div {
+    display: flex;
+    align-self: center;
+    height: 100%;
+}
+
+.submit-div {
+    display: flex;
+    padding: 0 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.label-style {
+    margin-left: 0.25rem;
+}
+
+.button-div {
+    display: flex;
+    align-items: center;
+}
+
+.button-style {
+    background-color: #1E355E;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.date-table-div {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.date-table-style {
+    overflow-x: hidden;
+}
+
+.right-part {
+    width: 30%;
+}
+
+.security-input-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.security-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.securityInfo-table-data-cell {
+    text-align: left;
+}
+
+.counter-main-div {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+.select-style{
+    display: flex;
+    align-items: center;
+}

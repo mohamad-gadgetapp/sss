@@ -24,6 +24,10 @@ const Header = ({ title }: HeaderProps) => {
   const handleClickNewTab = (url: string) => {
     window.open(url, "_blank", 'toolbar=0,location=0,menubar=0');
   };
+
+  const video = () => {
+    
+  }
   return (
     <AppBar style={styles.appBar} position="static" className="header-style">
       <div>{title}</div>
@@ -42,10 +46,10 @@ const Header = ({ title }: HeaderProps) => {
             className="btn-text-style"
             onClick={() => onClickNavigate("/aboutUsPage")}
           >
-            <div className="stagingDiv">Staging</div>
+            <div className="stagingDiv" onClick={video}>Staging</div>
           </div>
           <div style={styles.userBar} className="appBar">
-            <div className="userBarIcon">
+            <div className="userBarIcon" onClick={() => onClickNavigate("/tradeBlotter")}>
               <img src={user} className="profileHeaderIcon" />
             </div>
             <span style={styles.userName} className="btn-text-style">

@@ -14,7 +14,7 @@ import AboutUsPage from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Contract from './pages/Contract';
 import Loan from './pages/Loan';
-
+import TradeBlotter from "./pages/TradeBlotter";
 
 function App() {
 
@@ -31,7 +31,7 @@ function App() {
                     <Route path="/contactUs" element={<ContactUs/>}/>
                     <Route path="/contract" element={<Contract/>}/>
                     <Route path="/loan" element={<Loan/>}/>
-                   
+                    <Route path="/tradeBlotter" element={<TradeBlotter />} />
                 </Routes>
             </div>
 

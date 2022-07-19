@@ -3,6 +3,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { AgGridReact } from 'ag-grid-react';
 import { ColumnDefs } from "../../common/columDef";
+import { ColumnDefsTradeBooking } from "../../common/columnTradeBooking";
 import { ColumnLoanDefs } from "../../common/columnLoan";
 import "./style.css";
 import {ColDef, ColumnResizedEvent, ValueFormatterParams} from 'ag-grid-community';
@@ -18,7 +19,7 @@ interface AgGridProps {
 
 const AgGrid = ({ title, rowData, height,type }: AgGridProps) => {
     const gridRef = useRef(null)
-    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ?[...ColumnLoanDefs] : [...ColumnDefs]);
+    const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ?[...ColumnLoanDefs] :type === "trade" ? [...ColumnDefsTradeBooking] : [...ColumnDefs]);
 
     const defaultColDef = useMemo<ColDef>(() => {
         return {
@@ -87,6 +88,7 @@ const AgGrid = ({ title, rowData, height,type }: AgGridProps) => {
                 rowHeight={23}
                 columnDefs={columnDefs}
                 rowData={rowData}
+                suppressRowClickSelection={true}
                 floatingFiltersHeight={30}
                 defaultColDef={defaultColDef}
                 columnTypes={columnTypes}
