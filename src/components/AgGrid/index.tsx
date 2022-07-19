@@ -7,7 +7,7 @@ import {ColumnLoanDefs} from "../../common/columnLoan";
 import {ColumnDefsTradeBooking} from "../../common/columnTradeBooking";
 import ButtonCellRenderer from "../../common/ButtonCellRenderer";
 import "./style.css";
-import {ColDef, ColumnResizedEvent, GridOptionsWrapper} from 'ag-grid-community';
+import {ColDef, ColumnResizedEvent,  } from 'ag-grid-community';
 import 'ag-grid-enterprise';
 
 
@@ -16,10 +16,10 @@ interface AgGridProps {
     rowData: Array<object>;
     height?: number;
     type?: string;
-    onClick?:(e:object)=>void;
+    onClickHan?:(e: React.MutableRefObject<any>)=>void;
 }
 
-const AgGrid = ({title, rowData, height, type, onClick}: AgGridProps) => {
+const AgGrid = ({title, rowData, height, type, onClickHan}: AgGridProps) => {
     const gridRef = useRef<any>(null)
     const [columnDefs, setColumnDefs] = useState<any>(type === "loan" ? [...ColumnLoanDefs] : type === "trade"? [...ColumnDefsTradeBooking] : [...ColumnDefs]);
     let gridApi: any;
@@ -60,7 +60,12 @@ const AgGrid = ({title, rowData, height, type, onClick}: AgGridProps) => {
     const onSelectionChanged = useCallback(() => {
         const selectedRows = gridRef.current!.api.getSelectedRows();
         console.log("selectedRows 01: ", selectedRows);
-        onClick?.(selectedRows);
+        localStorage.setItem('rowData', JSON.stringify(selectedRows));
+        // if (onClickHan) {
+        //     onClickHan(gridRef);
+        // }else{
+        //     console.log("dataaaaa", onClickHan)
+        // }
     }, []);
     // @ts-ignore
     //  var ButtonCellRenderer = useMemo<any>(() => ButtonCellRenderer,[]);

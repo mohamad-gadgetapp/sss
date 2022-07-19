@@ -12,7 +12,7 @@ export default function ButtonCellRenderer(props: ICellRendererParams) {
         // alert(message);
         console.log('data: ', data);
         // return props.click(data);
-        localStorage.setItem('rowData', JSON.stringify(data));
+        // localStorage.setItem('rowData', JSON.stringify(data));
     };
     return <button onClick={onClick}>Click me</button>;
 }

@@ -3,6 +3,7 @@ import "./style.css"
 import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import data from "../../loansData.json";
+import {countBy} from "lodash";
 
 const TradeBlotter = () => {
 
@@ -15,8 +16,15 @@ const TradeBlotter = () => {
     const [rowData, setRowData] = useState<Array<object>>([...tradingData.tradeBookingData]);
     const [rowDataLoan, setRowDataLoan] = useState<Array<object>>([...data.loansData]);
     const [heightAG_1] = useState(30);
-    const [details, setDetails] = useState<any>(null);
+    const [details, setDetails] = useState<any>(() => {
+        // getting stored value
+        const saved: any = localStorage.getItem("rowData");
+        const initialValue = JSON.parse(saved);
+        return initialValue || "";
+    });
     const [newDetails, setNewDetails] = useState<any>(null);
+    const [selectBorrow, setSelectBorrow] = useState("");
+    const [selectLoan, setSelectLoan] = useState("");
     const [cpartyField, setCpartyField] = useState("")
     const [cpartyFieldBorrow, setCpartyFieldBorrow] = useState("");
     const [securityField, setSecurityField] = useState("");
@@ -34,25 +42,23 @@ const TradeBlotter = () => {
     const [profitCenterField, setProfitCenterField] = useState("");
     const [profitCenterFieldBorrow, setProfitCenterFieldBorrow] = useState("");
     const [termDateField, setTermDateField] = useState("");
+    const [termDateFieldBorrow, setTermDateFieldBorrow] = useState("");
 
     // const showData = () => {
     //     document.getElementById("tablePart").style.width = "70%";
     // }
-    var localData: any = null;
-
-    useEffect(() => {
-        localData = localStorage.getItem("rowData");
-        console.log("update ", details)
-    }, [details])
-
-    useMemo(() => {
-
-        let localData_ = JSON.parse(localData);
-        console.log("local sdata", localData_)
-        setDetails(localData_);
-    }, [localData]);
-
-   const onCLickData=(data:any)=>{
+    // var localData: any = localStorage.getItem("rowData");
+    // let localData_ = JSON.parse(localData);
+    // useEffect(() => {
+    //
+    //     setDetails(localData_);
+    // }, [])
+    //
+    // useEffect(() => {
+    //     console.log("dataNew: ", details);
+    // }, [details])
+    //
+    const onCLickData = (data: any) => {
         console.log("data ,", data)
     }
 
@@ -202,7 +208,7 @@ const TradeBlotter = () => {
                 </div>
                 <div className="main-div-TradeBooking">
                     <div className="title-subHeaderTitle"> Borrow</div>
-                    <AgGrid rowData={rowDataLoan} height={heightAG_1} type="loan" onClick={onCLickData}/>
+                    <AgGrid rowData={rowDataLoan} height={heightAG_1} type="loan" onClickHan={onCLickData}/>
                 </div>
                 <div className="main-div-TradeBooking">
                     <div className="title-subHeaderTitle"> Loan</div>
@@ -237,11 +243,11 @@ const TradeBlotter = () => {
                                     <td className="securityInfo-table-data-cell">Cusip</td>
                                 </tr>
                                 {
-                                    newDetails !== null && (
+                                    details !== null && (
                                         <tr>
-                                            <td className="securityInfo-table-data-cell">{newDetails.cparty}</td>
-                                            <td className="securityInfo-table-data-cell">{newDetails.collateral_code}</td>
-                                            <td className="securityInfo-table-data-cell">{newDetails.haircut}</td>
+                                            <td className="securityInfo-table-data-cell">{details.cparty}</td>
+                                            <td className="securityInfo-table-data-cell">{details.collateral_code}</td>
+                                            <td className="securityInfo-table-data-cell">{details.haircut}</td>
                                         </tr>
                                     )
                                 }
@@ -257,11 +263,11 @@ const TradeBlotter = () => {
                                     <td className="securityInfo-table-data-cell">Sedol</td>
                                 </tr>
                                 {
-                                    newDetails !== null && (
+                                    details !== null && (
                                         <tr>
-                                            <td className="securityInfo-table-data-cell">{newDetails.cparty}</td>
-                                            <td className="securityInfo-table-data-cell">{newDetails.collateral_code}</td>
-                                            <td className="securityInfo-table-data-cell">{newDetails.haircut}</td>
+                                            <td className="securityInfo-table-data-cell">{details.cparty}</td>
+                                            <td className="securityInfo-table-data-cell">{details.collateral_code}</td>
+                                            <td className="securityInfo-table-data-cell">{details.haircut}</td>
                                         </tr>
                                     )
                                 }
