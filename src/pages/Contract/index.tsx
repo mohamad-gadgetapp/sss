@@ -152,7 +152,6 @@ const Contract = ({ height }: ContractPageProps) => {
               >
                 Submit
               </button>
-              {/* <Button title="Submit" onClick={onSubmit}/> */}
               <button className="clearAll-Btn" onClick={onClear}>
                 Clear All
               </button>
