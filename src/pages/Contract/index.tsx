@@ -10,13 +10,12 @@ import CancelIcon from '@mui/icons-material/Cancel';
 interface ContractPageProps {
   height?: number;
   columns?: object;
+  title?: string;
 }
 
-const Contract = ({ height }: ContractPageProps) => {
-  const [rowData, setRowData] = useState<Array<object>>([
-    ...data.contractsData,
-  ]);
-  const [heightAG_1] = useState(30);
+const Contract = ({ height, title }: ContractPageProps) => {
+  const [rowData, setRowData] = useState<Array<object>>([...data.contractsData,]);
+  const [heightAG_1] = useState(15);
   const [excelFileName, setExcelFileName] = useState("");
   const [excelData, setExcelData] = useState<any>(null);
 
@@ -143,7 +142,7 @@ const Contract = ({ height }: ContractPageProps) => {
                     Upload Excel File
                   </div>
                 </button>
-                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon style={{color: "#E90909", height: "0.9rem"}}/>}</div>
+                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon style={{ color: "#E90909", height: "0.9rem" }} />}</div>
               </div>
               <button
                 type="submit"

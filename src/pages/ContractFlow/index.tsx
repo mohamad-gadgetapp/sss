@@ -1,13 +1,12 @@
 import ShowcaseLayout from "../../components/ShowcaseLayout";
 import Contract from '../Contract';
-  
 const ContractFlow = () => {
 
   return (
     <div>
-       <ShowcaseLayout
+      <ShowcaseLayout
         child_list={[
-          <Contract/>
+          <Contract />
         ]}
       ></ShowcaseLayout>
     </div>

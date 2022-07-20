@@ -8,8 +8,10 @@ export const ColumnDefsTradeBooking = [
         floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         width: 30,
-        cellStyle: {display: "flex",
-        alignItems: "center", justifyContent: "center"},
+        cellStyle: {
+            display: "flex",
+            alignItems: "center", justifyContent: "center"
+        },
         minWidth: 30,
         maxWidth: 30,
         suppressSizeToFit: false,

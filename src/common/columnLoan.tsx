@@ -1,4 +1,4 @@
-import {colors} from "./color";
+import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
 
 export const ColumnLoanDefs = [
@@ -6,7 +6,7 @@ export const ColumnLoanDefs = [
         headerName: "DTC NO",
         field: "dtc_no",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -22,7 +22,7 @@ export const ColumnLoanDefs = [
         headerName: "CPTY_NAME",
         field: "cpty_name",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -37,8 +37,8 @@ export const ColumnLoanDefs = [
         headerName: "TB_TICKER",
         field: "tb_ticker",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
-        headerComponentParams: {template: `<img src="${symbol}"/>`},
+        floatingFilterComponentParams: { suppressFilterButton: true },
+        headerComponentParams: { template: `<img src="${symbol}"/>` },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -54,7 +54,7 @@ export const ColumnLoanDefs = [
         headerName: "CUSIP",
         field: "cusip",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -75,7 +75,7 @@ export const ColumnLoanDefs = [
         headerName: "B/L",
         field: "b/l",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -91,7 +91,7 @@ export const ColumnLoanDefs = [
         field: "quantity",
         type: 'quarterFigure',
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -106,7 +106,7 @@ export const ColumnLoanDefs = [
         headerName: "RATE",
         field: "rate",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -117,7 +117,7 @@ export const ColumnLoanDefs = [
         headerName: "VALUE",
         field: "value",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -128,7 +128,7 @@ export const ColumnLoanDefs = [
         headerName: "TRADE_DATE",
         field: "trade_date",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -143,7 +143,7 @@ export const ColumnLoanDefs = [
         headerName: "SETTLE_DATE",
         field: "settle_date",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -158,7 +158,7 @@ export const ColumnLoanDefs = [
         headerName: "TERM_DATE",
         field: "term_date",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -173,7 +173,7 @@ export const ColumnLoanDefs = [
         headerName: "DAILY DEBITS",
         field: "daily_debits",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -188,7 +188,7 @@ export const ColumnLoanDefs = [
         headerName: "CONTRACT_ID",
         field: "contract_id",
         floatingFilter: true,
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",
@@ -202,7 +202,7 @@ export const ColumnLoanDefs = [
     {
         headerName: "STATUS",
         field: "status",
-        floatingFilterComponentParams: {suppressFilterButton: true},
+        floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: function (params: any) {
             if (params.node.data.status === "Complete") {
                 return {
