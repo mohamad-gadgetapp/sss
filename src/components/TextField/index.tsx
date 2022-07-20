@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useState } from "react";
-// import inputLogo from "./InputLogo.svg";
+import inputLogo from "./InputLogo.svg";
 import "./style.css";
 
 
@@ -29,7 +29,7 @@ const ContractBooking = (props: ContractProps) => {
               htmlFor="exampleInputEmail1"
               className="form-label inputLabelHeight"
             >
-              <img src="" />
+              <img src={inputLogo} />
             </label>
             <input
               className="form-control inputBorderNone"

@@ -210,11 +210,11 @@
     }
 
     .checkbox-div {
-        width: 10%;
+        width: 6%;
     }
 
     .table-div {
-        width: 80%;
+        width: 84%;
         overflow-x: auto;
         overflow-y: hidden;
     }
@@ -225,7 +225,7 @@
     }
 
     .table-data-cell {
-        width: 10%;
+        width: 11.111111%;
     }
 
     .date-table-div {
@@ -262,13 +262,17 @@
     }
 }
 
+::placeholder {
+    color: #EAECEF;
+}
+
 .main-div-TradeBlotter {
     padding: 0.5rem;
     display: flex;
 }
 
 .left-part {
-    width: 70%;
+    width: 75%;
 }
 
 .main-div-TradeBooking {
@@ -315,6 +319,21 @@
 .input-style {
     width: 90%;
     padding: 0.25rem 0.5rem;
+    border: 1px solid #EAECEF;
+    border-radius: 6px;
+    height: 2.5rem;
+}
+
+.error-style {
+    color: red;
+    font-size: 0.75rem;
+}
+
+.select-style {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #EAECEF;
+    border-radius: 6px;
+    height: 2.5rem;
 }
 
 .book-div {
@@ -360,8 +379,13 @@
     overflow-x: hidden;
 }
 
+.table-data-cell-innerDiv {
+    display: flex;
+    flex-direction: column;
+}
+
 .right-part {
-    width: 30%;
+    width: 25%;
 }
 
 .security-input-main-div {
@@ -384,9 +408,4 @@
 .counter-main-div {
     padding: 0 1rem;
     margin-bottom: 1rem;
-}
-
-.select-style {
-    display: flex;
-    align-items: center;
 }
