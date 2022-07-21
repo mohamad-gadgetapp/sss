@@ -51,25 +51,23 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         gridApi = params.api;
     }
 
-    const getData = () => {
-        let selectedNodes = gridApi.getSelectedNodes();
-        let selectedData = selectedNodes.map((node: any) => node.data);
-        alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
-        return selectedData;
-    }
-
+   
+      const rowClassRules = useMemo(() => {
+        return {
+          'is-new-warning': (params:any) => {
+            console.log("params ", params.data.is_new)
+            var isNew = params.data.is_new;
+            return isNew === "TRUE" ;
+          }
+        };
+      }, []);
     const onSelectionChanged = useCallback(() => {
         const selectedRows = gridRef.current!.api.getSelectedRows();
         console.log("selectedRows 01: ", selectedRows);
         localStorage.setItem('rowData', JSON.stringify(selectedRows));
-        // if (onClickHan) {
-        //     onClickHan(gridRef);
-        // }else{
-        //     console.log("dataaaaa", onClickHan)
-        // }
+        
     }, []);
-    // @ts-ignore
-    //  var ButtonCellRenderer = useMemo<any>(() => ButtonCellRenderer,[]);
+    
     return (
         <div
             className="ag-theme-balham"
@@ -92,12 +90,14 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
                 suppressAggFuncInHeader={true}
                 enableCellChangeFlash={true}
                 enableRangeSelection={true}
+                // suppressClickEdit={true}
                 pagination={true}
                 paginationPageSize={10}
                 onGridReady={onGridReady}
                 onColumnResized={onColumnResized}
                 onSelectionChanged={onSelectionChanged}
                 rowSelection={'multiple'}
+                rowClassRules={rowClassRules}
                 frameworkComponents={{
                     ButtonCellRenderer
                 }}>

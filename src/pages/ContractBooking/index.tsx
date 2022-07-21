@@ -10,7 +10,7 @@ const ContractBooking = ({ height }: ContractProps) => {
   return (
     <>
       <div style={{ height: `${height}rem`, overflow: 'auto' }}>
-        <SubHeader title="Contract Booking"  />
+        <SubHeader title="Contract Booking"/>
       </div>
     </>
   );

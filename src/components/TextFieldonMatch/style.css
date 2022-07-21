@@ -49,11 +49,3 @@ input{
 .counterParty-dummyData{
     position: relative;
 }
-
-
-
-
-.error-style {
-    color: red;
-    font-size: 0.75rem;
-}

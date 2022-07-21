@@ -6,29 +6,27 @@
 
 .SubHeaderMatch{
     display: flex;
-    align-items: center;
     padding-right: 1rem;
+    margin-left: 1rem;
 }
 
-.SubHeaderNonMatch{
-    display: flex;
-    align-items: center;
-}
-
-.matchMainDiv{
-    display: flex;
-    margin-right: 3rem;
+.contractBooking-Btn{
     margin-top: 1rem;
+    margin-right: 3rem;
 }
 
 .match{
     margin-left: 1rem;
+    /* margin-top: -0.3rem; */
     font-family: 'Cairo';
     font-weight: 400;
     font-size: 1.25rem;
     line-height: 2.25rem;
 }
-
+.matchRadio{
+    margin-top: 0.8rem;
+    height: fit-content;
+}
 .nonmatch{
     margin-left: 1rem;
     font-family: 'Cairo';

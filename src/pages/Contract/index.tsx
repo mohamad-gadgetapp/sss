@@ -15,13 +15,16 @@ interface ContractPageProps {
 
 const Contract = ({ height, title }: ContractPageProps) => {
   const [rowData, setRowData] = useState<Array<object>>([...data.contractsData,]);
-  const [heightAG_1] = useState(15);
+  const [heightAG_1] = useState(30);
   const [excelFileName, setExcelFileName] = useState("");
-  const [excelData, setExcelData] = useState<any>(null);
+  const [workbookData, setworkbookData] = useState<any>(null);
+  // const [excelData, setExcelData] = useState<any>(null);
+
 
   const onClear = () => {
-    setRowData([]);
+    // setRowData([...data.contractsData]);
     setExcelFileName("");
+    //setworkbookData([]);
   };
   const onChange = (e: any) => {
     makeRequest(
@@ -29,7 +32,8 @@ const Contract = ({ height, title }: ContractPageProps) => {
       `${URL.createObjectURL(e.target.files[0])}`,
       function (data) {
         var workbook = convertDataToWorkbook(data);
-        setExcelData(workbook);
+        populateGrid(workbook);
+        setworkbookData(workbook);
         setExcelFileName(e.target.files[0].name);
       },
       function (error) {
@@ -68,10 +72,6 @@ const Contract = ({ height, title }: ContractPageProps) => {
     return XLSX.read(bstr, { type: "binary" });
   };
 
-  const onSubmit = () => {
-    console.log("excelFile ", excelData);
-    populateGrid(excelData);
-  };
   const populateGrid = (workbook: any) => {
     console.log("workbook ", workbook);
     const firstSheetName = workbook.SheetNames[0];
@@ -91,10 +91,11 @@ const Contract = ({ height, title }: ContractPageProps) => {
       K: "status",
       L: "daily_debits",
       M: "contract_id",
+      N:"is_new"
     };
 
     const rowData_ = rowData;
-
+    const arrayData = rowData;
     var rowIndex = 2;
     console.log("row", worksheet["A" + rowIndex]);
 
@@ -102,10 +103,17 @@ const Contract = ({ height, title }: ContractPageProps) => {
       console.log("row");
       const row: any = {};
       Object.keys(columns).forEach(function (column) {
+        console.log("params ", worksheet[column + rowIndex].w)
+        console.log("column ", columns[column] )
         row[columns[column]] = worksheet[column + rowIndex].w;
       });
-
-      setRowData([...rowData_, row]);
+      if(row.quantity < 0){
+        row.status = "Error"
+      }
+      if(row.dtc_no === ""){
+        row.status = "Error"
+      }
+      setRowData(pres => [...pres!,row]);
       rowIndex++;
     }
   };
@@ -121,8 +129,9 @@ const Contract = ({ height, title }: ContractPageProps) => {
         </div>
         <div className="react-grid-item-contract">
           <div className="contractBooking-Button">
-            <div className="title-subHeaderTitle">Contract</div>
+            <div className="title-subHeaderTitle">Contracts</div>
             <div className="clear-submit-btn-div">
+              <a href="" className="templetelink">Download Blank Templete</a>
               <div className="upload-btn-main-div">
                 <button className="excel-upload-btn">
                   <input
@@ -142,12 +151,11 @@ const Contract = ({ height, title }: ContractPageProps) => {
                     Upload Excel File
                   </div>
                 </button>
-                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon style={{ color: "#E90909", height: "0.9rem" }} />}</div>
+                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon onClick={onClear} style={{ color: "#E90909", height: "0.9rem" }} />}</div>
               </div>
               <button
                 type="submit"
                 className="uploadSheet-submit-Btn"
-                onClick={() => onSubmit()}
               >
                 Submit
               </button>

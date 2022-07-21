@@ -11,6 +11,10 @@
     margin-bottom: 12px;
 }
 
+.ag-theme-material .ag-checkbox-input-wrapper.ag-checked::after {
+    color: #152541 !important;
+  }
+
 .ag-pivot-on .ag-header-cell-label {
     color: #1b6d85;
     font-weight: bold;
@@ -64,6 +68,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-left: 1rem;
 
 }
+
+.is-new-warning {
+    background-color: yellow !important;
+  }

@@ -3,14 +3,42 @@ import symbol from "../assets/Symbol.svg";
 
 export const ColumnDefs = [
   {
-    headerName: "DTC NO",
-    field: "dtc_no",
-    floatingFilter: true,
+    headerName: "",
+    headerCheckboxSelection: true,
+    headerCheckboxSelectionFilteredOnly: true,
+    checkboxSelection: true,
+    floatingFilter: false,
+    // suppressClickEdit: true,
+    editable:false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
+    },
+    width: 50,
+    minWidth: 30,
+    maxWidth: 30,
+    suppressSizeToFit: false,
+  },
+  {
+    headerName: "DTC NO",
+    field: "dtc_no",
+    floatingFilter: false,
+    floatingFilterComponentParams: { suppressFilterButton: true },
+    cellStyle:function (params: any){
+      if (params.node.data.dtc_no == "") {
+        return {
+          display: "flex",
+          alignItems: "center",
+          border:"2px solid red"
+          }
+      }else{
+        return {
+          display: "flex",
+          alignItems: "center",
+        }
+      }
     },
     width: 120,
     minWidth: 60,
@@ -19,27 +47,25 @@ export const ColumnDefs = [
   },
   {
     headerName: "CPTY_NAME",
-    field: "contractsData.cpty_name",
-    floatingFilter: true,
+    field: "cpty_name",
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 120,
-    minWidth: 60,
-    maxWidth: 130,
+    width: 250,
+    minWidth: 150,
+    maxWidth: 300,
     suppressSizeToFit: false,
   },
   {
     headerName: "TB_TICKER",
     field: "tb_ticker",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     headerComponentParams: { template: `<img src="${symbol}"/>` },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -52,16 +78,15 @@ export const ColumnDefs = [
   {
     headerName: "CUSIP",
     field: "cusip",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 120,
-    minWidth: 60,
-    maxWidth: 130,
+    width: 150,
+    minWidth: 100,
+    maxWidth: 180,
     suppressSizeToFit: false,
     filterParams: {
       allowedCharPattern: "\\d\\-\\,", // note: ensure you escape as if you were creating a RegExp from a string
@@ -73,107 +98,117 @@ export const ColumnDefs = [
   {
     headerName: "B/L",
     field: "b/l",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 120,
+    width: 100,
     minWidth: 60,
-    maxWidth: 130,
+    maxWidth: 100,
     suppressSizeToFit: false,
   },
   {
     headerName: "QUANTITY",
-    field: "contractsData.quantity",
-    floatingFilter: true,
+    field: "quantity",
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    cellStyle: {
-      backgroundColor: colors.primary_light_grey,
-      display: "flex",
-      alignItems: "center",
+    cellStyle:function (params: any) {
+      if (params.node.data.quantity < 0) {
+        return {
+          display: "flex",
+          alignItems: "center",
+          border:"2px solid red"
+          }
+      }else{
+        return {
+          display: "flex",
+          alignItems: "center",
+          }
+      }
+      
     },
-    width: 200,
-    minWidth: 150,
-    maxWidth: 250,
+    width: 90,
+    minWidth: 90,
+    maxWidth: 100,
     suppressSizeToFit: false,
+   
   },
   {
     headerName: "RATE",
     field: "rate",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
+    width: 90,
+    minWidth: 90,
+    maxWidth: 100,
   },
   {
     headerName: "VALUE",
-    field: "contractsData.value",
-    floatingFilter: true,
+    field: "value",
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
+    width: 150,
+    minWidth: 150,
+    maxWidth: 180,
   },
   {
     headerName: "TRADE_DATE",
     field: "trade_date",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 200,
+    width: 120,
     minWidth: 100,
-    maxWidth: 220,
+    maxWidth: 150,
     suppressSizeToFit: false,
   },
   {
     headerName: "SETTLE_DATE",
     field: "settle_date",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 200,
+    width: 120,
     minWidth: 100,
-    maxWidth: 220,
+    maxWidth: 150,
     suppressSizeToFit: false,
   },
   {
     headerName: "DAILY DEBITS",
-    field: "contractsData.daily_debits",
-    floatingFilter: true,
+    field: "daily_debits",
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
-    width: 200,
+    width: 150,
     minWidth: 100,
-    maxWidth: 220,
+    maxWidth: 180,
     suppressSizeToFit: false,
   },
   {
     headerName: "CONTRACT_ID",
     field: "contract_id",
-    floatingFilter: true,
+    floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
-      backgroundColor: colors.primary_light_grey,
       display: "flex",
       alignItems: "center",
     },
@@ -184,26 +219,25 @@ export const ColumnDefs = [
   },
   {
     headerName: "STATUS",
-        field: "status",
+    field: "status",
+    floatingFilter: false,
+    editable:false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: function (params: any) {
       if (params.node.data.status === "Complete") {
         return {
-          backgroundColor: colors.primary_light_grey,
           display: "flex",
           alignItems: "center",
           color: "#039100",
         };
       } else if (params.node.data.status === "Error") {
         return {
-          backgroundColor: colors.primary_light_grey,
           display: "flex",
           alignItems: "center",
           color: "#E90909",
         };
       } else if (params.node.data.status === "Pending") {
         return {
-          backgroundColor: colors.primary_light_grey,
           display: "flex",
           alignItems: "center",
           color: "#0D34FF",
@@ -212,4 +246,3 @@ export const ColumnDefs = [
     },
   },
 ];
-

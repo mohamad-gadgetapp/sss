@@ -1,20 +1,23 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import "./style.css"
+import React, { useState, useEffect, useMemo } from "react";
+import "./style.css";
 import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import data from "../../loansData.json";
 import { countBy } from "lodash";
 
 const TradeBlotter = () => {
-
   // interface TradeBlotterPageProps {
   //     height?: number;
   //     columns?: object;
   //     title?: string;
   // }
 
-  const [rowData, setRowData] = useState<Array<object>>([...tradingData.tradeBookingData]);
-  const [rowDataLoan, setRowDataLoan] = useState<Array<object>>([...data.loansData]);
+  const [rowData, setRowData] = useState<Array<object>>([
+    ...tradingData.tradeBookingData,
+  ]);
+  const [rowDataLoan, setRowDataLoan] = useState<Array<object>>([
+    ...data.loansData,
+  ]);
   const [heightAG_1] = useState(30);
   const [details, setDetails] = useState<any>(() => {
     // getting stored value
@@ -25,7 +28,7 @@ const TradeBlotter = () => {
   const [newDetails, setNewDetails] = useState<any>(null);
   const [selectBorrow, setSelectBorrow] = useState("");
   const [selectLoan, setSelectLoan] = useState("");
-  const [cpartyField, setCpartyField] = useState("")
+  const [cpartyField, setCpartyField] = useState("");
   const [cpartyFieldBorrow, setCpartyFieldBorrow] = useState("");
   const [securityField, setSecurityField] = useState("");
   const [securityFieldBorrow, setSecurityFieldBorrow] = useState("");
@@ -59,28 +62,37 @@ const TradeBlotter = () => {
   // }, [details])
   //
   const onCLickData = (data: any) => {
-    console.log("data ,", data)
-  }
+    console.log("data ,", data);
+  };
 
   return (
     <div className="main-div-TradeBlotter">
       <div id="tablePart" className="left-part">
         <div className="main-div-TradeBooking">
           <div className="header-TradeBooking">
-            <span className="title-style">
-              Trade Booking
-            </span>
-            <svg className="upArrow-TradeBooking" fill="#000" stroke="#fff" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path>
+            <span className="title-style">Trade Booking</span>
+            <svg
+              className="upArrow-TradeBooking"
+              fill="#000"
+              stroke="#fff"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+              ></path>
             </svg>
           </div>
           <div className="search-main-div">
             <div className="search-table">
               <div className="checkbox-div">
                 <input type="checkbox" name="" id="match" />
-                <label htmlFor="match" className="label-style">Match</label>
+                <label htmlFor="match" className="label-style">
+                  Match
+                </label>
               </div>
               <div className="table-div">
                 <table className="table-style">
@@ -106,24 +118,78 @@ const TradeBlotter = () => {
                           <option>Borrow</option>
                         </select>
                       </td>
-                      <td className="table-data-cell"><input type="text" name="" id="cparty"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="security"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="quantity"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="loanValue"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="collateralCode"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="rate"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="haircut"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="profitCenter"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="termDate"
-                        className="input-style" /></td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="cparty"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="security"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="quantity"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="loanValue"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="collateralCode"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="rate"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="haircut"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="profitCenter"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="termDate"
+                          className="input-style"
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td className="select-data-cell">
@@ -132,24 +198,78 @@ const TradeBlotter = () => {
                           <option>Loan</option>
                         </select>
                       </td>
-                      <td className="table-data-cell"><input type="text" name="" id="cparty"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="security"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="quantity"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="loanValue"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="collateralCode"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="rate"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="haircut"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="profitCenter"
-                        className="input-style" /></td>
-                      <td className="table-data-cell"><input type="text" name="" id="termDate"
-                        className="input-style" /></td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="cparty"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="security"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="quantity"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="loanValue"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="collateralCode"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="rate"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="haircut"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="profitCenter"
+                          className="input-style"
+                        />
+                      </td>
+                      <td className="table-data-cell">
+                        <input
+                          type="text"
+                          name=""
+                          id="termDate"
+                          className="input-style"
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -161,7 +281,9 @@ const TradeBlotter = () => {
             <div className="submit-div">
               <div className="checkbox-div">
                 <input type="checkbox" name="" id="selectAll" />
-                <label htmlFor="selectAll" className="label-style">Select All</label>
+                <label htmlFor="selectAll" className="label-style">
+                  Select All
+                </label>
               </div>
               <div className="button-div">
                 <button className="button-style">Upload Template</button>
@@ -175,13 +297,20 @@ const TradeBlotter = () => {
         <AgGrid rowData={rowData} height={heightAG_1} type="trade" />
         <div className="main-div-TradeBooking">
           <div className="header-TradeBooking">
-            <span className="title-style">
-              Trade Browser
-            </span>
-            <svg className="upArrow-TradeBooking" fill="#000" stroke="#fff" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path>
+            <span className="title-style">Trade Browser</span>
+            <svg
+              className="upArrow-TradeBooking"
+              fill="#000"
+              stroke="#fff"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+              ></path>
             </svg>
           </div>
           <div className="search-main-div">
@@ -191,18 +320,39 @@ const TradeBlotter = () => {
                   <tr>
                     <td className="date-table-data-cell">
                       <label htmlFor="fromDate">From</label>
-                      <input type="date" name="" id="fromDate" className="date-input-style" />
+                      <input
+                        type="date"
+                        name=""
+                        id="fromDate"
+                        className="date-input-style"
+                      />
                     </td>
                     <td className="date-table-data-cell">
                       <label htmlFor="toDate">To</label>
-                      <input type="date" name="" id="toDate" className="date-input-style" />
+                      <input
+                        type="date"
+                        name=""
+                        id="toDate"
+                        className="date-input-style"
+                      />
                     </td>
                     <td className="security-table-data-cell">
                       <label htmlFor="fromDate">Security</label>
-                      <input type="text" name="" id="fromDate" className="date-input-style" />
+                      <input
+                        type="text"
+                        name=""
+                        id="fromDate"
+                        className="date-input-style"
+                      />
                     </td>
-                    <td className="input-table-data-cell"><input type="text" name="" id=""
-                      className="input-style" /></td>
+                    <td className="input-table-data-cell">
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        className="input-style"
+                      />
+                    </td>
                     <td className="query-table-data-cell">
                       <button className="button-style">Query</button>
                     </td>
@@ -214,7 +364,12 @@ const TradeBlotter = () => {
         </div>
         <div className="main-div-TradeBooking">
           <div className="title-subHeaderTitle"> Borrow</div>
-          <AgGrid rowData={rowDataLoan} height={heightAG_1} type="loan" onClickHan={onCLickData} />
+          <AgGrid
+            rowData={rowDataLoan}
+            height={heightAG_1}
+            type="loan"
+            onClickHan={onCLickData}
+          />
         </div>
         <div className="main-div-TradeBooking">
           <div className="title-subHeaderTitle"> Loan</div>
@@ -224,20 +379,32 @@ const TradeBlotter = () => {
       <div id="data" className="right-part">
         <div className="main-div-TradeBooking">
           <div className="header-TradeBooking">
-            <span className="title-style">
-              Security Info
-            </span>
-            <svg className="upArrow-TradeBooking" fill="#000" stroke="#fff" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path>
+            <span className="title-style">Security Info</span>
+            <svg
+              className="upArrow-TradeBooking"
+              fill="#000"
+              stroke="#fff"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+              ></path>
             </svg>
           </div>
           <div className="security-div">
             <div className="security-input-main-div">
               <div className="security-input">
                 <label htmlFor="fromDate">Security</label>
-                <input type="text" name="" id="fromDate" className="security-input-style" />
+                <input
+                  type="text"
+                  name=""
+                  id="fromDate"
+                  className="security-input-style"
+                />
               </div>
             </div>
             <div className="date-table-div">
@@ -248,15 +415,19 @@ const TradeBlotter = () => {
                     <td className="securityInfo-table-data-cell">Name</td>
                     <td className="securityInfo-table-data-cell">Cusip</td>
                   </tr>
-                  {
-                    details !== null && (
-                      <tr>
-                        <td className="securityInfo-table-data-cell">{details.cparty}</td>
-                        <td className="securityInfo-table-data-cell">{details.collateral_code}</td>
-                        <td className="securityInfo-table-data-cell">{details.haircut}</td>
-                      </tr>
-                    )
-                  }
+                  {details !== null && (
+                    <tr>
+                      <td className="securityInfo-table-data-cell">
+                        {details.cparty}
+                      </td>
+                      <td className="securityInfo-table-data-cell">
+                        {details.collateral_code}
+                      </td>
+                      <td className="securityInfo-table-data-cell">
+                        {details.haircut}
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -268,15 +439,19 @@ const TradeBlotter = () => {
                     <td className="securityInfo-table-data-cell">Isin</td>
                     <td className="securityInfo-table-data-cell">Sedol</td>
                   </tr>
-                  {
-                    details !== null && (
-                      <tr>
-                        <td className="securityInfo-table-data-cell">{details.cparty}</td>
-                        <td className="securityInfo-table-data-cell">{details.collateral_code}</td>
-                        <td className="securityInfo-table-data-cell">{details.haircut}</td>
-                      </tr>
-                    )
-                  }
+                  {details !== null && (
+                    <tr>
+                      <td className="securityInfo-table-data-cell">
+                        {details.cparty}
+                      </td>
+                      <td className="securityInfo-table-data-cell">
+                        {details.collateral_code}
+                      </td>
+                      <td className="securityInfo-table-data-cell">
+                        {details.haircut}
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -284,20 +459,32 @@ const TradeBlotter = () => {
         </div>
         <div className="main-div-TradeBooking">
           <div className="header-TradeBooking">
-            <span className="title-style">
-              Counter Party
-            </span>
-            <svg className="upArrow-TradeBooking" fill="#000" stroke="#fff" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"></path>
+            <span className="title-style">Counter Party</span>
+            <svg
+              className="upArrow-TradeBooking"
+              fill="#000"
+              stroke="#fff"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z"
+              ></path>
             </svg>
           </div>
           <div className="security-div">
             <div className="security-input-main-div">
               <div className="security-input">
                 <label htmlFor="fromDate">Cparty</label>
-                <input type="text" name="" id="fromDate" className="security-input-style" />
+                <input
+                  type="text"
+                  name=""
+                  id="fromDate"
+                  className="security-input-style"
+                />
               </div>
             </div>
             <div className="counter-main-div font-style">
@@ -312,7 +499,7 @@ const TradeBlotter = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TradeBlotter
+export default TradeBlotter;
