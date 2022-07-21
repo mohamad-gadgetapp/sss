@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
+import searchData from "../../dummyData.json";
 import data from "../../loansData.json";
 
 const TradeBlotter = () => {
@@ -18,15 +19,12 @@ const TradeBlotter = () => {
   const [rowDataLoan, setRowDataLoan] = useState<Array<object>>([
     ...data.loansData,
   ]);
+  const [searchlist, setSearchList] = useState<Array<object>>([
+    ...searchData.dummyData,
+  ]);
   const [heightAG_1] = useState(30);
-  const [details, setDetails] = useState<any>(() => {
-    // getting stored value
-    const saved: any = localStorage.getItem("rowData");
-    const initialValue = JSON.parse(saved);
-    return initialValue || "";
-  });
+  const [details, setDetails] = useState<any>(null);
   const [checkStatus, setCheckStatus] = useState(false);
-  const [newDetails, setNewDetails] = useState<any>(null);
   const [statusField, setStatusField] = useState<any>("");
   const [selectBorrow, setSelectBorrow] = useState("Borrow");
   const [selectLoan, setSelectLoan] = useState<any>("Loan");
@@ -41,8 +39,8 @@ const TradeBlotter = () => {
   const [rateField, setRateField] = useState<any>("");
   const [hairCutField, setHairCutField] = useState<any>("");
   const [hairCutFieldBorrow, setHairCutFieldBorrow] = useState("");
-  const [profitCenterField, setProfitCenterField] = useState<any>("");
-  const [profitCenterFieldBorrow, setProfitCenterFieldBorrow] = useState("");
+  const [profitCenterField, setProfitCenterField] = useState<any>("C");
+  const [profitCenterFieldBorrow, setProfitCenterFieldBorrow] = useState("C");
   const [termDateField, setTermDateField] = useState<any>("");
   const [termDateFieldBorrow, setTermDateFieldBorrow] = useState("");
   const [cpartyFieldError, setCpartyFieldError] = useState<any>("");
@@ -63,36 +61,44 @@ const TradeBlotter = () => {
   const [profitCenterFieldErrorBorrow, setProfitCenterFieldErrorBorrow] =
     useState<any>("");
 
-  // const showData = () => {
-  //     document.getElementById("tablePart").style.width = "70%";
-  // }
-  // var localData: any = localStorage.getItem("rowData");
-  // let localData_ = JSON.parse(localData);
-  // useEffect(() => {
-  //
-  //     setDetails(localData_);
-  // }, [])
-  //
-  // useEffect(() => {
-  //     console.log("dataNew: ", details);
-  // }, [details])
-  //
   const onCLickData = (data: any) => {
     console.log("data ,", data);
+    setDetails(data[0]);
   };
 
-  const checkboxOnChange = () => {};
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+  };
 
   const clearTextFn = () => {
-    setCpartyField("");
-    setSecurityField("");
-    setQuantityField("");
-    setLoanValueField("");
-    // setCollateralField("");
-    setRateField("");
-    setHairCutField("");
-    setProfitCenterField("");
-    setTermDateField("");
+    if (checkStatus === true) {
+      setCpartyField("");
+      setSecurityField("");
+      setQuantityField("");
+      setLoanValueField("");
+      setRateField("");
+      setHairCutField("");
+      setProfitCenterField("C");
+      setTermDateField("");
+      setCpartyFieldBorrow("");
+      setLoanValueFieldBorrow("");
+      setHairCutFieldBorrow("");
+      setProfitCenterFieldBorrow("C");
+      setTermDateFieldBorrow("");
+    } else {
+      setCpartyField("");
+      setSecurityField("");
+      setQuantityField("");
+      setLoanValueField("");
+      setRateField("");
+      setHairCutField("");
+      setProfitCenterField("C");
+      setTermDateField("");
+    }
   };
 
   const bookFn = () => {
@@ -342,52 +348,106 @@ const TradeBlotter = () => {
                   <tbody>
                     <tr>
                       <td className="select-data-cell">
-                        <select
-                          className="select-style"
-                          value={selectLoan}
-                          onChange={(e) => setSelectLoan(e.target.value)}
-                        >
-                          <option>Loan</option>
-                          <option>Borrow</option>
-                        </select>
+                        <div className="counterParty-dummyData">
+                          <select
+                            className="select-style"
+                            value={selectLoan}
+                            onChange={(e) => setSelectLoan(e.target.value)}
+                          >
+                            <option>Loan</option>
+                            <option>Borrow</option>
+                          </select>
+                        </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
-                          <input
-                            type="text"
-                            name=""
-                            id="cparty"
-                            required
-                            className="input-style"
-                            value={cpartyField}
-                            onChange={(e) => setCpartyField(e.target.value)}
-                          />
+                        <div className="counterParty-dummyData">
+                          <div className="table-data-cell-innerDiv">
+                            <input
+                              type="text"
+                              name=""
+                              id="cparty"
+                              required
+                              className="input-style"
+                              value={cpartyField}
+                              onChange={(e) => setCpartyField(e.target.value)}
+                            />
 
-                          <span className="error-style">
-                            {cpartyFieldError}
-                          </span>
+                            <span className="error-style">
+                              {cpartyFieldError}
+                            </span>
+                          </div>
+                          <div className="dropdown-dummyData">
+                            {searchlist
+                              .filter((value: any) => {
+                                const searchTerm = cpartyField.toLowerCase();
+                                const partyName = value.cpty_name.toLowerCase();
+
+                                return (
+                                  searchTerm &&
+                                  partyName.startsWith(searchTerm) &&
+                                  partyName !== searchTerm
+                                );
+                              })
+                              .slice(0, 10)
+                              .map((item: any) => (
+                                <div
+                                  onClick={() => setCpartyField(item.cpty_name)}
+                                  key={item.cpty_name}
+                                  className="dropdown-row"
+                                >
+                                  {item.cpty_name}
+                                </div>
+                              ))}
+                          </div>
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
-                          <input
-                            type="text"
-                            name=""
-                            id="security"
-                            className="input-style"
-                            value={securityField}
-                            onChange={(e) => setSecurityField(e.target.value)}
-                            required
-                          />
-                          <span className="error-style">
-                            {securityFieldError}
-                          </span>
+                        <div className="counterParty-dummyData">
+                          <div className="table-data-cell-innerDiv">
+                            <input
+                              type="text"
+                              name=""
+                              id="security"
+                              className="input-style"
+                              value={securityField}
+                              onChange={(e) => setSecurityField(e.target.value)}
+                              required
+                            />
+                            <span className="error-style">
+                              {securityFieldError}
+                            </span>
+                          </div>
+                          <div className="dropdown-dummyData">
+                            {searchlist
+                              .filter((value: any) => {
+                                const searchTerm = securityField.toLowerCase();
+                                const partyName = value.cpty_name.toLowerCase();
+
+                                return (
+                                  searchTerm &&
+                                  partyName.startsWith(searchTerm) &&
+                                  partyName !== searchTerm
+                                );
+                              })
+                              .slice(0, 10)
+                              .map((item: any) => (
+                                <div
+                                  onClick={() =>
+                                    setSecurityField(item.cpty_name)
+                                  }
+                                  key={item.cpty_name}
+                                  className="dropdown-row"
+                                >
+                                  {item.cpty_name}
+                                </div>
+                              ))}
+                          </div>
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
-                            type="text"
+                            type="number"
                             name=""
                             id="quantity"
                             className="input-style"
@@ -401,9 +461,9 @@ const TradeBlotter = () => {
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
-                            type="text"
+                            type="number"
                             name=""
                             id="loanValue"
                             className="input-style"
@@ -433,7 +493,7 @@ const TradeBlotter = () => {
                         </div>
                       </td> */}
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
                             type="number"
                             name=""
@@ -447,11 +507,11 @@ const TradeBlotter = () => {
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
                             type="text"
                             name=""
-                            id="haircut"
+                            id="mark"
                             className="input-style"
                             value={hairCutField}
                             onChange={(e) => setHairCutField(e.target.value)}
@@ -463,7 +523,7 @@ const TradeBlotter = () => {
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
                             type="text"
                             name=""
@@ -480,13 +540,14 @@ const TradeBlotter = () => {
                         </div>
                       </td>
                       <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
+                        <div className="table-data-cell-innerDiv counterParty-dummyData">
                           <input
                             type="date"
                             name=""
                             id="termDate"
                             className="input-style"
                             value={termDateField}
+                            min={disablePastDate()}
                             onChange={(e) => setTermDateField(e.target.value)}
                           />
                         </div>
@@ -495,17 +556,19 @@ const TradeBlotter = () => {
                     {checkStatus && (
                       <tr>
                         <td className="select-data-cell">
-                          <select
-                            className="select-style"
-                            value={selectBorrow}
-                            onChange={(e) => setSelectBorrow(e.target.value)}
-                          >
-                            <option>Loan</option>
-                            <option>Borrow</option>
-                          </select>
+                          <div className="counterParty-dummyData">
+                            <select
+                              className="select-style"
+                              value={selectBorrow}
+                              onChange={(e) => setSelectBorrow(e.target.value)}
+                            >
+                              <option>Loan</option>
+                              <option>Borrow</option>
+                            </select>
+                          </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="text"
                               name=""
@@ -522,7 +585,7 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="text"
                               name=""
@@ -538,7 +601,7 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="text"
                               name=""
@@ -554,9 +617,9 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
-                              type="text"
+                              type="number"
                               name=""
                               id="loanValue"
                               className="input-style"
@@ -588,7 +651,7 @@ const TradeBlotter = () => {
                           </div>
                         </td> */}
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="number"
                               name=""
@@ -604,11 +667,11 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="text"
                               name=""
-                              id="haircut"
+                              id="mark"
                               className="input-style"
                               onChange={(e) =>
                                 setHairCutFieldBorrow(e.target.value)
@@ -621,9 +684,9 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
-                              type="text"
+                              type="number"
                               name=""
                               id="profitCenter"
                               className="input-style"
@@ -637,7 +700,7 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
+                          <div className="table-data-cell-innerDiv counterParty-dummyData">
                             <input
                               type="date"
                               name=""
@@ -681,7 +744,12 @@ const TradeBlotter = () => {
             </div>
           </div>
         </div>
-        <AgGrid rowData={rowData} height={heightAG_1} type="trade" />
+        <AgGrid
+          rowData={rowData}
+          height={heightAG_1}
+          type="trade"
+          onClickHan={onCLickData}
+        />
         <div className="main-div-TradeBooking">
           <div className="header-TradeBooking">
             <span className="title-style">Trade Browser</span>
@@ -751,12 +819,7 @@ const TradeBlotter = () => {
         </div>
         <div className="main-div-TradeBooking">
           <div className="title-subHeaderTitle"> Borrow</div>
-          <AgGrid
-            rowData={rowDataLoan}
-            height={heightAG_1}
-            type="loan"
-            onClickHan={onCLickData}
-          />
+          <AgGrid rowData={rowDataLoan} height={heightAG_1} type="loan" />
         </div>
         <div className="main-div-TradeBooking">
           <div className="title-subHeaderTitle"> Loan</div>
@@ -805,13 +868,13 @@ const TradeBlotter = () => {
                   {details !== null && (
                     <tr>
                       <td className="securityInfo-table-data-cell">
-                        {details.cparty}
+                        {details?.cparty}
                       </td>
                       <td className="securityInfo-table-data-cell">
-                        {details.collateral_code}
+                        {details?.collateral_code}
                       </td>
                       <td className="securityInfo-table-data-cell">
-                        {details.haircut}
+                        {details?.term_date}
                       </td>
                     </tr>
                   )}
@@ -829,13 +892,13 @@ const TradeBlotter = () => {
                   {details !== null && (
                     <tr>
                       <td className="securityInfo-table-data-cell">
-                        {details.cparty}
+                        {details?.loan_value}
                       </td>
                       <td className="securityInfo-table-data-cell">
-                        {details.collateral_code}
+                        {details?.collateral_code}
                       </td>
                       <td className="securityInfo-table-data-cell">
-                        {details.haircut}
+                        {details?.profit_center}
                       </td>
                     </tr>
                   )}
@@ -875,12 +938,22 @@ const TradeBlotter = () => {
               </div>
             </div>
             <div className="counter-main-div font-style">
-              <div className="counter-inner-style">Name:</div>
-              <div className="counter-inner-style">Borrow Haircut:</div>
-              <div className="counter-inner-style">Loan Haircut:</div>
-              <div className="counter-inner-style">Borrow Limit:</div>
-              <div className="counter-inner-style">Borrow Limit:</div>
-              <div className="counter-inner-style">Rounding:</div>
+              <div className="counter-inner-style">Name: {details?.cparty}</div>
+              <div className="counter-inner-style">
+                Borrow Mark: {details?.mark}
+              </div>
+              <div className="counter-inner-style">
+                Loan Mark: {details?.mark}
+              </div>
+              <div className="counter-inner-style">
+                Borrow Limit: {details?.quantity}
+              </div>
+              <div className="counter-inner-style">
+                Borrow Limit: {details?.quantity}
+              </div>
+              <div className="counter-inner-style">
+                Rounding: {details?.status}
+              </div>
             </div>
           </div>
         </div>

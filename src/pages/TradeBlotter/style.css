@@ -138,7 +138,7 @@
 
     .date-table-div {
         overflow-x: scroll;
-        overflow-y: hidden;
+        /*overflow-y: hidden;*/
         white-space: nowrap;
         padding: 0 0.5rem;
     }
@@ -216,7 +216,7 @@
     .table-div {
         width: 84%;
         overflow-x: auto;
-        overflow-y: hidden;
+        /*overflow-y: hidden;*/
     }
 
     .table-style {
@@ -314,6 +314,27 @@
 
 .table-style {
     overflow-x: hidden;
+}
+
+.counterParty-dummyData{
+    /*position: relative;*/
+}
+
+.dropdown-dummyData{
+    background-color: white;
+    border: 1px solid #1e355e;
+    height: 25vh;
+    width: 15%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding:0.35rem 0.75rem;
+    position: absolute;
+    z-index: 10;
+    border-radius: 6px;
+}
+
+.dropdown-dummyData:empty{
+    display: none;
 }
 
 .input-style {

@@ -9,7 +9,7 @@
       "quantity": "1000",
       "loan_value": "100",
       "collateral_code": "100000",
-      "haircut": "0.5",
+      "mark": "0.5",
       "profit_center": "-0.3",
       "term_date": "OBFR"
     },
@@ -22,7 +22,7 @@
       "quantity": "1000",
       "loan_value": "100",
       "collateral_code": "100000",
-      "haircut": "15",
+      "mark": "15",
       "profit_center": "-1.3",
       "term_date": "OBFR"
     },
@@ -35,7 +35,7 @@
       "quantity": "",
       "loan_value": "",
       "collateral_code": "",
-      "haircut": "",
+      "mark": "",
       "profit_center": "",
       "term_date": ""
     }
