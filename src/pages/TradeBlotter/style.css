@@ -316,11 +316,11 @@
     overflow-x: hidden;
 }
 
-.counterParty-dummyData{
+.counterParty-dummyData-trade{
     /*position: relative;*/
 }
 
-.dropdown-dummyData{
+.dropdown-dummyData-trade{
     background-color: white;
     border: 1px solid #1e355e;
     height: 25vh;
@@ -333,7 +333,7 @@
     border-radius: 6px;
 }
 
-.dropdown-dummyData:empty{
+.dropdown-dummyData-trade:empty{
     display: none;
 }
 

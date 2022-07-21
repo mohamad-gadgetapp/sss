@@ -7,7 +7,7 @@ interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onChangeBorrow?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onSearch?: React.DOMAttributes<HTMLDivElement>;
-  handleSubmit?:(event: React.MouseEvent<HTMLButtonElement>) => void
+  handleSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ContractBooking = (props: ContractProps) => {
@@ -23,9 +23,7 @@ const ContractBooking = (props: ContractProps) => {
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
 
-  const handleSubmit = () => {
-
-  }
+  const handleSubmit = () => {};
 
   const onChange = (event: any) => {
     setCpartyField(event.target.value);
@@ -45,11 +43,10 @@ const ContractBooking = (props: ContractProps) => {
     console.log("search", searchTerm);
   };
 
- const onChangeData=(e:any)=>{
-  setSelectLoan(e.target.value)
-  if(props.onChangeBorrow)
-    props.onChangeBorrow(e)
-  }
+  const onChangeData = (e: any) => {
+    setSelectLoan(e.target.value);
+    if (props.onChangeBorrow) props.onChangeBorrow(e);
+  };
 
   return (
     <div style={{ height: `${props.height}rem` }}>
@@ -68,9 +65,7 @@ const ContractBooking = (props: ContractProps) => {
               value={selectLoan}
               onChange={onChangeData}
             />
-            <span className="error-style">
-                              error this fils
-                            </span>
+            <span className="error-style"></span>
           </div>
           <div className="counterParty-dummyData">
             <div className="mb-3 inputFieldDiv">
