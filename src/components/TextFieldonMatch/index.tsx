@@ -5,38 +5,26 @@ import dummyData from "../../dummyData.json";
 interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
   height?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
-  onChangeBorrow?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onSearch?: React.DOMAttributes<HTMLDivElement>;
-  handleSubmit?:(event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const ContractBooking = (props: ContractProps) => {
+  const [value, setValue] = useState("");
   const [symbol, setSymbol] = useState("");
-  const [selectLoan, setSelectLoan] = useState<any>("");
-  const [cpartyField, setCpartyField] = useState<any>("");
-  const [profitCenterField, setProfitCenterField] = useState("");
-  const [rateField, setRateFieldField] = useState<any>("");
-  const [quantityField, setQuantityField] = useState<any>("");
-  const [loanValueField, setLoanValueField] = useState<any>("");
-  const [markField, setMarkField] = useState("");
-  const [termDateField, setTermDateField] = useState("");
+
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
 
-  const handleSubmit = () => {
-
-  }
-
   const onChange = (event: any) => {
-    setCpartyField(event.target.value);
+    setValue(event.target.value);
   };
-
+  
   const onChangeSymbol = (event: any) => {
     setSymbol(event.target.value);
   };
 
   const onSearch = (searchTerm: any) => {
-    setCpartyField(searchTerm);
+    setValue(searchTerm);
     console.log("search", searchTerm);
   };
 
@@ -44,12 +32,6 @@ const ContractBooking = (props: ContractProps) => {
     setSymbol(searchTerm);
     console.log("search", searchTerm);
   };
-
- const onChangeData=(e:any)=>{
-  setSelectLoan(e.target.value)
-  if(props.onChangeBorrow)
-    props.onChangeBorrow(e)
-  }
 
   return (
     <div style={{ height: `${props.height}rem` }}>
@@ -60,17 +42,13 @@ const ContractBooking = (props: ContractProps) => {
               htmlFor="exampleInputEmail1"
               className="form-label inputLabelHeight"
             >
+              <img src="" />
               Borrow/Loan
             </label>
             <input
               className="form-control inputBorderNone"
               placeholder="Borrow"
-              value={selectLoan}
-              onChange={onChangeData}
             />
-            <span className="error-style">
-                              error this fils
-                            </span>
           </div>
           <div className="counterParty-dummyData">
             <div className="mb-3 inputFieldDiv">
@@ -78,21 +56,20 @@ const ContractBooking = (props: ContractProps) => {
                 htmlFor="exampleInputEmail1"
                 className="form-label inputLabelHeight"
               >
+                <img src="" />
                 Counter Party
               </label>
               <input
                 className="form-control inputBorderNone"
                 placeholder="1111"
-                // value={value}
+                value={value}
                 onChange={onChange}
-                value={cpartyField}
-                // onChange={(e) => setCpartyField(e.target.value)}
               />
             </div>
             <div className="dropdown-dummyData">
               {list
                 .filter((item: any) => {
-                  const searchTerm = cpartyField.toLowerCase();
+                  const searchTerm = value.toLowerCase();
                   const partyName = item.cpty_name.toLowerCase();
 
                   return (
@@ -165,8 +142,6 @@ const ContractBooking = (props: ContractProps) => {
             <input
               className="form-control inputBorderNone"
               placeholder="Quantity"
-              value={quantityField}
-              onChange={(e) => setQuantityField(e.target.value)}
             />
           </div>
           <div className="mb-3 inputFieldDiv">
@@ -179,8 +154,6 @@ const ContractBooking = (props: ContractProps) => {
             <input
               className="form-control inputBorderNone"
               placeholder="Loan Value"
-              value={loanValueField}
-              onChange={(e) => setLoanValueField(e.target.value)}
             />
           </div>
           <div className="mb-3 inputFieldDiv">
@@ -190,14 +163,17 @@ const ContractBooking = (props: ContractProps) => {
             >
               Profit Center
             </label>
-            <input
-              className="form-control inputBorderNone"
-              placeholder="C"
-              value={profitCenterField}
-              onChange={(e) => setProfitCenterField(e.target.value)}
-            />
+            <input className="form-control inputBorderNone" placeholder="C" />
           </div>
-
+          <div className="mb-3 inputFieldDiv">
+            <label
+              htmlFor="exampleInputEmail1"
+              className="form-label inputLabelHeight"
+            >
+              Profit Center
+            </label>
+            <input className="form-control inputBorderNone" placeholder="C" />
+          </div>
           <div className="mb-3 inputFieldDiv">
             <label
               htmlFor="exampleInputEmail1"
@@ -208,8 +184,6 @@ const ContractBooking = (props: ContractProps) => {
             <input
               className="form-control inputBorderNone"
               placeholder="Rate"
-              value={rateField}
-              onChange={(e) => setRateFieldField(e.target.value)}
             />
           </div>
           <div className="mb-3 inputFieldDiv">
@@ -222,8 +196,6 @@ const ContractBooking = (props: ContractProps) => {
             <input
               className="form-control inputBorderNone"
               placeholder="Mark"
-              value={markField}
-              onChange={(e) => setMarkField(e.target.value)}
             />
           </div>
           <div className="mb-3 inputFieldDiv">
@@ -233,12 +205,7 @@ const ContractBooking = (props: ContractProps) => {
             >
               Term Date
             </label>
-            <input
-              type="date"
-              className="form-control inputBorderNone"
-              value={termDateField}
-              onChange={(e) => setTermDateField(e.target.value)}
-            />
+            <input type="date" className="form-control inputBorderNone" />
           </div>
         </div>
       </div>

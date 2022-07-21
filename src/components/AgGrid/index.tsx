@@ -72,6 +72,16 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     onClickHan(selectedRows);
   }, []);
 
+    const rowClassRules = useMemo(() => {
+        return {
+            'is-new-warning': (params:any) => {
+                console.log("params ", params.data.is_new)
+                var isNew = params.data.is_new;
+                return isNew === "TRUE" ;
+            }
+        };
+    }, []);
+
   return (
     <div
       className="ag-theme-balham"
@@ -103,6 +113,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         paginationPageSize={10}
         onGridReady={onGridReady}
         onColumnResized={onColumnResized}
+        rowClassRules={rowClassRules}
         onSelectionChanged={onSelectionChanged}
         // rowSelection={"multiple"}
         // frameworkComponents={{
@@ -113,4 +124,4 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
   );
 };
 
-export default AgGrid;
+export default AgGrid

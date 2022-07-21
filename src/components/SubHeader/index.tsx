@@ -1,80 +1,63 @@
 import React, { useState } from "react";
 import TextField from "../../components/TextField";
+import TextFieldonMatch from "../../components/TextField";
 import Button from "../../components/Button";
 import "./style.css";
 
 interface SubHeaderProps {
   title?: string;
-  value?: string | "match";
 }
 
 const SubHeader = ({ title }: SubHeaderProps) => {
-  const [checkedRadio, setCheckedRadio] = useState("");
-
+  const [checkedRadio, setCheckedRadio] = useState(false);
+  const [selectLoan, setSelectLoan] = useState<any>("");
   const handleClick = (event: any) => {
-    setCheckedRadio(event.target.value);
+      setCheckedRadio(event.target.checked);
   };
+
+  const handleSubmit = () => {
+    document.getElementsByTagName("input")[0].focus();
+  };
+
+  const handleKeyPress = (event: any) => {
+    if(event.key === 'Enter'){
+      alert("Enter Key " + event.target.checked)
+          setCheckedRadio(true)
+     }
+  };
+
+// const func = (event:any)=>{
+
+// }
 
   return (
     <div className="SubHeaderMainDiv">
       <div className="">
         <div className="subHeaderTitle drag-handle">{title}</div>
         <div className="subheaderChildDiv">
-          <div>
-            <TextField
-              name="hello"
-              label="input"
-              quantity="Quantity"
-              rate="Rate"
-              counterParty="Counter Party"
-              annotation="Annotation"
-            />
-          
-          {checkedRadio === "match" && (
-          <TextField
-            name="hello"
-            label="input"
-            quantity="Quantity"
-            rate="Rate"
-            counterParty="Counter Party"
-            annotation="Annotation"
-          />
-        )}
-        </div>
-          <div>
-            <div className="matchMainDiv">
-              <div className="SubHeaderMatch">
-                <input
-                  type="radio"
-                  name="match"
-                  id="match"
-                  className="matchRadio"
-                  onChange={handleClick}
-                  value="match"
-                />
-                <label htmlFor="match" className="match">
-                  Match
-                </label>
-              </div>
-              <div className="SubHeaderNonMatch">
-                <input
-                  type="radio"
-                  name="match"
-                  id="nonmatch"
-                  className="nonMatchRadio"
-                  onChange={handleClick}
-                  value="nonmatch"
-                  defaultChecked
-                />
-                <label htmlFor="nonmatch" className="nonmatch">
-                  Non Match
-                </label>
-              </div>
-              <Button/>
+            <div className="SubHeaderMatch">
+              <input
+                type="checkbox"
+                name="match"
+                id="match"
+                className="matchRadio"
+                onChange={handleClick}
+                tabIndex={1}
+                onKeyPress={handleKeyPress}
+              />
+              <label htmlFor="match" className="match">
+                Match
+              </label>
             </div>
+        
+          <div>
+            <TextField onChangeBorrow={(e)=>{console.log("set kdncjsa ", e.target.value)}} handleSubmit={handleSubmit}/>
+              {checkedRadio == true && <TextFieldonMatch />}
+          </div>
+          <div className="contractBooking-Btn">
+          <Button onClick={handleSubmit}/>
           </div>
         </div>
-        
       </div>
     </div>
   );
