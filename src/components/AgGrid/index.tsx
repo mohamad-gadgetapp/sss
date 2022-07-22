@@ -51,6 +51,13 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         gridApi = params.api;
     }
 
+//     const onRowDataChanged = () => {       
+//         var ageColumn = gridRef.current.columnApi.getColumn("QUANTITY")
+//         var rowCount = gridRef.current.api.getDisplayedRowCount()
+//         ageColumn.colDef.headerName = `QUANTITY ${rowCount}`;
+//         gridRef.current.api.refreshHeader();
+//    }
+
    
       const rowClassRules = useMemo(() => {
         return {
@@ -101,6 +108,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
                 frameworkComponents={{
                     ButtonCellRenderer
                 }}>
+                {/* onRowDataChanged={onRowDataChanged} */}
             </AgGridReact>
         </div>
     )

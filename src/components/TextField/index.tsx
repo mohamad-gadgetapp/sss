@@ -1,18 +1,39 @@
-import React, { InputHTMLAttributes, useState, useEffect } from "react";
+import React, {
+  InputHTMLAttributes,
+  useState,
+  useEffect,
+  Fragment,
+} from "react";
 import "./style.css";
 import dummyData from "../../dummyData.json";
 
 interface ContractProps extends InputHTMLAttributes<HTMLInputElement> {
   height?: number;
+  errorBorrow?: string;
+  errorCounterParty?: string;
+  errorSymbol?: string;
+  errorQuantity?: string;
+  errorLoanValue?: string;
+  errorProfitCenter?: string;
+  errorRate?: string;
+  errorMark?: string;
+  errorTermDate?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
-  onChangeBorrow?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  borrowFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  counterPartyFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  SymbolFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  QuantityFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  LoanValueFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  ProfitCenterFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  RateFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  MarkFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  TermDateFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onSearch?: React.DOMAttributes<HTMLDivElement>;
-  handleSubmit?:(event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const ContractBooking = (props: ContractProps) => {
   const [symbol, setSymbol] = useState("");
-  const [selectLoan, setSelectLoan] = useState<any>("");
+  const [borrowField, setborrowField] = useState<any>("");
   const [cpartyField, setCpartyField] = useState<any>("");
   const [profitCenterField, setProfitCenterField] = useState("");
   const [rateField, setRateFieldField] = useState<any>("");
@@ -23,20 +44,10 @@ const ContractBooking = (props: ContractProps) => {
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
 
-  const handleSubmit = () => {
-
-  }
-
-  const onChange = (event: any) => {
-    setCpartyField(event.target.value);
-  };
-
-  const onChangeSymbol = (event: any) => {
-    setSymbol(event.target.value);
-  };
 
   const onSearch = (searchTerm: any) => {
-    setCpartyField(searchTerm);
+     setMarkField(searchTerm.LOAN_MARK);
+     setCpartyField(searchTerm.NAME);
     console.log("search", searchTerm);
   };
 
@@ -45,11 +56,48 @@ const ContractBooking = (props: ContractProps) => {
     console.log("search", searchTerm);
   };
 
- const onChangeData=(e:any)=>{
-  setSelectLoan(e.target.value)
-  if(props.onChangeBorrow)
-    props.onChangeBorrow(e)
-  }
+  const onChangeBorrow = (e: any) => {
+    setborrowField(e.target.value);
+    if (props.borrowFieldprop) props.borrowFieldprop(e);
+  };
+  const onChangeCounterParty = (e: any) => {
+    setCpartyField(e.target.value);
+    if (props.counterPartyFieldprop) props.counterPartyFieldprop(e);
+  };
+  const onChangeSymbol = (e: any) => {
+    setSymbol(e.target.value);
+    if (props.SymbolFieldprop) props.SymbolFieldprop(e);
+  };
+  const onChangeQuantity = (e: any) => {
+    setQuantityField(e.target.value);
+    if (props.QuantityFieldprop) props.QuantityFieldprop(e);
+  };
+  const onChangeLoanValue = (e: any) => {
+    setLoanValueField(e.target.value);
+    if (props.LoanValueFieldprop) props.LoanValueFieldprop(e);
+  };
+  const onChangeProfitCenter = (e: any) => {
+    setProfitCenterField(e.target.value);
+    if (props.ProfitCenterFieldprop) props.ProfitCenterFieldprop(e);
+  };
+  const onChangeRate = (e: any) => {
+    setRateFieldField(e.target.value);
+    if (props.RateFieldprop) props.RateFieldprop(e);
+  };
+  const onChangeMark = (e: any) => {
+    setMarkField(e.target.value);
+    if (props.MarkFieldprop) props.MarkFieldprop(e);
+  };
+  const onChangeTermDate = (e: any) => {
+    setTermDateField(e.target.value);
+    if (props.TermDateFieldprop) props.TermDateFieldprop(e);
+  };
+
+  useEffect(() => {
+    if(cpartyField === ""){
+      setMarkField("");
+    }
+  },[cpartyField])
 
   return (
     <div style={{ height: `${props.height}rem` }}>
@@ -65,12 +113,10 @@ const ContractBooking = (props: ContractProps) => {
             <input
               className="form-control inputBorderNone"
               placeholder="Borrow"
-              value={selectLoan}
-              onChange={onChangeData}
+              value={borrowField}
+              onChange={onChangeBorrow}
             />
-            <span className="error-style">
-                              error this fils
-                            </span>
+            <span className="error-style">{props.errorBorrow}</span>
           </div>
           <div className="counterParty-dummyData">
             <div className="mb-3 inputFieldDiv">
@@ -78,22 +124,24 @@ const ContractBooking = (props: ContractProps) => {
                 htmlFor="exampleInputEmail1"
                 className="form-label inputLabelHeight"
               >
-                Counter Party
-              </label>
-              <input
+                C Party
+              </label> 
+               <input
                 className="form-control inputBorderNone"
                 placeholder="1111"
-                // value={value}
-                onChange={onChange}
+              
+                onChange={onChangeCounterParty}
                 value={cpartyField}
-                // onChange={(e) => setCpartyField(e.target.value)}
+                // onKeyDown={handleKeyDown}
               />
+            
+              <span className="error-style">{props.errorCounterParty}</span>
             </div>
             <div className="dropdown-dummyData">
               {list
                 .filter((item: any) => {
                   const searchTerm = cpartyField.toLowerCase();
-                  const partyName = item.cpty_name.toLowerCase();
+                  const partyName = item.NAME.toLowerCase();
 
                   return (
                     searchTerm &&
@@ -104,11 +152,11 @@ const ContractBooking = (props: ContractProps) => {
                 .slice(0, 10)
                 .map((item: any) => (
                   <div
-                    onClick={() => onSearch(item.cpty_name)}
-                    key={item.cpty_name}
+                    onClick={() => onSearch(item)}
+                    key={item.NAME}
                     className="dropdown-row"
                   >
-                    {item.cpty_name}
+                    {item.NAME}
                   </div>
                 ))}
             </div>
@@ -129,12 +177,13 @@ const ContractBooking = (props: ContractProps) => {
                 value={symbol}
                 onChange={onChangeSymbol}
               />
+              <span className="error-style">{props.errorSymbol}</span>
             </div>
             <div className="dropdown-dummyData">
               {list
                 .filter((item: any) => {
                   const searchTerm = symbol.toLowerCase();
-                  const partyName = item.cpty_name.toLowerCase();
+                  const partyName = item.NAME.toLowerCase();
 
                   return (
                     searchTerm &&
@@ -145,11 +194,11 @@ const ContractBooking = (props: ContractProps) => {
                 .slice(0, 10)
                 .map((item: any) => (
                   <div
-                    onClick={() => onSearchSymbol(item.cpty_name)}
-                    key={item.cpty_name}
+                    onClick={() => onSearchSymbol(item.NAME)}
+                    key={item.NAME}
                     className="dropdown-row"
                   >
-                    {item.cpty_name}
+                    {item.NAME}
                   </div>
                 ))}
             </div>
@@ -166,8 +215,9 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               placeholder="Quantity"
               value={quantityField}
-              onChange={(e) => setQuantityField(e.target.value)}
+              onChange={onChangeQuantity}
             />
+            <span className="error-style">{props.errorQuantity}</span>
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
@@ -180,8 +230,9 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               placeholder="Loan Value"
               value={loanValueField}
-              onChange={(e) => setLoanValueField(e.target.value)}
+              onChange={onChangeLoanValue}
             />
+            <span className="error-style">{props.errorLoanValue}</span>
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
@@ -194,8 +245,9 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               placeholder="C"
               value={profitCenterField}
-              onChange={(e) => setProfitCenterField(e.target.value)}
+              onChange={onChangeProfitCenter}
             />
+            <span className="error-style">{props.errorProfitCenter}</span>
           </div>
 
           <div className="mb-3 inputFieldDiv">
@@ -209,8 +261,9 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               placeholder="Rate"
               value={rateField}
-              onChange={(e) => setRateFieldField(e.target.value)}
+              onChange={onChangeRate}
             />
+            <span className="error-style">{props.errorRate}</span>
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
@@ -223,8 +276,12 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               placeholder="Mark"
               value={markField}
-              onChange={(e) => setMarkField(e.target.value)}
+              onChange={onChangeMark}
             />
+            {
+              markField === ""  &&  <span className="error-style">{props.errorMark}</span> 
+            }
+            
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
@@ -237,13 +294,15 @@ const ContractBooking = (props: ContractProps) => {
               type="date"
               className="form-control inputBorderNone"
               value={termDateField}
-              onChange={(e) => setTermDateField(e.target.value)}
+              onChange={onChangeTermDate}
             />
+            <span className="error-style">{props.errorTermDate}</span>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default ContractBooking;
