@@ -62,6 +62,12 @@ const TradeBlotter = () => {
     console.log("search", searchTerm);
   };
 
+  const onSearchBorrow = (searchTerm: any) => {
+    setHairCutFieldBorrow(searchTerm.LOAN_MARK);
+    setCpartyFieldBorrow(searchTerm.NAME);
+    console.log("search", searchTerm);
+  };
+
   const disablePastDate = () => {
     const today = new Date();
     const dd = String(today.getDate() + 1).padStart(2, "0");
@@ -542,37 +548,91 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
-                            <input
-                              type="text"
-                              name=""
-                              id="cparty"
-                              required
-                              className="input-style"
-                              value={cpartyFieldBorrow}
-                              onChange={(e) =>
-                                setCpartyFieldBorrow(e.target.value)
-                              }
-                            />
-                            <span className="error-style">
-                              {cpartyFieldErrorBorrow}
-                            </span>
+                          <div className="counterParty-dummyData-trade">
+                            <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
+                              <input
+                                type="text"
+                                name=""
+                                id="cparty"
+                                required
+                                className="input-style"
+                                value={cpartyFieldBorrow}
+                                onChange={(e) =>
+                                  setCpartyFieldBorrow(e.target.value)
+                                }
+                              />
+                              <span className="error-style">
+                                {cpartyFieldErrorBorrow}
+                              </span>
+                            </div>
+                            <div className="dropdown-dummyData-trade">
+                              {searchlist
+                                .filter((value: any) => {
+                                  const searchTerm =
+                                    cpartyFieldBorrow.toLowerCase();
+                                  const partyName = value.NAME.toLowerCase();
+
+                                  return (
+                                    searchTerm &&
+                                    partyName.startsWith(searchTerm) &&
+                                    partyName !== searchTerm
+                                  );
+                                })
+                                .slice(0, 10)
+                                .map((item: any, index) => (
+                                  <div
+                                    onClick={() => onSearchBorrow(item)}
+                                    key={index}
+                                    className="dropdown-row"
+                                  >
+                                    {item.NAME}
+                                  </div>
+                                ))}
+                            </div>
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
-                            <input
-                              type="text"
-                              name=""
-                              id="security"
-                              className="input-style"
-                              value={securityField}
-                              onChange={(e) => setSecurityField(e.target.value)}
-                              required
-                            />
-                            <span className="error-style">
-                              {securityFieldError}
-                            </span>
+                          <div className="counterParty-dummyData-trade">
+                            <div className="table-data-cell-innerDiv">
+                              <input
+                                type="text"
+                                name=""
+                                id="security"
+                                className="input-style"
+                                value={securityField}
+                                onChange={(e) =>
+                                  setSecurityField(e.target.value)
+                                }
+                                required
+                              />
+                              <span className="error-style">
+                                {securityFieldError}
+                              </span>
+                            </div>
+                            <div className="dropdown-dummyData-trade">
+                              {searchlist
+                                .filter((value: any) => {
+                                  const searchTerm =
+                                    securityField.toLowerCase();
+                                  const partyName = value.NAME.toLowerCase();
+
+                                  return (
+                                    searchTerm &&
+                                    partyName.startsWith(searchTerm) &&
+                                    partyName !== searchTerm
+                                  );
+                                })
+                                .slice(0, 10)
+                                .map((item: any, index) => (
+                                  <div
+                                    onClick={() => onSearch(item)}
+                                    key={index}
+                                    className="dropdown-row"
+                                  >
+                                    {item.NAME}
+                                  </div>
+                                ))}
+                            </div>
                           </div>
                         </td>
                         <td className="table-data-cell">
