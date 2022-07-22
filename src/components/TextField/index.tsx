@@ -44,10 +44,9 @@ const ContractBooking = (props: ContractProps) => {
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
 
-
   const onSearch = (searchTerm: any) => {
-     setMarkField(searchTerm.LOAN_MARK);
-     setCpartyField(searchTerm.NAME);
+    setMarkField(searchTerm.LOAN_MARK);
+    setCpartyField(searchTerm.NAME);
     console.log("search", searchTerm);
   };
 
@@ -94,15 +93,25 @@ const ContractBooking = (props: ContractProps) => {
   };
 
   useEffect(() => {
-    if(cpartyField === ""){
+    if (cpartyField === "") {
       setMarkField("");
     }
-  },[cpartyField])
+  }, [cpartyField]);
 
   return (
     <div style={{ height: `${props.height}rem` }}>
       <div>
         <div className="contractMainDiv">
+          {/*<div className="mb-3 inputFieldDiv">*/}
+
+          {/*  <input*/}
+          {/*    className="form-control inputBorderNone"*/}
+          {/*    placeholder="Borrow"*/}
+          {/*    value={borrowField}*/}
+          {/*    onChange={onChangeBorrow}*/}
+          {/*  />*/}
+          {/*  <span className="error-style">{props.errorBorrow}</span>*/}
+          {/*</div>*/}
           <div className="mb-3 inputFieldDiv">
             <label
               htmlFor="exampleInputEmail1"
@@ -110,13 +119,14 @@ const ContractBooking = (props: ContractProps) => {
             >
               Borrow/Loan
             </label>
-            <input
-              className="form-control inputBorderNone"
-              placeholder="Borrow"
+            <select
+              className="inputBorderNone input-style select-picker"
               value={borrowField}
               onChange={onChangeBorrow}
-            />
-            <span className="error-style">{props.errorBorrow}</span>
+            >
+              <option>Loan</option>
+              <option>Borrow</option>
+            </select>
           </div>
           <div className="counterParty-dummyData">
             <div className="mb-3 inputFieldDiv">
@@ -126,10 +136,9 @@ const ContractBooking = (props: ContractProps) => {
               >
                 C Party
               </label>
-               <input
+              <input
                 className="form-control inputBorderNone"
                 placeholder="1111"
-
                 onChange={onChangeCounterParty}
                 value={cpartyField}
                 // onKeyDown={handleKeyDown}
@@ -278,10 +287,9 @@ const ContractBooking = (props: ContractProps) => {
               value={markField}
               onChange={onChangeMark}
             />
-            {
-              markField === ""  &&  <span className="error-style">{props.errorMark}</span>
-            }
-
+            {markField === "" && (
+              <span className="error-style">{props.errorMark}</span>
+            )}
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
@@ -303,6 +311,5 @@ const ContractBooking = (props: ContractProps) => {
     </div>
   );
 };
-
 
 export default ContractBooking;

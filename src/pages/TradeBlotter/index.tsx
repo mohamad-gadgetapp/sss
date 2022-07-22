@@ -56,6 +56,12 @@ const TradeBlotter = () => {
     setDetails(data[0]);
   };
 
+  const onSearch = (searchTerm: any) => {
+    setHairCutField(searchTerm.LOAN_MARK);
+    setCpartyField(searchTerm.NAME);
+    console.log("search", searchTerm);
+  };
+
   const disablePastDate = () => {
     const today = new Date();
     const dd = String(today.getDate() + 1).padStart(2, "0");
@@ -113,31 +119,31 @@ const TradeBlotter = () => {
     if (checkStatus === true) {
       console.log("errorBorrow");
       if (cpartyField === "") {
-        setCpartyFieldError("Enter Valid Text");
+        setCpartyFieldError("Enter the field");
         hasError = false;
       } else {
         setCpartyFieldError("");
       }
       if (securityField === "") {
-        setSecurityFieldError("Enter Valid Text");
+        setSecurityFieldError("Enter the field");
         hasError = false;
       } else {
         setSecurityFieldError("");
       }
       if (quantityField === "") {
-        setQuantityFieldError("Enter Valid Text");
+        setQuantityFieldError("Enter the field");
         hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
-        setLoanValueFieldError("Enter Valid Text");
+        setLoanValueFieldError("Enter the field");
         hasError = false;
       } else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
-        setRateFieldError("Enter Valid Text");
+        setRateFieldError("Enter the field");
         hasError = false;
       } else if (rateField < -999 || rateField > 999) {
         setRateFieldError("Enter Valid Rate");
@@ -146,7 +152,7 @@ const TradeBlotter = () => {
         setRateFieldError("");
       }
       if (hairCutField === "") {
-        setHairCutFieldError("Enter Valid Text");
+        setHairCutFieldError("Enter the field");
         hasError = false;
       } else {
         setHairCutFieldError("");
@@ -158,19 +164,19 @@ const TradeBlotter = () => {
         setProfitCenterFieldError("");
       }
       if (cpartyFieldBorrow === "") {
-        setCpartyFieldErrorBorrow("Enter Valid Text");
+        setCpartyFieldErrorBorrow("Enter the field");
         hasError = false;
       } else {
         setCpartyFieldErrorBorrow("");
       }
       if (loanValueFieldBorrow === "") {
-        setLoanValueFieldErrorBorrow("Enter Valid Text");
+        setLoanValueFieldErrorBorrow("Enter the field");
         hasError = false;
       } else {
         setLoanValueFieldErrorBorrow("");
       }
       if (hairCutFieldBorrow === "") {
-        setHairCutFieldErrorBorrow("Enter Valid Text");
+        setHairCutFieldErrorBorrow("Enter the field");
         hasError = false;
       } else {
         setHairCutFieldErrorBorrow("");
@@ -183,31 +189,31 @@ const TradeBlotter = () => {
       }
     } else {
       if (cpartyField === "") {
-        setCpartyFieldError("Enter Valid Text");
+        setCpartyFieldError("Enter the field");
         hasError = false;
       } else {
         setCpartyFieldError("");
       }
       if (securityField === "") {
-        setSecurityFieldError("Enter Valid Text");
+        setSecurityFieldError("Enter the field");
         hasError = false;
       } else {
         setSecurityFieldError("");
       }
       if (quantityField === "") {
-        setQuantityFieldError("Enter Valid Text");
+        setQuantityFieldError("Enter the field");
         hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
-        setLoanValueFieldError("Enter Valid Text");
+        setLoanValueFieldError("Enter the field");
         hasError = false;
       } else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
-        setRateFieldError("Enter Valid Text");
+        setRateFieldError("Enter the field");
         hasError = false;
       } else if (rateField < -999 || rateField > 999) {
         setRateFieldError("Enter Valid Rate");
@@ -216,7 +222,7 @@ const TradeBlotter = () => {
         setRateFieldError("");
       }
       if (hairCutField === "") {
-        setHairCutFieldError("Enter Valid Text");
+        setHairCutFieldError("Enter the field");
         hasError = false;
       } else {
         setHairCutFieldError("");
@@ -375,10 +381,10 @@ const TradeBlotter = () => {
                                 );
                               })
                               .slice(0, 10)
-                              .map((item: any) => (
+                              .map((item: any, index) => (
                                 <div
-                                  onClick={() => setCpartyField(item.NAME)}
-                                  key={item.CPTY_ID}
+                                  onClick={() => onSearch(item)}
+                                  key={index}
                                   className="dropdown-row"
                                 >
                                   {item.NAME}
@@ -416,10 +422,10 @@ const TradeBlotter = () => {
                                 );
                               })
                               .slice(0, 10)
-                              .map((item: any) => (
+                              .map((item: any, index) => (
                                 <div
-                                  onClick={() => setSecurityField(item.NAME)}
-                                  key={item.CPTY_ID}
+                                  onClick={() => onSearch(item)}
+                                  key={index}
                                   className="dropdown-row"
                                 >
                                   {item.NAME}

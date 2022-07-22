@@ -58,7 +58,7 @@ const ContractBooking = (props: ContractProps) => {
   // };
 
   const onSearch = (searchTerm: any) => {
-    setMarkFieldonMatch(searchTerm.LOAN_MARK)
+    setMarkFieldonMatch(searchTerm.LOAN_MARK);
     setCpartyFieldonMatch(searchTerm.NAME);
     console.log("search", searchTerm);
   };
@@ -110,15 +110,30 @@ const ContractBooking = (props: ContractProps) => {
   };
 
   useEffect(() => {
-    if(cpartyFieldonMatch === ""){
+    if (cpartyFieldonMatch === "") {
       setMarkFieldonMatch("");
     }
-  },[cpartyFieldonMatch])
+  }, [cpartyFieldonMatch]);
 
   return (
     <div style={{ height: `${props.height}rem` }}>
       <div>
         <div className="contractMainDiv">
+          {/*<div className="mb-3 inputFieldDiv">*/}
+          {/*  <label*/}
+          {/*    htmlFor="exampleInputEmail1"*/}
+          {/*    className="form-label inputLabelHeight"*/}
+          {/*  >*/}
+          {/*    Borrow/Loan*/}
+          {/*  </label>*/}
+          {/*  <input*/}
+          {/*    className="form-control inputBorderNone"*/}
+          {/*    placeholder="Borrow"*/}
+          {/*    value={borrowFieldonMatch}*/}
+          {/*    onChange={onChangeBorrowonMatch}*/}
+          {/*  />*/}
+          {/*  <span className="error-style">{props.errorBorrowonMatch}</span>*/}
+          {/*</div>*/}
           <div className="mb-3 inputFieldDiv">
             <label
               htmlFor="exampleInputEmail1"
@@ -126,13 +141,14 @@ const ContractBooking = (props: ContractProps) => {
             >
               Borrow/Loan
             </label>
-            <input
-              className="form-control inputBorderNone"
-              placeholder="Borrow"
+            <select
+              className="inputBorderNone input-style select-picker"
               value={borrowFieldonMatch}
               onChange={onChangeBorrowonMatch}
-            />
-            <span className="error-style">{props.errorBorrowonMatch}</span>
+            >
+              <option>Borrow</option>
+              <option>Loan</option>
+            </select>
           </div>
           <div className="counterParty-dummyData">
             <div className="mb-3 inputFieldDiv">
@@ -145,10 +161,8 @@ const ContractBooking = (props: ContractProps) => {
               <input
                 className="form-control inputBorderNone"
                 placeholder="1111"
-               
                 onChange={onChangeCounterPartyonMatch}
                 value={cpartyFieldonMatch}
-               
               />
               <span className="error-style">
                 {props.errorCounterPartyonMatch}
@@ -297,10 +311,9 @@ const ContractBooking = (props: ContractProps) => {
               value={markFieldonMatch}
               // onChange={onChangeMarkonMatch}
             />
-            {
-              markFieldonMatch === ""  &&  <span className="error-style">{props.errorMarkonMatch}</span> 
-            }
-            
+            {markFieldonMatch === "" && (
+              <span className="error-style">{props.errorMarkonMatch}</span>
+            )}
           </div>
           <div className="mb-3 inputFieldDiv">
             <label
