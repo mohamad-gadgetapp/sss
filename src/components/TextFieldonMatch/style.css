@@ -35,12 +35,17 @@ input{
 
 .dropdown-dummyData{
     border: 1px solid #1E355E;
-    height: 25vh;
-    width: 8vw;
+    height: fit-content;
+    max-height: 25vh;
+    width: 12vw;
     overflow: hidden;
     overflow-y: scroll;
     position: absolute; 
+    cursor: pointer;
+    font-size: 0.7rem;
+
 }
+
 
 .dropdown-dummyData:empty{
     display: none;
@@ -48,4 +53,13 @@ input{
 
 .counterParty-dummyData{
     position: relative;
+}
+
+.dropdown-row{
+    padding: 0.2rem 0.5rem;
+    
+}
+.dropdown-row:hover{
+    padding: 0.2rem 0.5rem;
+    background-color: #CACACA;
 }

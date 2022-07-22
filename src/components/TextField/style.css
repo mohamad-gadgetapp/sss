@@ -40,6 +40,8 @@ input{
     overflow: hidden;
     overflow-y: scroll;
     position: absolute; 
+    background-color: #ffffff;
+    z-index: 1;
 }
 
 .dropdown-dummyData:empty{
@@ -49,9 +51,6 @@ input{
 .counterParty-dummyData{
     position: relative;
 }
-
-
-
 
 .error-style {
     color: red;

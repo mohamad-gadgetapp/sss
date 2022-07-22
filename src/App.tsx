@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import './App.css';
 /** component */
 import Header from "./components/Header";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 /** pages */
