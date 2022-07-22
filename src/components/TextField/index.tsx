@@ -88,7 +88,7 @@ const ContractBooking = (props: ContractProps) => {
               {list
                 .filter((item: any) => {
                   const searchTerm = cpartyField.toLowerCase();
-                  const partyName = item.cpty_name.toLowerCase();
+                  const partyName = item.NAME.toLowerCase();
 
                   return (
                     searchTerm &&
@@ -99,7 +99,7 @@ const ContractBooking = (props: ContractProps) => {
                 .slice(0, 10)
                 .map((item: any) => (
                   <div
-                    onClick={() => onSearch(item.cpty_name)}
+                    onClick={() => onSearch(item.NAME)}
                     key={item.cpty_name}
                     className="dropdown-row"
                   >
@@ -129,7 +129,7 @@ const ContractBooking = (props: ContractProps) => {
               {list
                 .filter((item: any) => {
                   const searchTerm = symbol.toLowerCase();
-                  const partyName = item.cpty_name.toLowerCase();
+                  const partyName = item.NAME.toLowerCase();
 
                   return (
                     searchTerm &&
@@ -140,7 +140,7 @@ const ContractBooking = (props: ContractProps) => {
                 .slice(0, 10)
                 .map((item: any) => (
                   <div
-                    onClick={() => onSearchSymbol(item.cpty_name)}
+                    onClick={() => onSearchSymbol(item.NAME)}
                     key={item.cpty_name}
                     className="dropdown-row"
                   >

@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import searchData from "../../dummyData.json";
 import data from "../../loansData.json";
+import Select from "react-select";
 
 const TradeBlotter = () => {
-  // interface TradeBlotterPageProps {
-  //     height?: number;
-  //     columns?: object;
-  //     title?: string;
-  // }
   const obj: any = {};
   const objSecond: any = {};
   const [rowData, setRowData] = useState<Array<object>>([
@@ -25,17 +21,14 @@ const TradeBlotter = () => {
   const [heightAG_1] = useState(30);
   const [details, setDetails] = useState<any>(null);
   const [checkStatus, setCheckStatus] = useState(false);
-  const [statusField, setStatusField] = useState<any>("");
-  const [selectBorrow, setSelectBorrow] = useState("Borrow");
-  const [selectLoan, setSelectLoan] = useState<any>("Loan");
+  const [selectBorrow, setSelectBorrow] = useState("B");
+  const [selectLoan, setSelectLoan] = useState<any>("L");
   const [cpartyField, setCpartyField] = useState<any>("");
   const [cpartyFieldBorrow, setCpartyFieldBorrow] = useState("");
   const [securityField, setSecurityField] = useState<any>("");
   const [quantityField, setQuantityField] = useState<any>("");
   const [loanValueField, setLoanValueField] = useState<any>("");
   const [loanValueFieldBorrow, setLoanValueFieldBorrow] = useState("");
-  // const [collateralField, setCollateralField] = useState<any>("");
-  // const [collateralFieldBorrow, setCollateralFieldBorrow] = useState("");
   const [rateField, setRateField] = useState<any>("");
   const [hairCutField, setHairCutField] = useState<any>("");
   const [hairCutFieldBorrow, setHairCutFieldBorrow] = useState("");
@@ -48,14 +41,11 @@ const TradeBlotter = () => {
   const [securityFieldError, setSecurityFieldError] = useState<any>("");
   const [quantityFieldError, setQuantityFieldError] = useState<any>("");
   const [loanValueFieldError, setLoanValueFieldError] = useState<any>("");
-  // const [collateralFieldError, setCollateralFieldError] = useState<any>("");
   const [rateFieldError, setRateFieldError] = useState<any>("");
   const [hairCutFieldError, setHairCutFieldError] = useState<any>("");
   const [profitCenterFieldError, setProfitCenterFieldError] = useState<any>("");
   const [loanValueFieldErrorBorrow, setLoanValueFieldErrorBorrow] =
     useState<any>("");
-  // const [collateralFieldErrorBorrow, setCollateralFieldErrorBorrow] =
-  //   useState<any>("");
   const [hairCutFieldErrorBorrow, setHairCutFieldErrorBorrow] =
     useState<any>("");
   const [profitCenterFieldErrorBorrow, setProfitCenterFieldErrorBorrow] =
@@ -101,15 +91,25 @@ const TradeBlotter = () => {
     }
   };
 
+  const selectLoanBorrow = () => {
+    if (checkStatus) {
+      if (selectLoan === "B") {
+        console.log("if loan");
+        setSelectBorrow("L");
+      } else if (selectLoan === "L") {
+        console.log("else loan");
+        setSelectBorrow("B");
+      }
+    }
+  };
+
+  useEffect(() => {
+    selectLoanBorrow();
+  }, [selectLoan, selectBorrow]);
+
   const bookFn = () => {
     let hasError = true;
     console.log("length", profitCenterField.length);
-    // if (selectLoan === "") {
-    //   setErrorField(true);
-    //   hasError = false;
-    // } else {
-    //   setErrorField(false);
-    // }
     if (checkStatus === true) {
       console.log("errorBorrow");
       if (cpartyField === "") {
@@ -136,12 +136,6 @@ const TradeBlotter = () => {
       } else {
         setLoanValueFieldError("");
       }
-      // if (collateralField === "" || collateralField.length > 1) {
-      //   setCollateralFieldError("Enter Valid Text");
-      //   hasError = false;
-      // } else {
-      //   setCollateralFieldError("");
-      // }
       if (rateField === "") {
         setRateFieldError("Enter Valid Text");
         hasError = false;
@@ -175,12 +169,6 @@ const TradeBlotter = () => {
       } else {
         setLoanValueFieldErrorBorrow("");
       }
-      // if (collateralFieldBorrow === "" || collateralFieldBorrow.length > 1) {
-      //   setCollateralFieldErrorBorrow("Enter Valid Text");
-      //   hasError = false;
-      // } else {
-      //   setCollateralFieldErrorBorrow("");
-      // }
       if (hairCutFieldBorrow === "") {
         setHairCutFieldErrorBorrow("Enter Valid Text");
         hasError = false;
@@ -218,12 +206,6 @@ const TradeBlotter = () => {
       } else {
         setLoanValueFieldError("");
       }
-      // if (collateralField === "" || collateralField.length > 1) {
-      //   setCollateralFieldError("Enter Valid Text");
-      //   hasError = false;
-      // } else {
-      //   setCollateralFieldError("");
-      // }
       if (rateField === "") {
         setRateFieldError("Enter Valid Text");
         hasError = false;
@@ -247,8 +229,6 @@ const TradeBlotter = () => {
       }
     }
 
-    ////////////////////////////////////////////////////////////////////
-
     if (hasError === true) {
       if (checkStatus === true) {
         obj["status"] = "Sent";
@@ -257,7 +237,6 @@ const TradeBlotter = () => {
         obj["security"] = securityField;
         obj["quantity"] = quantityField;
         obj["loan_value"] = loanValueField;
-        // obj["collateral_code"] = collateralField;
         obj["rate"] = rateField;
         obj["haircut"] = hairCutField;
         obj["profit_center"] = profitCenterField;
@@ -268,7 +247,6 @@ const TradeBlotter = () => {
         objSecond["security"] = securityField;
         objSecond["quantity"] = quantityField;
         objSecond["loan_value"] = loanValueFieldBorrow;
-        // objSecond["collateral_code"] = collateralFieldBorrow;
         objSecond["rate"] = rateField;
         objSecond["haircut"] = hairCutFieldBorrow;
         objSecond["profit_center"] = profitCenterFieldBorrow;
@@ -281,7 +259,6 @@ const TradeBlotter = () => {
         obj["security"] = securityField;
         obj["quantity"] = quantityField;
         obj["loan_value"] = loanValueField;
-        // obj["collateral_code"] = collateralField;
         obj["rate"] = rateField;
         obj["haircut"] = hairCutField;
         obj["profit_center"] = profitCenterField;
@@ -338,7 +315,6 @@ const TradeBlotter = () => {
                       <td className="table-data-cell">Security</td>
                       <td className="table-data-cell">Quantity</td>
                       <td className="table-data-cell">Loan Value</td>
-                      {/* <td className="table-data-cell">Collateral Code</td> */}
                       <td className="table-data-cell">Rate</td>
                       <td className="table-data-cell">Mark</td>
                       <td className="table-data-cell">Profit Center</td>
@@ -350,12 +326,12 @@ const TradeBlotter = () => {
                       <td className="select-data-cell">
                         <div className="counterParty-dummyData-trade">
                           <select
-                            className="select-style"
+                            className="input-style select-picker"
                             value={selectLoan}
                             onChange={(e) => setSelectLoan(e.target.value)}
                           >
-                            <option>Loan</option>
-                            <option>Borrow</option>
+                            <option>L</option>
+                            <option>B</option>
                           </select>
                         </div>
                       </td>
@@ -371,7 +347,17 @@ const TradeBlotter = () => {
                               value={cpartyField}
                               onChange={(e) => setCpartyField(e.target.value)}
                             />
-
+                            {/*<Select*/}
+                            {/*  styles={customStyles}*/}
+                            {/*  onChange={(value) => setCpartyField(value)}*/}
+                            {/*  placeholder="Search"*/}
+                            {/*  isSearchable={true}*/}
+                            {/*  isClearable={false}*/}
+                            {/*  menuPlacement="auto"*/}
+                            {/*  getOptionLabel={(option: any) => option.NAME}*/}
+                            {/*  getOptionValue={(option: any) => option.CPTY_ID}*/}
+                            {/*  options={searchlist}*/}
+                            {/*/>*/}
                             <span className="error-style">
                               {cpartyFieldError}
                             </span>
@@ -380,7 +366,7 @@ const TradeBlotter = () => {
                             {searchlist
                               .filter((value: any) => {
                                 const searchTerm = cpartyField.toLowerCase();
-                                const partyName = value.cpty_name.toLowerCase();
+                                const partyName = value.NAME.toLowerCase();
 
                                 return (
                                   searchTerm &&
@@ -391,11 +377,11 @@ const TradeBlotter = () => {
                               .slice(0, 10)
                               .map((item: any) => (
                                 <div
-                                  onClick={() => setCpartyField(item.cpty_name)}
-                                  key={item.cpty_name}
+                                  onClick={() => setCpartyField(item.NAME)}
+                                  key={item.CPTY_ID}
                                   className="dropdown-row"
                                 >
-                                  {item.cpty_name}
+                                  {item.NAME}
                                 </div>
                               ))}
                           </div>
@@ -421,7 +407,7 @@ const TradeBlotter = () => {
                             {searchlist
                               .filter((value: any) => {
                                 const searchTerm = securityField.toLowerCase();
-                                const partyName = value.cpty_name.toLowerCase();
+                                const partyName = value.NAME.toLowerCase();
 
                                 return (
                                   searchTerm &&
@@ -432,13 +418,11 @@ const TradeBlotter = () => {
                               .slice(0, 10)
                               .map((item: any) => (
                                 <div
-                                  onClick={() =>
-                                    setSecurityField(item.cpty_name)
-                                  }
-                                  key={item.cpty_name}
+                                  onClick={() => setSecurityField(item.NAME)}
+                                  key={item.CPTY_ID}
                                   className="dropdown-row"
                                 >
-                                  {item.cpty_name}
+                                  {item.NAME}
                                 </div>
                               ))}
                           </div>
@@ -476,22 +460,6 @@ const TradeBlotter = () => {
                           </span>
                         </div>
                       </td>
-                      {/* <td className="table-data-cell">
-                        <div className="table-data-cell-innerDiv">
-                          <input
-                            type="text"
-                            name=""
-                            id="collateralCode"
-                            className="input-style"
-                            value={collateralField}
-                            onChange={(e) => setCollateralField(e.target.value)}
-                            required
-                          />
-                          <span className="error-style">
-                            {collateralFieldError}
-                          </span>
-                        </div>
-                      </td> */}
                       <td className="table-data-cell">
                         <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
                           <input
@@ -558,12 +526,12 @@ const TradeBlotter = () => {
                         <td className="select-data-cell">
                           <div className="counterParty-dummyData-trade">
                             <select
-                              className="select-style"
+                              className="input-style"
                               value={selectBorrow}
                               onChange={(e) => setSelectBorrow(e.target.value)}
                             >
-                              <option>Loan</option>
-                              <option>Borrow</option>
+                              <option>L</option>
+                              <option>B</option>
                             </select>
                           </div>
                         </td>
@@ -575,6 +543,7 @@ const TradeBlotter = () => {
                               id="cparty"
                               required
                               className="input-style"
+                              value={cpartyFieldBorrow}
                               onChange={(e) =>
                                 setCpartyFieldBorrow(e.target.value)
                               }
@@ -623,6 +592,7 @@ const TradeBlotter = () => {
                               name=""
                               id="loanValue"
                               className="input-style"
+                              value={loanValueFieldBorrow}
                               onChange={(e) =>
                                 setLoanValueFieldBorrow(e.target.value)
                               }
@@ -633,23 +603,6 @@ const TradeBlotter = () => {
                             </span>
                           </div>
                         </td>
-                        {/* <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv">
-                            <input
-                              type="text"
-                              name=""
-                              id="collateralCode"
-                              className="input-style"
-                              onChange={(e) =>
-                                setCollateralFieldBorrow(e.target.value)
-                              }
-                              required
-                            />
-                            <span className="error-style">
-                              {collateralFieldErrorBorrow}
-                            </span>
-                          </div>
-                        </td> */}
                         <td className="table-data-cell">
                           <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
                             <input
@@ -673,6 +626,7 @@ const TradeBlotter = () => {
                               name=""
                               id="mark"
                               className="input-style"
+                              value={hairCutFieldBorrow}
                               onChange={(e) =>
                                 setHairCutFieldBorrow(e.target.value)
                               }
@@ -686,10 +640,11 @@ const TradeBlotter = () => {
                         <td className="table-data-cell">
                           <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
                             <input
-                              type="number"
+                              type="text"
                               name=""
                               id="profitCenter"
                               className="input-style"
+                              value={profitCenterFieldBorrow}
                               onChange={(e) =>
                                 setProfitCenterFieldBorrow(e.target.value)
                               }
