@@ -26,6 +26,7 @@ const TradeBlotter = () => {
   const [cpartyField, setCpartyField] = useState<any>("");
   const [cpartyFieldBorrow, setCpartyFieldBorrow] = useState("");
   const [securityField, setSecurityField] = useState<any>("");
+  const [securityFieldBorrow, setSecurityFieldBorrow] = useState<any>("");
   const [quantityField, setQuantityField] = useState<any>("");
   const [loanValueField, setLoanValueField] = useState<any>("");
   const [loanValueFieldBorrow, setLoanValueFieldBorrow] = useState("");
@@ -60,6 +61,14 @@ const TradeBlotter = () => {
     setHairCutField(searchTerm.LOAN_MARK);
     setCpartyField(searchTerm.NAME);
     console.log("search", searchTerm);
+  };
+
+  const onSearchSecurity = (searchTerm: any) => {
+    setSecurityField(searchTerm.NAME);
+  };
+
+  const onSearchSecurityBorrow = (searchTerm: any) => {
+    setSecurityFieldBorrow(searchTerm.NAME);
   };
 
   const onSearchBorrow = (searchTerm: any) => {
@@ -174,6 +183,12 @@ const TradeBlotter = () => {
         hasError = false;
       } else {
         setCpartyFieldErrorBorrow("");
+      }
+      if (securityField === "") {
+        setSecurityFieldError("Enter the field");
+        hasError = false;
+      } else {
+        setSecurityFieldError("");
       }
       if (loanValueFieldBorrow === "") {
         setLoanValueFieldErrorBorrow("Enter the field");
@@ -430,7 +445,7 @@ const TradeBlotter = () => {
                               .slice(0, 10)
                               .map((item: any, index) => (
                                 <div
-                                  onClick={() => onSearch(item)}
+                                  onClick={() => onSearchSecurity(item)}
                                   key={index}
                                   className="dropdown-row"
                                 >
@@ -599,9 +614,9 @@ const TradeBlotter = () => {
                                 name=""
                                 id="security"
                                 className="input-style"
-                                value={securityField}
+                                value={securityFieldBorrow}
                                 onChange={(e) =>
-                                  setSecurityField(e.target.value)
+                                  setSecurityFieldBorrow(e.target.value)
                                 }
                                 required
                               />
@@ -613,7 +628,7 @@ const TradeBlotter = () => {
                               {searchlist
                                 .filter((value: any) => {
                                   const searchTerm =
-                                    securityField.toLowerCase();
+                                    securityFieldBorrow.toLowerCase();
                                   const partyName = value.NAME.toLowerCase();
 
                                   return (
@@ -625,7 +640,7 @@ const TradeBlotter = () => {
                                 .slice(0, 10)
                                 .map((item: any, index) => (
                                   <div
-                                    onClick={() => onSearch(item)}
+                                    onClick={() => onSearchSecurityBorrow(item)}
                                     key={index}
                                     className="dropdown-row"
                                   >

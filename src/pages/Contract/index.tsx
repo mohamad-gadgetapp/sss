@@ -5,7 +5,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SubHeader from "../../components/SubHeader";
 import * as XLSX from "xlsx";
 import data from "../../contractsData.json";
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 
 interface ContractPageProps {
   height?: number;
@@ -14,17 +14,18 @@ interface ContractPageProps {
 }
 
 const Contract = ({ height, title }: ContractPageProps) => {
-  const [rowData, setRowData] = useState<Array<object>>([...data.contractsData,]);
+  const [rowData, setRowData] = useState<Array<object>>([
+    ...data.contractsData,
+  ]);
   const [heightAG_1] = useState(30);
   const [excelFileName, setExcelFileName] = useState("");
   const [workbookData, setworkbookData] = useState<any>(null);
   // const [excelData, setExcelData] = useState<any>(null);
 
-
   const onClear = () => {
-    // setRowData([...data.contractsData]);
+    setRowData([...data.contractsData]);
     setExcelFileName("");
-    //setworkbookData([]);
+    setworkbookData([]);
   };
   const onChange = (e: any) => {
     makeRequest(
@@ -91,7 +92,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
       K: "status",
       L: "daily_debits",
       M: "contract_id",
-      N:"is_new"
+      N: "is_new",
     };
 
     const rowData_ = rowData;
@@ -103,17 +104,17 @@ const Contract = ({ height, title }: ContractPageProps) => {
       console.log("row");
       const row: any = {};
       Object.keys(columns).forEach(function (column) {
-        console.log("params ", worksheet[column + rowIndex].w)
-        console.log("column ", columns[column] )
+        console.log("params ", worksheet[column + rowIndex].w);
+        console.log("column ", columns[column]);
         row[columns[column]] = worksheet[column + rowIndex].w;
       });
-      if(row.quantity < 0){
-        row.status = "Error"
+      if (row.quantity < 0) {
+        row.status = "Error";
       }
-      if(row.dtc_no === ""){
-        row.status = "Error"
+      if (row.dtc_no === "") {
+        row.status = "Error";
       }
-      setRowData(pres => [...pres!,row]);
+      setRowData((pres) => [...pres!, row]);
       rowIndex++;
     }
   };
@@ -131,7 +132,9 @@ const Contract = ({ height, title }: ContractPageProps) => {
           <div className="contractBooking-Button">
             <div className="title-subHeaderTitle">Contracts</div>
             <div className="clear-submit-btn-div">
-              <a href="" className="templetelink">Download Blank Templete</a>
+              <a href="" className="templetelink">
+                Download Blank Templete
+              </a>
               <div className="upload-btn-main-div">
                 <button className="excel-upload-btn">
                   <input
@@ -151,12 +154,19 @@ const Contract = ({ height, title }: ContractPageProps) => {
                     Upload Excel File
                   </div>
                 </button>
-                <div className="file-name">{excelFileName}{excelFileName === "" ? "" : <CancelIcon onClick={onClear} style={{ color: "#E90909", height: "0.9rem" }} />}</div>
+                <div className="file-name">
+                  {excelFileName}
+                  {excelFileName === "" ? (
+                    ""
+                  ) : (
+                    <CancelIcon
+                      onClick={onClear}
+                      style={{ color: "#E90909", height: "0.9rem" }}
+                    />
+                  )}
+                </div>
               </div>
-              <button
-                type="submit"
-                className="uploadSheet-submit-Btn"
-              >
+              <button type="submit" className="uploadSheet-submit-Btn">
                 Submit
               </button>
               <button className="clearAll-Btn" onClick={onClear}>
