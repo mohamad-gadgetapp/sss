@@ -21,12 +21,15 @@ const TradeBlotter = () => {
   const [heightAG_1] = useState(30);
   const [details, setDetails] = useState<any>(null);
   const [checkStatus, setCheckStatus] = useState(false);
+  const [cpartyInputStatus, setCpartyInputStatus] = useState(false);
+  const [cpartyBorrowInputStatus, setCpartyBorrowInputStatus] = useState(false);
+  const [securityInputStatus, setSecurityInputStatus] = useState(false);
+  const [securityBorrowInputStatus, setSecurityBorrowInputStatus] = useState(false);
   const [selectBorrow, setSelectBorrow] = useState("B");
   const [selectLoan, setSelectLoan] = useState<any>("L");
   const [cpartyField, setCpartyField] = useState<any>("");
   const [cpartyFieldBorrow, setCpartyFieldBorrow] = useState("");
   const [securityField, setSecurityField] = useState<any>("");
-  const [securityFieldBorrow, setSecurityFieldBorrow] = useState<any>("");
   const [quantityField, setQuantityField] = useState<any>("");
   const [loanValueField, setLoanValueField] = useState<any>("");
   const [loanValueFieldBorrow, setLoanValueFieldBorrow] = useState("");
@@ -65,10 +68,6 @@ const TradeBlotter = () => {
 
   const onSearchSecurity = (searchTerm: any) => {
     setSecurityField(searchTerm.NAME);
-  };
-
-  const onSearchSecurityBorrow = (searchTerm: any) => {
-    setSecurityFieldBorrow(searchTerm.NAME);
   };
 
   const onSearchBorrow = (searchTerm: any) => {
@@ -373,6 +372,8 @@ const TradeBlotter = () => {
                               className="input-style"
                               value={cpartyField}
                               onChange={(e) => setCpartyField(e.target.value)}
+                              onFocus={() => setCpartyInputStatus(true)}
+                              onBlur={() => setCpartyInputStatus(false)}
                             />
                             {/*<Select*/}
                             {/*  styles={customStyles}*/}
@@ -389,29 +390,33 @@ const TradeBlotter = () => {
                               {cpartyFieldError}
                             </span>
                           </div>
-                          <div className="dropdown-dummyData-trade">
-                            {searchlist
-                              .filter((value: any) => {
-                                const searchTerm = cpartyField.toLowerCase();
-                                const partyName = value.NAME.toLowerCase();
+                          {
+                            cpartyInputStatus && (
+                                  <div className="dropdown-dummyData-trade">
+                                    {searchlist
+                                        .filter((value: any) => {
+                                          const searchTerm = cpartyField.toLowerCase();
+                                          const partyName = value.NAME.toLowerCase();
 
-                                return (
-                                  searchTerm &&
-                                  partyName.startsWith(searchTerm) &&
-                                  partyName !== searchTerm
-                                );
-                              })
-                              .slice(0, 10)
-                              .map((item: any, index) => (
-                                <div
-                                  onClick={() => onSearch(item)}
-                                  key={index}
-                                  className="dropdown-row"
-                                >
-                                  {item.NAME}
-                                </div>
-                              ))}
-                          </div>
+                                          return (
+                                              searchTerm &&
+                                              partyName.startsWith(searchTerm) &&
+                                              partyName !== searchTerm
+                                          );
+                                        })
+                                        .slice(0, 10)
+                                        .map((item: any, index) => (
+                                            <div
+                                                onClick={() => onSearch(item)}
+                                                key={index}
+                                                className="dropdown-row"
+                                            >
+                                              {item.NAME}
+                                            </div>
+                                        ))}
+                                  </div>
+                              )
+                          }
                         </div>
                       </td>
                       <td className="table-data-cell">
@@ -424,35 +429,41 @@ const TradeBlotter = () => {
                               className="input-style"
                               value={securityField}
                               onChange={(e) => setSecurityField(e.target.value)}
+                              onFocus={() => setSecurityInputStatus(true)}
+                              onBlur={() => setSecurityInputStatus(false)}
                               required
                             />
                             <span className="error-style">
                               {securityFieldError}
                             </span>
                           </div>
-                          <div className="dropdown-dummyData-trade">
-                            {searchlist
-                              .filter((value: any) => {
-                                const searchTerm = securityField.toLowerCase();
-                                const partyName = value.NAME.toLowerCase();
+                          {
+                            securityInputStatus && (
+                                  <div className="dropdown-dummyData-trade">
+                                    {searchlist
+                                        .filter((value: any) => {
+                                          const searchTerm = securityField.toLowerCase();
+                                          const partyName = value.NAME.toLowerCase();
 
-                                return (
-                                  searchTerm &&
-                                  partyName.startsWith(searchTerm) &&
-                                  partyName !== searchTerm
-                                );
-                              })
-                              .slice(0, 10)
-                              .map((item: any, index) => (
-                                <div
-                                  onClick={() => onSearchSecurity(item)}
-                                  key={index}
-                                  className="dropdown-row"
-                                >
-                                  {item.NAME}
-                                </div>
-                              ))}
-                          </div>
+                                          return (
+                                              searchTerm &&
+                                              partyName.startsWith(searchTerm) &&
+                                              partyName !== searchTerm
+                                          );
+                                        })
+                                        .slice(0, 10)
+                                        .map((item: any, index) => (
+                                            <div
+                                                onClick={() => onSearchSecurity(item)}
+                                                key={index}
+                                                className="dropdown-row"
+                                            >
+                                              {item.NAME}
+                                            </div>
+                                        ))}
+                                  </div>
+                              )
+                          }
                         </div>
                       </td>
                       <td className="table-data-cell">
@@ -575,35 +586,41 @@ const TradeBlotter = () => {
                                 onChange={(e) =>
                                   setCpartyFieldBorrow(e.target.value)
                                 }
+                                onFocus={() => setCpartyBorrowInputStatus(true)}
+                                onBlur={() => setCpartyBorrowInputStatus(false)}
                               />
                               <span className="error-style">
                                 {cpartyFieldErrorBorrow}
                               </span>
                             </div>
-                            <div className="dropdown-dummyData-trade">
-                              {searchlist
-                                .filter((value: any) => {
-                                  const searchTerm =
-                                    cpartyFieldBorrow.toLowerCase();
-                                  const partyName = value.NAME.toLowerCase();
+                            {
+                              cpartyBorrowInputStatus && (
+                                    <div className="dropdown-dummyData-trade">
+                                      {searchlist
+                                          .filter((value: any) => {
+                                            const searchTerm =
+                                                cpartyFieldBorrow.toLowerCase();
+                                            const partyName = value.NAME.toLowerCase();
 
-                                  return (
-                                    searchTerm &&
-                                    partyName.startsWith(searchTerm) &&
-                                    partyName !== searchTerm
-                                  );
-                                })
-                                .slice(0, 10)
-                                .map((item: any, index) => (
-                                  <div
-                                    onClick={() => onSearchBorrow(item)}
-                                    key={index}
-                                    className="dropdown-row"
-                                  >
-                                    {item.NAME}
-                                  </div>
-                                ))}
-                            </div>
+                                            return (
+                                                searchTerm &&
+                                                partyName.startsWith(searchTerm) &&
+                                                partyName !== searchTerm
+                                            );
+                                          })
+                                          .slice(0, 10)
+                                          .map((item: any, index) => (
+                                              <div
+                                                  onClick={() => onSearchBorrow(item)}
+                                                  key={index}
+                                                  className="dropdown-row"
+                                              >
+                                                {item.NAME}
+                                              </div>
+                                          ))}
+                                    </div>
+                                )
+                            }
                           </div>
                         </td>
                         <td className="table-data-cell">
@@ -614,40 +631,44 @@ const TradeBlotter = () => {
                                 name=""
                                 id="security"
                                 className="input-style"
-                                value={securityFieldBorrow}
+                                value={securityField}
                                 onChange={(e) =>
-                                  setSecurityFieldBorrow(e.target.value)
+                                  setSecurityField(e.target.value)
                                 }
+                                onFocus={() => setSecurityBorrowInputStatus(true)}
+                                onBlur={() => setSecurityBorrowInputStatus(false)}
                                 required
                               />
                               <span className="error-style">
                                 {securityFieldError}
                               </span>
                             </div>
-                            <div className="dropdown-dummyData-trade">
-                              {searchlist
-                                .filter((value: any) => {
-                                  const searchTerm =
-                                    securityFieldBorrow.toLowerCase();
-                                  const partyName = value.NAME.toLowerCase();
+                            {securityBorrowInputStatus && (
+                                <div className="dropdown-dummyData-trade">
+                                  {searchlist
+                                      .filter((value: any) => {
+                                        const searchTerm =
+                                            securityField.toLowerCase();
+                                        const partyName = value.NAME.toLowerCase();
 
-                                  return (
-                                    searchTerm &&
-                                    partyName.startsWith(searchTerm) &&
-                                    partyName !== searchTerm
-                                  );
-                                })
-                                .slice(0, 10)
-                                .map((item: any, index) => (
-                                  <div
-                                    onClick={() => onSearchSecurityBorrow(item)}
-                                    key={index}
-                                    className="dropdown-row"
-                                  >
-                                    {item.NAME}
-                                  </div>
-                                ))}
-                            </div>
+                                        return (
+                                            searchTerm &&
+                                            partyName.startsWith(searchTerm) &&
+                                            partyName !== searchTerm
+                                        );
+                                      })
+                                      .slice(0, 10)
+                                      .map((item: any, index) => (
+                                          <div
+                                              onClick={() => onSearchSecurity(item)}
+                                              key={index}
+                                              className="dropdown-row"
+                                          >
+                                            {item.NAME}
+                                          </div>
+                                      ))}
+                                </div>
+                            )}
                           </div>
                         </td>
                         <td className="table-data-cell">
@@ -742,6 +763,7 @@ const TradeBlotter = () => {
                               name=""
                               id="termDate"
                               className="input-style"
+                              min={disablePastDate()}
                               onChange={(e) =>
                                 setTermDateFieldBorrow(e.target.value)
                               }
