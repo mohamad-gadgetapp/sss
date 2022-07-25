@@ -4,7 +4,8 @@ import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import searchData from "../../dummyData.json";
 import data from "../../loansData.json";
-import Select from "react-select";
+import {Modal, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TradeBlotter = () => {
   const obj: any = {};
@@ -45,6 +46,8 @@ const TradeBlotter = () => {
   const [securityFieldError, setSecurityFieldError] = useState<any>("");
   const [quantityFieldError, setQuantityFieldError] = useState<any>("");
   const [loanValueFieldError, setLoanValueFieldError] = useState<any>("");
+  const [loanValueFieldExceedStatus, setLoanValueFieldExceedStatus] = useState(false);
+  const [loanValueFieldExceedWarningNo, setLoanValueFieldExceedWarningNo] = useState(false);
   const [rateFieldError, setRateFieldError] = useState<any>("");
   const [hairCutFieldError, setHairCutFieldError] = useState<any>("");
   const [profitCenterFieldError, setProfitCenterFieldError] = useState<any>("");
@@ -63,6 +66,7 @@ const TradeBlotter = () => {
   const onSearch = (searchTerm: any) => {
     setHairCutField(searchTerm.LOAN_MARK);
     setCpartyField(searchTerm.NAME);
+    setCpartyInputStatus(false);
     console.log("search", searchTerm);
   };
 
@@ -83,6 +87,55 @@ const TradeBlotter = () => {
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
   };
+
+  const warningNo = () => {
+    setLoanValueFieldExceedWarningNo(true);
+    setLoanValueFieldExceedStatus(false);
+  }
+
+  const warningYes = () => {
+    setLoanValueFieldExceedWarningNo(false);
+    setLoanValueFieldExceedStatus(false);
+    console.log("exceed: ", loanValueFieldExceedWarningNo);
+  }
+
+  const addData = () => {
+    if (checkStatus === true) {
+      obj["status"] = "Sent";
+      obj["trade_type"] = selectLoan;
+      obj["cparty"] = cpartyField;
+      obj["security"] = securityField;
+      obj["quantity"] = quantityField;
+      obj["loan_value"] = loanValueField;
+      obj["rate"] = rateField;
+      obj["haircut"] = hairCutField;
+      obj["profit_center"] = profitCenterField;
+      obj["term_date"] = termDateField;
+      objSecond["status"] = "Pending";
+      objSecond["trade_type"] = selectBorrow;
+      objSecond["cparty"] = cpartyFieldBorrow;
+      objSecond["security"] = securityField;
+      objSecond["quantity"] = quantityField;
+      objSecond["loan_value"] = loanValueFieldBorrow;
+      objSecond["rate"] = rateField;
+      objSecond["haircut"] = hairCutFieldBorrow;
+      objSecond["profit_center"] = profitCenterFieldBorrow;
+      objSecond["term_date"] = termDateFieldBorrow;
+      setRowData([...rowData, obj, objSecond]);
+    } else {
+      obj["status"] = "Sent";
+      obj["trade_type"] = selectLoan;
+      obj["cparty"] = cpartyField;
+      obj["security"] = securityField;
+      obj["quantity"] = quantityField;
+      obj["loan_value"] = loanValueField;
+      obj["rate"] = rateField;
+      obj["haircut"] = hairCutField;
+      obj["profit_center"] = profitCenterField;
+      obj["term_date"] = termDateField;
+      setRowData([...rowData, obj]);
+    }
+  }
 
   const clearTextFn = () => {
     if (checkStatus === true) {
@@ -129,7 +182,6 @@ const TradeBlotter = () => {
 
   const bookFn = () => {
     let hasError = true;
-    console.log("length", profitCenterField.length);
     if (checkStatus === true) {
       console.log("errorBorrow");
       if (cpartyField === "") {
@@ -147,13 +199,20 @@ const TradeBlotter = () => {
       if (quantityField === "") {
         setQuantityFieldError("Enter the field");
         hasError = false;
+      } else if (quantityField < 0) {
+        setQuantityFieldError("Enter Valid Quantity");
+        hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
         hasError = false;
-      } else {
+      } else if (loanValueField > 250e+6) {
+        setLoanValueFieldExceedStatus(true)
+        hasError = false;
+      }
+      else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
@@ -223,11 +282,17 @@ const TradeBlotter = () => {
       if (quantityField === "") {
         setQuantityFieldError("Enter the field");
         hasError = false;
+      }else if (quantityField < 0) {
+        setQuantityFieldError("Enter Valid Quantity");
+        hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
+        hasError = false;
+      } else if (loanValueField > 250e+6) {
+        setLoanValueFieldExceedStatus(true)
         hasError = false;
       } else {
         setLoanValueFieldError("");
@@ -256,41 +321,45 @@ const TradeBlotter = () => {
     }
 
     if (hasError === true) {
-      if (checkStatus === true) {
-        obj["status"] = "Sent";
-        obj["trade_type"] = selectLoan;
-        obj["cparty"] = cpartyField;
-        obj["security"] = securityField;
-        obj["quantity"] = quantityField;
-        obj["loan_value"] = loanValueField;
-        obj["rate"] = rateField;
-        obj["haircut"] = hairCutField;
-        obj["profit_center"] = profitCenterField;
-        obj["term_date"] = termDateField;
-        objSecond["status"] = "Pending";
-        objSecond["trade_type"] = selectBorrow;
-        objSecond["cparty"] = cpartyFieldBorrow;
-        objSecond["security"] = securityField;
-        objSecond["quantity"] = quantityField;
-        objSecond["loan_value"] = loanValueFieldBorrow;
-        objSecond["rate"] = rateField;
-        objSecond["haircut"] = hairCutFieldBorrow;
-        objSecond["profit_center"] = profitCenterFieldBorrow;
-        objSecond["term_date"] = termDateFieldBorrow;
-        setRowData([...rowData, obj, objSecond]);
-      } else {
-        obj["status"] = "Sent";
-        obj["trade_type"] = selectLoan;
-        obj["cparty"] = cpartyField;
-        obj["security"] = securityField;
-        obj["quantity"] = quantityField;
-        obj["loan_value"] = loanValueField;
-        obj["rate"] = rateField;
-        obj["haircut"] = hairCutField;
-        obj["profit_center"] = profitCenterField;
-        obj["term_date"] = termDateField;
-        setRowData([...rowData, obj]);
+      console.log("add data");
+      if(loanValueFieldExceedWarningNo === false) {
+        addData();
       }
+      // if (checkStatus === true) {
+      //   obj["status"] = "Sent";
+      //   obj["trade_type"] = selectLoan;
+      //   obj["cparty"] = cpartyField;
+      //   obj["security"] = securityField;
+      //   obj["quantity"] = quantityField;
+      //   obj["loan_value"] = loanValueField;
+      //   obj["rate"] = rateField;
+      //   obj["haircut"] = hairCutField;
+      //   obj["profit_center"] = profitCenterField;
+      //   obj["term_date"] = termDateField;
+      //   objSecond["status"] = "Pending";
+      //   objSecond["trade_type"] = selectBorrow;
+      //   objSecond["cparty"] = cpartyFieldBorrow;
+      //   objSecond["security"] = securityField;
+      //   objSecond["quantity"] = quantityField;
+      //   objSecond["loan_value"] = loanValueFieldBorrow;
+      //   objSecond["rate"] = rateField;
+      //   objSecond["haircut"] = hairCutFieldBorrow;
+      //   objSecond["profit_center"] = profitCenterFieldBorrow;
+      //   objSecond["term_date"] = termDateFieldBorrow;
+      //   setRowData([...rowData, obj, objSecond]);
+      // } else {
+      //   obj["status"] = "Sent";
+      //   obj["trade_type"] = selectLoan;
+      //   obj["cparty"] = cpartyField;
+      //   obj["security"] = securityField;
+      //   obj["quantity"] = quantityField;
+      //   obj["loan_value"] = loanValueField;
+      //   obj["rate"] = rateField;
+      //   obj["haircut"] = hairCutField;
+      //   obj["profit_center"] = profitCenterField;
+      //   obj["term_date"] = termDateField;
+      //   setRowData([...rowData, obj]);
+      // }
       clearTextFn();
       document.getElementsByTagName("input")[0].focus();
     }
@@ -373,7 +442,7 @@ const TradeBlotter = () => {
                               value={cpartyField}
                               onChange={(e) => setCpartyField(e.target.value)}
                               onFocus={() => setCpartyInputStatus(true)}
-                              onBlur={() => setCpartyInputStatus(false)}
+                              // onBlur={() => setCpartyInputStatus(false)}
                             />
                             {/*<Select*/}
                             {/*  styles={customStyles}*/}
@@ -497,6 +566,30 @@ const TradeBlotter = () => {
                             {loanValueFieldError}
                           </span>
                         </div>
+                        {/*{*/}
+                        {/*  loanValueFieldExceedStatus && (*/}
+                        {/*        <div className="modal" tabIndex={-1} role="dialog">*/}
+                        {/*          <div className="modal-dialog" role="document">*/}
+                        {/*            <div className="modal-content">*/}
+                        {/*              <div className="modal-header">*/}
+                        {/*                <h5 className="modal-title">Modal title</h5>*/}
+                        {/*                <button type="button" className="close" data-dismiss="modal" aria-label="Close">*/}
+                        {/*                  <span aria-hidden="true">&times;</span>*/}
+                        {/*                </button>*/}
+                        {/*              </div>*/}
+                        {/*              <div className="modal-body">*/}
+                        {/*                <p>Modal body text goes here.</p>*/}
+                        {/*              </div>*/}
+                        {/*              <div className="modal-footer">*/}
+                        {/*                <button type="button" className="btn btn-primary">Save changes</button>*/}
+                        {/*                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close*/}
+                        {/*                </button>*/}
+                        {/*              </div>*/}
+                        {/*            </div>*/}
+                        {/*          </div>*/}
+                        {/*        </div>*/}
+                        {/*    )*/}
+                        {/*}*/}
                       </td>
                       <td className="table-data-cell">
                         <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
@@ -776,13 +869,32 @@ const TradeBlotter = () => {
                 </table>
               </div>
               <div className="book-div">
-                <button
-                  type="submit"
-                  className="button-style"
-                  onClick={() => bookFn()}
-                >
+                {/*<button*/}
+                {/*  type="button"*/}
+                {/*  className="button-style btn btn-primary"*/}
+                {/*  // onClick={() => bookFn()}*/}
+                {/*  data-toggle="modal" data-target="#exampleModal"*/}
+                {/*>*/}
+                {/*  Book*/}
+                {/*</button>*/}
+                <Button variant="primary" onClick={() => bookFn()} className="button-style">
                   Book
-                </button>
+                </Button>
+
+                <Modal show={loanValueFieldExceedStatus} onHide={() => setLoanValueFieldExceedStatus(false)}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Warning</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Loan value entered is bigger than 250M. Do you want to continue?</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="danger" onClick={() => warningNo()}>
+                      No
+                    </Button>
+                    <Button variant="success" onClick={() => warningYes()}>
+                      Yes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
             {/* </form> */}

@@ -62,27 +62,26 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     gridColumnApi.getAllGridColumns().forEach((item:any) => {
       result[item.colId] = null;
     });
-    console.log("result: ", result);
+    // console.log("result: ", result);
     let columnsWithAggregation = ['quantity','value','daily_debits']
     columnsWithAggregation.forEach(element => {
-      console.log('element', element);
+      // console.log('element', element);
       gridApi.forEachNodeAfterFilter((rowNode:any) => {
-      //   //if(rowNode.index < 10){
-        console.log("rownode: ", rowNode.data[element]);
-      //   //}
+      //   if(rowNode.index < 10){
+      //   console.log("rownode: ", rowNode.data[element]);
+      //   }
         if (rowNode.data[element]) {
          let numberWithoutCommas = removeCommas(rowNode.data[element]);
           result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
         }
       });
       result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-      console.log("result element: ",  result[element]);
+      // console.log("result element: ",  result[element]);
       // if (result[element])
       //   result[element] = `${parseInt(result[element]).toFixed(2)}`;
     })
     // console.log(target);
     result['dtc_no'] = 'Total:';
-
     gridApi.setPinnedBottomRowData([result]);
   };
 
