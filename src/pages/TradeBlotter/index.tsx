@@ -48,6 +48,7 @@ const TradeBlotter = () => {
   const [loanValueFieldError, setLoanValueFieldError] = useState<any>("");
   const [loanValueFieldExceedStatus, setLoanValueFieldExceedStatus] = useState(false);
   const [loanValueFieldExceedWarningNo, setLoanValueFieldExceedWarningNo] = useState(false);
+  const [loanValueFieldExceedWarningYes, setLoanValueFieldExceedWarningYes] = useState(false);
   const [rateFieldError, setRateFieldError] = useState<any>("");
   const [hairCutFieldError, setHairCutFieldError] = useState<any>("");
   const [profitCenterFieldError, setProfitCenterFieldError] = useState<any>("");
@@ -94,7 +95,7 @@ const TradeBlotter = () => {
   }
 
   const warningYes = () => {
-    setLoanValueFieldExceedWarningNo(false);
+    setLoanValueFieldExceedWarningYes(true);
     setLoanValueFieldExceedStatus(false);
     console.log("exceed: ", loanValueFieldExceedWarningNo);
   }
@@ -208,10 +209,11 @@ const TradeBlotter = () => {
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
         hasError = false;
-      } else if (loanValueField > 250e+6) {
-        setLoanValueFieldExceedStatus(true)
-        hasError = false;
       }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
       else {
         setLoanValueFieldError("");
       }
@@ -251,7 +253,12 @@ const TradeBlotter = () => {
       if (loanValueFieldBorrow === "") {
         setLoanValueFieldErrorBorrow("Enter the field");
         hasError = false;
-      } else {
+      }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
+      else {
         setLoanValueFieldErrorBorrow("");
       }
       if (hairCutFieldBorrow === "") {
@@ -291,10 +298,12 @@ const TradeBlotter = () => {
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
         hasError = false;
-      } else if (loanValueField > 250e+6) {
-        setLoanValueFieldExceedStatus(true)
-        hasError = false;
-      } else {
+      }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
+      else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
@@ -322,8 +331,11 @@ const TradeBlotter = () => {
 
     if (hasError === true) {
       console.log("add data");
-      if(loanValueFieldExceedWarningNo === false) {
-        addData();
+      if (loanValueField > 250e+6) {
+        setLoanValueFieldExceedStatus(true);
+        if(loanValueFieldExceedWarningYes === true) {
+          addData();
+        }
       }
       // if (checkStatus === true) {
       //   obj["status"] = "Sent";
