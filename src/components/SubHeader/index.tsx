@@ -8,7 +8,7 @@ import dummyData from "../../dummyData.json";
 interface SubHeaderProps {
   title?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  borrowAndLoneFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  borrowAndLoneFieldprop?: (event: any) => any;
   counterPartyFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   TickerFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   QuantityFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
@@ -55,6 +55,11 @@ interface SubHeaderProps {
   errorContractValueisMatch?: string;
   errorProfitCenterisMatch?: string;
   errorTermDateisMatch?: string;
+
+  CounterPartyClick?: any;
+  TickerSearch?: any;
+  CounterPartyClickisMatch?: any;
+  TickerSearchMatch?: any;
 }
 
 const SubHeader = ({
@@ -78,6 +83,10 @@ const SubHeader = ({
   RateFieldisMatchprop,
   MarkFieldisMatchprop,
   TermDateFieldisMatchprop,
+  CounterPartyClick,
+  TickerSearch,
+  CounterPartyClickisMatch,
+  TickerSearchMatch,
   errorCounterParty,
   errorTicker,
   errorQuantity,
@@ -95,7 +104,6 @@ const SubHeader = ({
   errorProfitCenterisMatch,
   errorTermDateisMatch,
 }: SubHeaderProps) => {
-
   const [checkedRadio, setCheckedRadio] = useState(false);
   const [borrowAndLoanField, setBorrowAndLoan] = useState("Loan");
   const [counterPartyField, setCounterPartyField] = useState<any>("");
@@ -126,6 +134,8 @@ const SubHeader = ({
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
 
+  
+
   const handleClick = (event: any) => {
     setCheckedRadio(event.target.checked);
   };
@@ -136,12 +146,16 @@ const SubHeader = ({
     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
-};
+  };
 
   const onChangeBorrowAndLoan = (e: any) => {
     setBorrowAndLoan(e.target.value);
     if (borrowAndLoneFieldprop) {
-      borrowAndLoneFieldprop(e);
+      if(e.target.value != ""){
+        borrowAndLoneFieldprop(e.target.value);
+      }else{
+        borrowAndLoneFieldprop("Loan");
+      }
     }
   };
 
@@ -265,19 +279,54 @@ const SubHeader = ({
   };
 
   const onSearch = (item: any) => {
+    if (CounterPartyClick) {
+      CounterPartyClick(item);
+      if (MarkFieldprop) {
+        MarkFieldprop(item.CPTY_ID);
+      }
+     
+    }
     setMarkField(item.CPTY_ID);
     setCounterPartyField(item.NAME);
-    if(item != ""){
-      setCpartyBorrowInputStatus(true);
+    if (item != "") {
+      setCpartyInputStatus(true);
     }
   };
-  const onSearchSymbol = (item: any) => {
-    // setMarkFieldisMatch(item.CPTY_ID);
+
+  const onTickerSearchValue = (item: any) => {
+    if(TickerSearch){
+      TickerSearch(item)
+    }
     setTickerField(item.NAME);
-    if(item != ""){
+    if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
+  }
+  
+  const onCounterSearchisMatch = (item: any) => {
+    if(CounterPartyClickisMatch){
+      CounterPartyClickisMatch(item);
+      if (MarkFieldisMatchprop) {
+        MarkFieldisMatchprop(item.CPTY_ID);
+      }
+    }
+    setCounterPartyFieldisMatch(item.NAME);
+    setMarkFieldisMatch(item.CPTY_ID);
+    if (item != "") {
+      setCpartyBorrowInputStatus(true);
+    }
+    
   };
+
+  const onTickerSearchisMatch = (item: any) => {
+    if(TickerSearchMatch){
+      TickerSearchMatch(item)
+    }
+    setTickerFieldisMatch(item.NAME)
+    if (item != "") {
+      setCpartyBorrowInputStatus(true);
+    }
+  }
 
   useEffect(() => {
     if (counterPartyField === "") {
@@ -351,15 +400,21 @@ const SubHeader = ({
                     placeholder="1111"
                     onChange={onChangeCounterParty}
                     value={counterPartyField}
-                    // onFocus={() => setCpartyInputStatus(true)}
-                    // onBlur={() => setCpartyInputStatus(false)}
+                    onFocus={() => setCpartyBorrowInputStatus(true)}
+                    onBlur={() => setCpartyBorrowInputStatus(false)}
                   />
 
                   <div className="error-style">{errorCounterParty}</div>
                 </div>
                 {counterPartyField != "" && (
                   <div className="dropdown-dummyData">
-                    <div className={cpartyBorrowInputStatus == true ? "tablemaibdivhide" : "tablemaibdiv" }>
+                    <div
+                      className={
+                        cpartyBorrowInputStatus == true
+                          ? "tablemaibdivhide"
+                          : "tablemaibdiv"
+                      }
+                    >
                       <div className="tabelrowhade">CPTY_ID</div>
                       <div className="tabelrowhadename">NAME</div>
                       <div className="tabelrowhade">BORROW</div>
@@ -384,14 +439,10 @@ const SubHeader = ({
                           key={index}
                           className="dropdown-row"
                         >
-                     
-                         
-                            <div className="tabelrowhade">{item.CPTY_ID}</div>
-                            <div className="tabelrowhadename">{item.NAME}</div>
-                            <div className="tabelrowhade">{item.BORROW_MARK}</div>
-                            <div className="tabelrowhade">{item.LOAN_MARK}</div>
-                         
-
+                          <div className="tabelrowhade">{item.CPTY_ID}</div>
+                          <div className="tabelrowhadename">{item.NAME}</div>
+                          <div className="tabelrowhade">{item.BORROW_MARK}</div>
+                          <div className="tabelrowhade">{item.LOAN_MARK}</div>
                         </div>
                       ))}
                   </div>
@@ -411,14 +462,20 @@ const SubHeader = ({
                     placeholder="GOOG"
                     value={tickerField}
                     onChange={onChangeTicker}
-                    // onFocus={() => setSecurityInputStatus(true)}
-                    // onBlur={() => setSecurityInputStatus(false)}
+                    onFocus={() => setCpartyBorrowInputStatus(true)}
+                    onBlur={() => setCpartyBorrowInputStatus(false)}
                   />
                   <div className="error-style">{errorTicker}</div>
                 </div>
                 {tickerField != "" && (
                   <div className="dropdown-dummyData">
-                    <div className={cpartyBorrowInputStatus == true ? "tablemaibdivhide" : "tablemaibdiv" }>
+                    <div
+                      className={
+                        cpartyBorrowInputStatus == true
+                          ? "tablemaibdivhide"
+                          : "tablemaibdiv"
+                      }
+                    >
                       <div className="tabelrowhade">CPTY_ID</div>
                       <div className="tabelrowhadename">NAME</div>
                       <div className="tabelrowhade">BORROW</div>
@@ -438,14 +495,14 @@ const SubHeader = ({
                       .slice(0, 10)
                       .map((item: any, index) => (
                         <div
-                          onClick={() => onSearchSymbol(item)}
+                          onClick={() => onTickerSearchValue(item)}
                           key={index}
                           className="dropdown-row"
                         >
                           <div className="tabelrowhade">{item.CPTY_ID}</div>
-                            <div className="tabelrowhadename">{item.NAME}</div>
-                            <div className="tabelrowhade">{item.BORROW_MARK}</div>
-                            <div className="tabelrowhade">{item.LOAN_MARK}</div>
+                          <div className="tabelrowhadename">{item.NAME}</div>
+                          <div className="tabelrowhade">{item.BORROW_MARK}</div>
+                          <div className="tabelrowhade">{item.LOAN_MARK}</div>
                         </div>
                       ))}
                   </div>
@@ -496,7 +553,7 @@ const SubHeader = ({
                   onChange={onChangeMark}
                 />
                 {markField === "" && (
-              <div className="error-style">{errorMark}</div>
+                  <div className="error-style">{errorMark}</div>
                 )}
               </div>
               <div className="mb-3 inputFieldDiv">
@@ -547,7 +604,6 @@ const SubHeader = ({
               </div>
             </div>
 
-            
             {checkedRadio == true && (
               <div className="subHeaderTextFieldDiv">
                 <div className="mb-3 inputFieldDiv loanfield">
@@ -584,14 +640,27 @@ const SubHeader = ({
                       // onKeyDown={handleKeyDown}
                     />
 
-                    <div className="error-style">{errorCounterPartyisMatch}</div>
+                    <div className="error-style">
+                      {errorCounterPartyisMatch}
+                    </div>
                   </div>
-                  {cpartyBorrowInputStatus && (
+                  {counterPartyFieldisMatch != "" && (
                     <div className="dropdown-dummyData">
+                      <div
+                        className={
+                          cpartyBorrowInputStatus == true
+                            ? "tablemaibdivhide"
+                            : "tablemaibdiv"
+                        }
+                      >
+                        <div className="tabelrowhade">CPTY_ID</div>
+                        <div className="tabelrowhadename">NAME</div>
+                        <div className="tabelrowhade">BORROW</div>
+                        <div className="tabelrowhade">LOAN</div>
+                      </div>
                       {list
                         .filter((item: any) => {
-                          const searchTerm =
-                            counterPartyFieldisMatch.toLowerCase();
+                          const searchTerm = counterPartyFieldisMatch.toLowerCase();
                           const partyName = item.NAME.toLowerCase();
 
                           return (
@@ -601,13 +670,18 @@ const SubHeader = ({
                           );
                         })
                         .slice(0, 10)
-                        .map((item: any) => (
+                        .map((item: any, index) => (
                           <div
-                            // onClick={() => onSearch(item)}
-                            key={item.NAME}
+                            onClick={() => onCounterSearchisMatch(item)}
+                            key={index}
                             className="dropdown-row"
                           >
-                            {item.NAME}
+                            <div className="tabelrowhade">{item.CPTY_ID}</div>
+                            <div className="tabelrowhadename">{item.NAME}</div>
+                            <div className="tabelrowhade">
+                              {item.BORROW_MARK}
+                            </div>
+                            <div className="tabelrowhade">{item.LOAN_MARK}</div>
                           </div>
                         ))}
                     </div>
@@ -627,13 +701,25 @@ const SubHeader = ({
                       placeholder="GOOG"
                       value={tickerFieldisMatch}
                       onChange={onChangeTickerisMatch}
-                      onFocus={() => setSecurityBorrowInputStatus(true)}
-                      onBlur={() => setSecurityBorrowInputStatus(false)}
+                      onFocus={() => setCpartyBorrowInputStatus(true)}
+                      onBlur={() => setCpartyBorrowInputStatus(false)}
                     />
                     <div className="error-style">{errorTickerisMatch}</div>
                   </div>
-                  {securityBorrowInputStatus && (
+                  {tickerFieldisMatch != "" && (
                     <div className="dropdown-dummyData">
+                      <div
+                        className={
+                          cpartyBorrowInputStatus == true
+                            ? "tablemaibdivhide"
+                            : "tablemaibdiv"
+                        }
+                      >
+                        <div className="tabelrowhade">CPTY_ID</div>
+                        <div className="tabelrowhadename">NAME</div>
+                        <div className="tabelrowhade">BORROW</div>
+                        <div className="tabelrowhade">LOAN</div>
+                      </div>
                       {list
                         .filter((item: any) => {
                           const searchTerm = tickerFieldisMatch.toLowerCase();
@@ -646,13 +732,18 @@ const SubHeader = ({
                           );
                         })
                         .slice(0, 10)
-                        .map((item: any) => (
+                        .map((item: any, index) => (
                           <div
-                            // onClick={() => onSearchSymbol(item.NAME)}
-                            key={item.NAME}
+                            onClick={() => onTickerSearchisMatch(item)}
+                            key={index}
                             className="dropdown-row"
                           >
-                            {item.NAME}
+                            <div className="tabelrowhade">{item.CPTY_ID}</div>
+                            <div className="tabelrowhadename">{item.NAME}</div>
+                            <div className="tabelrowhade">
+                              {item.BORROW_MARK}
+                            </div>
+                            <div className="tabelrowhade">{item.LOAN_MARK}</div>
                           </div>
                         ))}
                     </div>
@@ -702,8 +793,8 @@ const SubHeader = ({
                     onChange={onChangeMarkisMatch}
                   />
                   {markFieldisMatch === "" && (
-              <div className="error-style">{errorMarkisMatch}</div>
-            )}
+                    <div className="error-style">{errorMarkisMatch}</div>
+                  )}
                 </div>
                 <div className="mb-3 inputFieldDiv">
                   <label
@@ -752,7 +843,6 @@ const SubHeader = ({
                   <div className="error-style">{errorTermDateisMatch}</div>
                 </div>
               </div>
-             
             )}
           </div>
           <div className="textField-submitBtn">
@@ -762,7 +852,6 @@ const SubHeader = ({
           </div>
         </div>
       </div>
-     
     </div>
   );
 };

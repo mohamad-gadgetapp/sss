@@ -64,10 +64,48 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [errorProfitCenterisMatch, setErrorProfitCenterisMatch] = useState("");
   const [errorTermDateisMatch, setErrorTermDateisMatch] = useState("");
 
+  const [counterPartySearch, setCounterPartySearch] = useState("");
+  const [tickerSearch, setTickerSearch] = useState("");
+  const [counterPartySearchisMatch, setCounterPartySearchisMatch] = useState("");
+  const [tickerSearchisMatch, setTickerSearchisMatch] = useState("");
 
 
   const onSubmit = () => {
     alert("on Submit");
+    const objData ={
+      "b/l":baLinConttract,
+      "cpty_name":counterPartySearch,
+      "tb_ticker":tickerSearch,
+      "quantity":quantityContract,
+      "rate":rateFieldContract,
+      "cpty_id":markFieldContract,
+      "value":contractValueContract,
+      "profit_center":profitCenterFieldContract,
+      "term_date":termDateFieldContract,
+      "status": "sent",
+      "cusip": "-",
+      "daily_accruals": "-",
+      "settle_date_diff": "-",
+      "contract_id": "-",
+    }
+    const objDataMatch ={
+      "b/l":baLinConttractisMatch,
+      "cpty_name":counterPartySearchisMatch,
+      "tb_ticker":tickerSearchisMatch,
+      "quantity":quantityContractisMatch,
+      "rate":rateFieldContractisMatch,
+      "cpty_id":markFieldContractisMatch,
+      "value":contractValueContractisMatch,
+      "profit_center":profitCenterFieldContractisMatch,
+      "term_date":termDateFieldContractisMatch,
+      "status": "sent",
+      "cusip": "-",
+      "daily_accruals": "-",
+      "settle_date_diff": "-",
+      "contract_id": "-",
+    }
+ 
+      
     document.getElementsByTagName("input")[0].focus();
         let hasError = true;
     // if (baLinConttract === "") {
@@ -104,12 +142,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorRate("");
     }
-    if(markFieldContract == ""){
-      setErrorMark("Please enter the value");
-      hasError = false;
-    }else{
-      setErrorMark("");
-    }
+    // if(markFieldContract == ""){
+    //   setErrorMark("Please enter the value");
+    //   hasError = false;
+    // }else{
+    //   setErrorMark("");
+    // }
     if(contractValueContract == ""){
       setErrorContractValue("Please enter the value");
       hasError = false;
@@ -158,12 +196,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
     }else{
       setErrorRateisMatch("")
     }
-    if(markFieldContractisMatch == ""){
-      setErrorMarkisMatch("Please enter the value")
-      hasError = false;
-    }else{
-      setErrorMarkisMatch("")
-    }
+    // if(markFieldContractisMatch == ""){
+    //   setErrorMarkisMatch("Please enter the value")
+    //   hasError = false;
+    // }else{
+    //   setErrorMarkisMatch("")
+    // }
     if(contractValueContractisMatch == ""){
       setErrorContractValueisMatch("Please enter the value")
       hasError = false;
@@ -182,25 +220,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
     }else{
       setErrorTermDateisMatch("")
     }
-    if(hasError){
-      console.log("data",baLinConttract,
-      counterPartyinConttract,
-      tickerContract,
-      quantityContract,
-      rateFieldContract,
-      markFieldContract,
-      contractValueContract,
-      profitCenterFieldContract,
-      termDateFieldContract,
-      baLinConttractisMatch,
-      counterPartyinConttractisMatch,
-      tickerContractisMatch,
-      quantityContractisMatch,
-      rateFieldContractisMatch,
-      markFieldContractisMatch,
-      contractValueContractisMatch,
-      profitCenterFieldContractisMatch,
-      termDateFieldContractisMatch,)
+    console.log(hasError)
+    if(hasError === true){
+      console.log("InputData")
+      setRowData([...rowData, objData, objDataMatch])
+    }else{
+      
     }
   };
 
@@ -317,24 +342,29 @@ const Contract = ({ height, title }: ContractPageProps) => {
             title="Trade Entry"
             onClick={onSubmit}
             borrowAndLoneFieldprop={(e:any) => {
-              setBaLinContract(e.target.value);
+              setBaLinContract(e);
             }}
             counterPartyFieldprop={(e:any) => {setCounterPartyinContract(e.target.value)}}
             TickerFieldprop={(e:any) => {setTickerContract(e.target.value)}}
             QuantityFieldprop={(e:any) => {setQuantityContract(e.target.value)}}
             RateFieldprop={(e:any) => {setRateFieldContract(e.target.value)}}
-            MarkFieldprop={(e:any) => {setMarkFieldContract(e.target.value)}}
+            MarkFieldprop={(e:any) => {setMarkFieldContract(e)}}
             ContractValueFieldprop={(e:any) => {setContractValueContract(e.target.value)}}
             ProfitCenterFieldprop={(e:any) => {setProfitCenterFieldContract(e.target.value)}}
             TermDateFieldprop={(e:any) => {setTermDateFieldContract(e.target.value)}}
             borrowAndLoneFieldisMatchprop={(e:any) => {
               setBaLinContractisMatch(e.target.value);
             }}
+            CounterPartyClick={(item: any) => {setCounterPartySearch(item.NAME)}}
+            CounterPartyClickisMatch={(item: any) => {setCounterPartySearchisMatch(item.NAME)}}
+            // CounterPartyClickisMatch={(item: any) => {console.log(item)}}
+            TickerSearch={(item: any) => {setTickerSearch(item.NAME)}}
+            TickerSearchMatch={(item: any)=> {setTickerSearchisMatch(item.NAME)}}
             counterPartyFieldisMatchprop={(e:any) => {setCounterPartyinContractisMatch(e.target.value)}}
             TickerFieldisMatchprop={(e:any) => {setTickerContractisMatch(e.target.value)}}
             QuantityFieldisMatchprop={(e:any) => {setQuantityContractisMatch(e.target.value)}}
             RateFieldisMatchprop={(e:any) => {setRateFieldContractisMatch(e.target.value)}}
-            MarkFieldisMatchprop={(e:any) => {setMarkFieldContractisMatch(e.target.value)}}
+            MarkFieldisMatchprop={(e:any) => {setMarkFieldContractisMatch(e)}}
             ContractValueFieldisMatchprop={(e:any) => {setContractValueContractisMatch(e.target.value)}}
             ProfitCenterFieldisMatchprop={(e:any) => {setProfitCenterFieldContractisMatch(e.target.value)}}
             TermDateFieldisMatchprop={(e:any) => {setTermDateFieldContractisMatch(e.target.value)}}

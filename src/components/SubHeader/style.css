@@ -55,8 +55,8 @@
   margin: 1rem 0rem;
 }
 
-.textField-submitBtn {
-}
+/* .textField-submitBtn {
+} */
 
 .SubmitButton {
   height: 3rem;
@@ -170,9 +170,9 @@ input{
   background-color: #EAECEF;
 }
 
-.dropdown-dummyData:empty{
-  /* display: none; */
-}
+/* .dropdown-dummyData:empty{
+  display: none;
+} */
 
 .counterParty-dummyData{
   position: relative;
@@ -203,7 +203,6 @@ input{
   font-weight: 500;
 }
 .tablemaibdivhide{
-display: none;
-
+  display: none;
 }
 
