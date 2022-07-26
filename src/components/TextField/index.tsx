@@ -98,20 +98,19 @@ const ContractBooking = (props: ContractProps) => {
     }
   }, [cpartyField]);
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+};
+
+
   return (
     <div style={{ height: `${props.height}rem` }}>
       <div>
         <div className="contractMainDiv">
-          {/*<div className="mb-3 inputFieldDiv">*/}
-
-          {/*  <input*/}
-          {/*    className="form-control inputBorderNone"*/}
-          {/*    placeholder="Borrow"*/}
-          {/*    value={borrowField}*/}
-          {/*    onChange={onChangeBorrow}*/}
-          {/*  />*/}
-          {/*  <span className="error-style">{props.errorBorrow}</span>*/}
-          {/*</div>*/}
           <div className="mb-3 inputFieldDiv">
             <label
               htmlFor="exampleInputEmail1"
@@ -303,6 +302,7 @@ const ContractBooking = (props: ContractProps) => {
               className="form-control inputBorderNone"
               value={termDateField}
               onChange={onChangeTermDate}
+              min={disablePastDate()}
             />
             <span className="error-style">{props.errorTermDate}</span>
           </div>

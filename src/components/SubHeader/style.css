@@ -1,98 +1,209 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap");
 
-.SubHeaderMainDiv{
-    height: 375px;
-}
-
-.SubHeaderMatch{
-    display: flex;
-    padding-right: 1rem;
-    margin-left: 1rem;
+.SubHeaderMainDiv {
+  height: 375px;
 }
 
-.contractBooking-Btn{
-    margin-top: 1rem;
-    margin-right: 3rem;
+.SubHeaderMatch {
+  display: flex;
+  padding-right: 1rem;
+  margin-left: 1rem;
+}
+.loanfield{
+    margin-left: 2rem;
 }
 
-.match{
-    margin-left: 1rem;
-    /* margin-top: -0.3rem; */
-    font-family: 'Cairo';
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 2.25rem;
-}
-.matchRadio{
-    margin-top: 0.8rem;
-    height: fit-content;
-}
-.nonmatch{
-    margin-left: 1rem;
-    font-family: 'Cairo';
-    font-weight: 400;
-    font-size: 1.25rem;
-    line-height: 2.25rem;
+.contractBooking-Btn {
+  margin-top: 1rem;
+  margin-right: 3rem;
 }
 
-.subHeaderTitle{
-    font-family: 'Cairo';
-    font-weight: 600;
-    font-size: 2.1rem;
-    padding: 0rem 2rem;
-    margin: 1rem 0rem;
+.match {
+  margin: 1rem 1rem;
+  margin-top: 1px;
+  font-family: "Cairo";
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+}
+.matchRadio {
+  margin-top: 0.8rem;
+  height: fit-content;
+}
+.nonmatch {
+  margin-left: 1rem;
+  font-family: "Cairo";
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2.25rem;
 }
 
-.subheaderChildDiv{
-    display: flex;
+.subHeaderTitle {
+  font-family: "Cairo";
+  font-weight: 600;
+  font-size: 2.1rem;
+  padding: 0rem 2rem;
+  margin: 1rem 0rem;
+}
+
+.subheaderChildDiv {
+  display: flex;
+}
+
+.subHeaderTextFieldDiv {
+  display: flex;
+  margin: 1rem 0rem;
+}
+
+.textField-submitBtn {
+}
+
+.SubmitButton {
+  height: 3rem;
+  width: 9rem;
+  background-color: #1e355e;
+  color: #ffffff;
+  font-family: "Cairo";
+  font-weight: 600;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  margin-right: 2rem;
 }
 
 [type="radio"]:checked,
 [type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
 [type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
 }
 [type="radio"]:checked + label:before,
 [type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #1E355E;
-    border-radius: 100%;
-    background: #fff;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #1e355e;
+  border-radius: 100%;
+  background: #fff;
 }
 [type="radio"]:checked + label:after,
 [type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background: #1E355E;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #1e355e;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 [type="radio"]:not(:checked) + label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
 }
 [type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
+
+
+.contractMainDiv{
+  display: flex;
+  /* align-items: center; */
+  width: fit-content;
+  margin-bottom: 1.5rem;
+}
+
+input{
+  height: 3rem;
+  border-radius: 0.5rem;
+}
+
+.inputFieldDiv{
+  /* width: 20%; */
+  padding: 0rem 1rem;
+  height: 5rem;
+}
+
+.inputBorderNone:focus{
+  box-shadow: none;
+  outline: none;
+}
+
+.inputLabelHeight{
+  height: 1.6rem;
+}
+
+.textField-button-div{
+  display: flex;
+}
+
+.nonmatch{
+  width: 8rem;
+}
+
+.dropdown-dummyData{
+  /* border: 1px solid #1E355E; */
+  height: fit-content;
+  max-height: 25vh;
+  width: 20vw;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: absolute; 
+  cursor: pointer;
+  font-size: 0.7rem;
+  z-index: 1111;
+  background-color: #EAECEF;
+}
+
+.dropdown-dummyData:empty{
+  /* display: none; */
+}
+
+.counterParty-dummyData{
+  position: relative;
+}
+
+.dropdown-row{
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  text-align: center;
+}
+.dropdown-row:hover{
+  padding: 0.2rem 0.5rem;
+  background-color: #CACACA;
+  display: flex;
+}
+
+.tabelrowhade{
+  width:3vw;
+}
+.tabelrowhadename{
+  width:10vw;
+}
+
+
+.tablemaibdiv{
+  display: flex;
+  text-align: center;
+  font-weight: 500;
+}
+.tablemaibdivhide{
+display: none;
+
+}
+

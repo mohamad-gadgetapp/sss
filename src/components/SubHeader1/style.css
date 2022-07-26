@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
+
+.SubHeaderMainDiv{
+    height: 375px;
+}
+
+.SubHeaderMatch{
+    display: flex;
+    padding-right: 1rem;
+    margin-left: 1rem;
+}
+
+.contractBooking-Btn{
+    margin-top: 1rem;
+    margin-right: 3rem;
+}
+
+.match{
+    margin: 1rem 1rem;
+    margin-top: 1px;
+    font-family: 'Cairo';
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 2.25rem;
+}
+.matchRadio{
+    margin-top: 0.8rem;
+    height: fit-content;
+}
+.nonmatch{
+    margin-left: 1rem;
+    font-family: 'Cairo';
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 2.25rem;
+}
+
+.subHeaderTitle{
+    font-family: 'Cairo';
+    font-weight: 600;
+    font-size: 2.1rem;
+    padding: 0rem 2rem;
+    margin: 1rem 0rem;
+}
+
+.subheaderChildDiv{
+    display: flex;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #1E355E;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #1E355E;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}

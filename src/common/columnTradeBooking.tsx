@@ -6,6 +6,7 @@ export const ColumnDefsTradeBooking = [
     // headerCheckboxSelectionFilteredOnly: true,
     checkboxSelection: true,
     floatingFilter: false,
+    editable:false,  
     floatingFilterComponentParams: { suppressFilterButton: true },
     width: 30,
     cellStyle: {
@@ -21,6 +22,7 @@ export const ColumnDefsTradeBooking = [
     headerName: "Status",
     field: "status",
     floatingFilter: false,
+    editable:false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: function (params: any) {
       if (params.node.data.status == "Complete") {
