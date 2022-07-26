@@ -4,47 +4,67 @@ import ButtonCellRenderer from "./ButtonCellRenderer";
 
 export const ColumnLoanDefs = [
     {
-        headerName: "DTC NO",
-        field: "dtc_no",
-        floatingFilter: true,
+        headerName: "B/L",
+        field: "b_l",
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
+        },
+        width: 100,
+        minWidth: 60,
+        maxWidth: 100,
+        suppressSizeToFit: false,
+    },
+    {
+        headerName: "COUNTERPARTY_ID",
+        field: "cpty_id",
+        floatingFilter: false,
+        floatingFilterComponentParams: { suppressFilterButton: true },
+        cellStyle: {
+            display: "flex",
+            alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
         width: 120,
         minWidth: 60,
         maxWidth: 130,
         suppressSizeToFit: false,
-
     },
     {
-        headerName: "CPTY_NAME",
+        headerName: "COUNTERPARTY_NAME",
         field: "cpty_name",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 60,
-        maxWidth: 130,
+        width: 250,
+        minWidth: 150,
+        maxWidth: 300,
         suppressSizeToFit: false,
     },
     {
-        headerName: "TB_TICKER",
+        headerName: "TICKER",
         field: "tb_ticker",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
-        headerComponentParams: { template: `<img src="${symbol}"/>` },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
         width: 120,
         minWidth: 60,
@@ -54,16 +74,18 @@ export const ColumnLoanDefs = [
     {
         headerName: "CUSIP",
         field: "cusip",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 60,
-        maxWidth: 130,
+        width: 150,
+        minWidth: 100,
+        maxWidth: 180,
         suppressSizeToFit: false,
         filterParams: {
             allowedCharPattern: "\\d\\-\\,", // note: ensure you escape as if you were creating a RegExp from a string
@@ -73,173 +95,186 @@ export const ColumnLoanDefs = [
         },
     },
     {
-        headerName: "B/L",
-        field: "b/l",
-        floatingFilter: true,
-        floatingFilterComponentParams: { suppressFilterButton: true },
-        cellStyle: {
-            backgroundColor: colors.primary_light_grey,
-            display: "flex",
-            alignItems: "center",
-        },
-        width: 120,
-        minWidth: 60,
-        maxWidth: 130,
-        suppressSizeToFit: false,
-    },
-    {
         headerName: "QUANTITY",
         field: "quantity",
-        type: 'quarterFigure',
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
-        // cellRendererSelector: (params: any) => {
-        //     if (params.node.rowPinned) {
-        //         return {
-        //             component: ButtonCellRenderer,
-        //             params: {
-        //                 style: { 'font-style': 'italic' },
-        //             },
-        //         };
-        //     } else {
-        //         // rows that are not pinned don't use any cell renderer
-        //         return undefined;
-        //     }
-        // },
-        cellStyle: {
-            backgroundColor: colors.primary_light_grey,
-            display: "flex",
-            alignItems: "center",
+        cellStyle:function (params: any) {
+            if (params.node.data.quantity < 0) {
+                return {
+                    display: "flex",
+                    alignItems: "center",
+                    border:"2px solid red",
+                    // backgroundColor: "#ffffff",
+                    borderBottom: "1px solid #DFDFDF",
+                    borderRight: "1px solid #DFDFDF"
+                }
+            }else{
+                return {
+                    display: "flex",
+                    alignItems: "center",
+                    // backgroundColor: "#ffffff",
+                    borderBottom: "1px solid #DFDFDF",
+                    borderRight: "1px solid #DFDFDF"
+                }
+            }
+
         },
-        width: 200,
-        minWidth: 150,
-        maxWidth: 250,
+        width: 90,
+        minWidth: 90,
+        maxWidth: 100,
         suppressSizeToFit: false,
+
     },
     {
         headerName: "RATE",
         field: "rate",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
+        width: 90,
+        minWidth: 90,
+        maxWidth: 100,
     },
     {
-        headerName: "VALUE",
+        headerName: "CONTRACT VALUE",
         field: "value",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
+        width: 150,
+        minWidth: 150,
+        maxWidth: 180,
     },
     {
         headerName: "TRADE_DATE",
         field: "trade_date",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 200,
+        width: 120,
         minWidth: 100,
-        maxWidth: 220,
+        maxWidth: 150,
         suppressSizeToFit: false,
     },
     {
         headerName: "SETTLE_DATE",
         field: "settle_date",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 200,
+        width: 120,
         minWidth: 100,
-        maxWidth: 220,
+        maxWidth: 150,
+        suppressSizeToFit: false,
+    },
+    {
+        headerName: "PROFIT CENTER",
+        field: "profit_center",
+        floatingFilter: false,
+        floatingFilterComponentParams: { suppressFilterButton: true },
+        cellStyle: {
+            display: "flex",
+            alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
+        },
+        width: 120,
+        minWidth: 100,
+        maxWidth: 150,
         suppressSizeToFit: false,
     },
     {
         headerName: "TERM_DATE",
         field: "term_date",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 200,
+        width: 120,
         minWidth: 100,
-        maxWidth: 220,
+        maxWidth: 150,
         suppressSizeToFit: false,
     },
     {
-        headerName: "DAILY DEBITS",
-        field: "daily_debits",
-        floatingFilter: true,
+        headerName: "DAILY_ACCRUALS",
+        field: "daily_accruals",
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
-        width: 200,
+        width: 150,
         minWidth: 100,
-        maxWidth: 220,
+        maxWidth: 180,
+        suppressSizeToFit: false,
+    },
+    {
+        headerName: "SETTLE_DATE",
+        field: "settle_date_diff",
+        floatingFilter: false,
+        floatingFilterComponentParams: { suppressFilterButton: true },
+        cellStyle: {
+            display: "flex",
+            alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
+        },
+        width: 120,
+        minWidth: 100,
+        maxWidth: 150,
         suppressSizeToFit: false,
     },
     {
         headerName: "CONTRACT_ID",
         field: "contract_id",
-        floatingFilter: true,
+        floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
         cellStyle: {
-            backgroundColor: colors.primary_light_grey,
             display: "flex",
             alignItems: "center",
+            // backgroundColor: "#ffffff",
+            borderBottom: "1px solid #DFDFDF",
+            borderRight: "1px solid #DFDFDF"
         },
         width: 200,
         minWidth: 100,
         maxWidth: 220,
         suppressSizeToFit: false,
-    },
-    {
-        headerName: "STATUS",
-        field: "status",
-        floatingFilterComponentParams: { suppressFilterButton: true },
-        cellStyle: function (params: any) {
-            if (params.node.data.status === "Complete") {
-                return {
-                    backgroundColor: colors.primary_light_grey,
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#039100",
-                };
-            } else if (params.node.data.status === "Error") {
-                return {
-                    backgroundColor: colors.primary_light_grey,
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#E90909",
-                };
-            } else if (params.node.data.status === "Pending") {
-                return {
-                    backgroundColor: colors.primary_light_grey,
-                    display: "flex",
-                    alignItems: "center",
-                    color: "#0D34FF",
-                };
-            }
-        },
-    },
+    }
 ];

@@ -1,19 +1,39 @@
+import searchLogo from "../assets/searchLogo.svg";
+
 export const ColumnDefs = [
   {
-    headerName: "B/L",
-    field: "b/l",
+    headerName: "Select",
+    field: "",
     floatingFilter: false,
+    checkboxSelection: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
     width: 100,
     minWidth: 60,
     maxWidth: 100,
+    suppressSizeToFit: false,
+  },
+  {
+    headerName: "B/L",
+    field: "b_l",
+    floatingFilter: false,
+    floatingFilterComponentParams: { suppressFilterButton: true },
+    cellStyle: {
+      display: "flex",
+      alignItems: "center",
+      // backgroundColor: "#ffffff",
+      borderBottom: "1px solid #DFDFDF",
+      borderRight: "1px solid #DFDFDF"
+    },
+    width: 100,
+    minWidth: 100,
+    maxWidth: 150,
     suppressSizeToFit: false,
   },
   {
@@ -24,7 +44,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -41,7 +61,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -58,7 +78,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -75,7 +95,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -101,7 +121,7 @@ export const ColumnDefs = [
           display: "flex",
           alignItems: "center",
           border:"2px solid red",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         }
@@ -109,7 +129,7 @@ export const ColumnDefs = [
         return {
           display: "flex",
           alignItems: "center",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         }
@@ -130,7 +150,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -146,7 +166,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -162,7 +182,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -179,7 +199,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -196,7 +216,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -213,7 +233,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -230,7 +250,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -247,7 +267,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -264,7 +284,7 @@ export const ColumnDefs = [
     cellStyle: {
       display: "flex",
       alignItems: "center",
-      backgroundColor: "#ffffff",
+      // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
       borderRight: "1px solid #DFDFDF"
     },
@@ -279,13 +299,14 @@ export const ColumnDefs = [
     floatingFilter: false,
     editable:false,
     floatingFilterComponentParams: { suppressFilterButton: true },
+    minWidth: 100,
     cellStyle: function (params: any) {
       if (params.node.data.status === "Complete") {
         return {
           display: "flex",
           alignItems: "center",
           color: "#039100",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         };
@@ -294,7 +315,7 @@ export const ColumnDefs = [
           display: "flex",
           alignItems: "center",
           color: "#E90909",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         };
@@ -303,7 +324,7 @@ export const ColumnDefs = [
           display: "flex",
           alignItems: "center",
           color: "#0D34FF",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         };
@@ -311,7 +332,7 @@ export const ColumnDefs = [
         return {
           display: "flex",
           alignItems: "center",
-          backgroundColor: "#ffffff",
+          // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
           borderRight: "1px solid #DFDFDF"
         };

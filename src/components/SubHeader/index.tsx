@@ -12,7 +12,7 @@ interface SubHeaderProps {
   counterPartyFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   TickerFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   QuantityFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
-  ContractValueFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  ContractValueFieldprop?: (event: any) => any;
   ProfitCenterFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   RateFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   MarkFieldprop?: (event: React.ChangeEvent<HTMLInputElement>) => any;
@@ -28,7 +28,7 @@ interface SubHeaderProps {
     event: React.ChangeEvent<HTMLInputElement>
   ) => any;
   ContractValueFieldisMatchprop?: (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: any
   ) => any;
   ProfitCenterFieldisMatchprop?: (
     event: React.ChangeEvent<HTMLInputElement>
@@ -109,7 +109,7 @@ const SubHeader = ({
   const [counterPartyField, setCounterPartyField] = useState<any>("");
   const [tickerField, setTickerField] = useState("");
   const [quantityField, setQuantityField] = useState<any>("");
-  const [rateField, setRateField] = useState<any>("");
+  const [rateField, setRateField] = useState<any>("0");
   const [markField, setMarkField] = useState("");
   const [contractValueField, setContractValueField] = useState("");
   const [profitCenterField, setProfitCenterField] = useState("");
@@ -126,7 +126,7 @@ const SubHeader = ({
   const [counterPartyFieldisMatch, setCounterPartyFieldisMatch] = useState("");
   const [tickerFieldisMatch, setTickerFieldisMatch] = useState("");
   const [quantityFieldisMatch, setQuantityFieldisMatch] = useState("");
-  const [rateFieldisMatch, setRateFieldisMatch] = useState("");
+  const [rateFieldisMatch, setRateFieldisMatch] = useState("0");
   const [markFieldisMatch, setMarkFieldisMatch] = useState("");
   const [contractFieldisMatch, setContractFieldisMatch] = useState("");
   const [profitCenterFieldisMatch, setProfitCenterFieldisMatch] = useState("");
@@ -161,7 +161,7 @@ const SubHeader = ({
 
   const onChangeCounterParty = (e: any) => {
     setCounterPartyField(e.target.value);
-    setCounterPartyFieldisMatch(e.target.value)
+    // setCounterPartyFieldisMatch(e.target.value);
     if (counterPartyFieldprop) {
       counterPartyFieldprop(e);
     }
@@ -179,12 +179,24 @@ const SubHeader = ({
     if (RateFieldprop) {
       RateFieldprop(e);
     }
+    let contractValue = parseInt(quantityField)* parseInt(e.target.value)
+    console.log("contractValue ",contractValue)
+    setContractValueField(JSON.stringify(contractValue));
+    if (ContractValueFieldprop) {
+      ContractValueFieldprop(JSON.stringify(contractValue));
+    }
   };
 
   const onChangeQuantity = (e: any) => {
     setQuantityField(e.target.value);
+    setQuantityFieldisMatch(e.target.value)
     if (QuantityFieldprop) {
       QuantityFieldprop(e);
+    }
+    let contractValue = parseInt(e.target.value)* parseInt(rateField)
+    setContractValueField(JSON.stringify(contractValue));
+    if (ContractValueFieldprop) {
+      ContractValueFieldprop(JSON.stringify(contractValue));
     }
   };
 
@@ -210,6 +222,7 @@ const SubHeader = ({
   };
 
   const onChangeTermDate = (e: any) => {
+    setTermDateFieldisMatch(e.target.value);
     setTermDateField(e.target.value);
     if (TermDateFieldprop) {
       TermDateFieldprop(e);
@@ -242,12 +255,22 @@ const SubHeader = ({
     if (RateFieldisMatchprop) {
       RateFieldisMatchprop(e);
     }
+    let contractValue = parseInt(quantityFieldisMatch)* parseInt(e.target.value)
+    setContractFieldisMatch(JSON.stringify(contractValue))
+    if (ContractValueFieldisMatchprop) {
+      ContractValueFieldisMatchprop(JSON.stringify(contractValue));
+    }
   };
 
   const onChangeQuantityisMatch = (e: any) => {
     setQuantityFieldisMatch(e.target.value);
     if (QuantityFieldisMatchprop) {
       QuantityFieldisMatchprop(e);
+    }
+    let contractValue = parseInt(e.target.value)* parseInt(rateFieldisMatch)
+    setContractFieldisMatch(JSON.stringify(contractValue))
+    if (ContractValueFieldisMatchprop) {
+      ContractValueFieldisMatchprop(JSON.stringify(contractValue));
     }
   };
 
@@ -281,13 +304,19 @@ const SubHeader = ({
 
   const onSearch = (item: any) => {
     if (CounterPartyClick) {
+      // if (MarkFieldisMatchprop) {
+      //   MarkFieldisMatchprop(item.CPTY_ID);
+      // }
       CounterPartyClick(item);
+      // CounterPartyClickisMatch(item);
       if (MarkFieldprop) {
         MarkFieldprop(item.CPTY_ID);
       }
+      
      
     }
     setMarkField(item.CPTY_ID);
+    // setMarkFieldisMatch(item.CPTY_ID);
     setCounterPartyField(item.NAME);
     if (item != "") {
       setCpartyInputStatus(true);
@@ -298,7 +327,12 @@ const SubHeader = ({
     if(TickerSearch){
       TickerSearch(item)
     }
+    if(TickerSearchMatch){
+      TickerSearchMatch(item)
+    }
     setTickerField(item.NAME);
+    setTickerFieldisMatch(item.NAME);
+    
     if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
@@ -310,6 +344,7 @@ const SubHeader = ({
       if (MarkFieldisMatchprop) {
         MarkFieldisMatchprop(item.CPTY_ID);
       }
+      
     }
     setCounterPartyFieldisMatch(item.NAME);
     setMarkFieldisMatch(item.CPTY_ID);
@@ -568,6 +603,7 @@ const SubHeader = ({
                   className="form-control input-style inputBorderNone"
                   placeholder="Contract Value"
                   value={contractValueField}
+                  disabled={true}
                   onChange={onChangeContractValue}
                 />
                 <div className="error-style">{errorContractValue}</div>
@@ -761,7 +797,7 @@ const SubHeader = ({
                     className="form-control input-style inputBorderNone"
                     placeholder="Quantity"
                     value={quantityFieldisMatch}
-                    onChange={onChangeQuantityisMatch}
+                    onChange={onChangeQuantity}
                   />
                   <div className="error-style">{errorQuantityisMatch}</div>
                 </div>
@@ -808,6 +844,7 @@ const SubHeader = ({
                     className="form-control input-style inputBorderNone"
                     placeholder="Contract Value"
                     value={contractFieldisMatch}
+                    disabled={true}
                     onChange={onChangeContractValueisMatch}
                   />
                   <div className="error-style">{errorContractValueisMatch}</div>
@@ -838,10 +875,12 @@ const SubHeader = ({
                     type="date"
                     className="form-control input-style inputBorderNone"
                     value={termDateFieldisMatch}
-                    onChange={onChangeTermDateisMatch}
+                    onChange={onChangeTermDate}
                     min={disablePastDate()}
+
                   />
-                  <div className="error-style">{errorTermDateisMatch}</div>
+                  {termDateField != "" && <div className="error-style">{errorTermDateisMatch}</div>}
+                  
                 </div>
               </div>
             )}

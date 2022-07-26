@@ -38,7 +38,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
       flex: 1,
       sortable: true,
       filter: true,
-      floatingFilter: true,
+      floatingFilter: false,
       suppressFilterButton: false,
       editable: true,
       resizable: true,
@@ -64,14 +64,16 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     let columnsWithAggregation = ['quantity','value','daily_debits']
     columnsWithAggregation.forEach(element => {
       gridApi.forEachNodeAfterFilter((rowNode:any) => {
+        console.log("footer: ", rowNode);
         if (rowNode.data[element]) {
          let numberWithoutCommas = removeCommas(rowNode.data[element]);
           result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
         }
       });
       result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    })
-    result['b/l'] = 'Total:';
+    console.log("result", result);
+    });
+    result['b_l'] = 'Total:';
     gridApi.setPinnedBottomRowData([result]);
   };
 
@@ -91,6 +93,15 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
       }
     };
   }, []);
+
+  const getRowStyle = (params:any) => {
+    console.log("pin: ", params.node.RowNode)
+    if (params.node.rowPinned === 'bottom') {
+      return { "background-color": "#6a7587" };
+    } else {
+      return { "background-color": "white" };
+    }
+  };
 
   const onSelectionChanged = useCallback(() => {
     const selectedRows = gridRef.current!.api.getSelectedRows();
@@ -129,6 +140,8 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         onColumnResized={onColumnResized}
         rowClassRules={rowClassRules}
         onSelectionChanged={onSelectionChanged}
+        rowSelection={'multiple'}
+        getRowStyle={getRowStyle}
       ></AgGridReact>
     </div>
   );

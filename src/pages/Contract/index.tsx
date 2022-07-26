@@ -41,13 +41,13 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [tickerContractisMatch, setTickerContractisMatch] = useState("");
   const [quantityContractisMatch, setQuantityContractisMatch] = useState("");
   const [rateFieldContractisMatch, setRateFieldContractisMatch] = useState("");
-  const [markFieldContractisMatch, setMarkFieldContractisMatch] = useState("");
+  const [markFieldContractisMatch, setMarkFieldContractisMatch] = useState<any>("");
   const [contractValueContractisMatch, setContractValueContractisMatch] =
     useState("");
   const [
     profitCenterFieldContractisMatch,
     setProfitCenterFieldContractisMatch,
-  ] = useState("");
+  ] = useState<any>("");
   const [termDateFieldContractisMatch, setTermDateFieldContractisMatch] =
     useState("");
 
@@ -150,12 +150,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorRate("");
     }
-    // if(markFieldContract == ""){
-    //   setErrorMark("Please enter the value");
-    //   hasError = false;
-    // }else{
-    //   setErrorMark("");
-    // }
+    if(markFieldContract == ""){
+      setErrorMark("Please enter the value");
+      hasError = false;
+    }else{
+      setErrorMark("");
+    }
     if (contractValueContract == "") {
       setErrorContractValue("Please enter the value");
       hasError = false;
@@ -186,7 +186,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorCounterPartyisMatch("");
     }
-    if (tickerContractisMatch == "") {
+    if (tickerSearchisMatch == "") {
       setErrorTickerisMatch("Please enter the value");
       hasError = false;
     } else {
@@ -194,6 +194,10 @@ const Contract = ({ height, title }: ContractPageProps) => {
     }
     if (quantityContractisMatch == "") {
       setErrorQuantityisMatch("Please enter the value");
+      hasError = false;
+    }
+    else if(parseInt(quantityContractisMatch) < 0){
+      setErrorQuantityisMatch("Please enter positive value");
       hasError = false;
     } else {
       setErrorQuantityisMatch("");
@@ -204,12 +208,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorRateisMatch("");
     }
-    // if(markFieldContractisMatch == ""){
-    //   setErrorMarkisMatch("Please enter the value")
-    //   hasError = false;
-    // }else{
-    //   setErrorMarkisMatch("")
-    // }
+    if(markFieldContractisMatch == ""){
+      setErrorMarkisMatch("Please enter the value")
+      hasError = false;
+    }else{
+      setErrorMarkisMatch("")
+    }
     if (contractValueContractisMatch == "") {
       setErrorContractValueisMatch("Please enter the value");
       hasError = false;
@@ -294,7 +298,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
     const worksheet = workbook.Sheets[firstSheetName];
     console.log("workbook ", worksheet);
     const columns: Record<string, string> = {
-      A: "b/l",
+      A: "b_l",
       B: "cpty_id",
       C: "cpty_name",
       D: "tb_ticker",
@@ -371,7 +375,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
               setMarkFieldContract(e);
             }}
             ContractValueFieldprop={(e: any) => {
-              setContractValueContract(e.target.value);
+              setContractValueContract(e);
             }}
             ProfitCenterFieldprop={(e: any) => {
               setProfitCenterFieldContract(e.target.value);
@@ -386,6 +390,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
               setCounterPartySearch(item.NAME);
             }}
             CounterPartyClickisMatch={(item: any) => {
+              console.log("search dfksd ", item)
               setCounterPartySearchisMatch(item.NAME);
             }}
             // CounterPartyClickisMatch={(item: any) => {console.log(item)}}
@@ -393,6 +398,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
               setTickerSearch(item.NAME);
             }}
             TickerSearchMatch={(item: any) => {
+            
               setTickerSearchisMatch(item.NAME);
             }}
             counterPartyFieldisMatchprop={(e: any) => {
@@ -411,7 +417,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
               setMarkFieldContractisMatch(e);
             }}
             ContractValueFieldisMatchprop={(e: any) => {
-              setContractValueContractisMatch(e.target.value);
+              setContractValueContractisMatch(e);
             }}
             ProfitCenterFieldisMatchprop={(e: any) => {
               setProfitCenterFieldContractisMatch(e.target.value);

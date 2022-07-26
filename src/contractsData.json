@@ -2,7 +2,7 @@
   "contractsData": [
     {
       "no": 1,
-      "b/l": "Loan",
+      "b_l": "Loan",
       "cpty_id": "CPID 1",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -21,7 +21,7 @@
     },
     {
       "no": 2,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 2",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -40,7 +40,7 @@
     },
     {
       "no": 3,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 3",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -59,7 +59,7 @@
     },
     {
       "no": 4,
-      "b/l": "Loan",
+      "b_l": "Loan",
       "cpty_id": "CPID 4",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -78,7 +78,7 @@
     },
     {
       "no": 5,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 5",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -97,7 +97,7 @@
     },
     {
       "no": 6,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 6",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -116,7 +116,7 @@
     },
     {
       "no": 7,
-      "b/l": "Loan",
+      "b_l": "Loan",
       "cpty_id": "CPID 7",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -135,7 +135,7 @@
     },
     {
       "no": 8,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 8",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -154,7 +154,7 @@
     },
     {
       "no": 9,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 9",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -173,7 +173,7 @@
     },
     {
       "no": 10,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 10",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -192,7 +192,7 @@
     },
     {
       "no": 11,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 11",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -211,7 +211,7 @@
     },
     {
       "no": 12,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 12",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
@@ -230,7 +230,7 @@
     },
     {
       "no": 13,
-      "b/l": "Borrow",
+      "b_l": "Borrow",
       "cpty_id": "CPID 13",
       "cpty_name": "FUTU CLEARING INC.",
       "tb_ticker": "AAPL",
