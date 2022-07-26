@@ -44,6 +44,7 @@
   border: 1px solid var(--primary_grey);
   box-shadow: 0px 2px 5px var(--primary_grey);
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .excel-upload-btn {
@@ -85,4 +86,8 @@
 .templetelink{
   margin-top: 0.5rem;
   color: #1E355E;
+}
+
+.is-new-warning {
+  background-color: yellow !important;
 }

@@ -14,9 +14,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 interface HeaderProps {
   title?: string;
+  valid?: boolean;
 }
 
-const Header = ({ title }: HeaderProps) => {
+const Header = ({ title,valid }: HeaderProps) => {
   const navigate = useNavigate();
   const onClickNavigate = (page: string) => {
     navigate(`${page}`);
@@ -41,6 +42,34 @@ const Header = ({ title }: HeaderProps) => {
           <img src={logo} className="img-style" />
         </Typography>
         <div className="nav-bar-container">
+                <div className="dropdowns-header-div">
+          {
+            valid === true && (
+                <>
+                  <div style={styles.userName} className="btn-text-style">
+                    Trading
+                    <ArrowDropDownIcon />
+                  </div>
+                  <div style={styles.userName} className="btn-text-style">
+                    Operations
+                    <ArrowDropDownIcon />
+                  </div>
+                  <div style={styles.userName} className="btn-text-style">
+                    Admin
+                    <ArrowDropDownIcon />
+                  </div>
+                  <div style={styles.userName} className="btn-text-style">
+                    Static
+                    <ArrowDropDownIcon />
+                  </div>
+                  <div style={styles.userName} className="btn-text-style">
+                    Locate
+                    <ArrowDropDownIcon />
+                  </div>
+                </>
+              )
+           }
+                </div>
           <div
             style={styles.navBarButton}
             className="btn-text-style"

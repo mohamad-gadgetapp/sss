@@ -6,6 +6,7 @@ import SubHeader from "../../components/SubHeader";
 import * as XLSX from "xlsx";
 import data from "../../contractsData.json";
 import CancelIcon from "@mui/icons-material/Cancel";
+import Header from "../../components/Header";
 
 interface ContractPageProps {
   height?: number;
@@ -18,6 +19,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
     ...data.contractsData,
   ]);
   const [heightAG_1] = useState(30);
+  const [statusRow, setStatusRow] = useState<any>("");
   const [excelFileName, setExcelFileName] = useState("");
   const [workbookData, setworkbookData] = useState<any>(null);
   // const [excelData, setExcelData] = useState<any>(null);
@@ -237,6 +239,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
     setExcelFileName("");
     setworkbookData([]);
   };
+
   const onChange = (e: any) => {
     makeRequest(
       "GET",
@@ -289,20 +292,23 @@ const Contract = ({ height, title }: ContractPageProps) => {
     const worksheet = workbook.Sheets[firstSheetName];
     console.log("workbook ", worksheet);
     const columns: Record<string, string> = {
-      A: "dtc_no",
-      B: "cpty_name",
-      C: "tb_ticker",
-      D: "cusip",
-      E: "b/l",
+      A: "b/l",
+      B: "cpty_id",
+      C: "cpty_name",
+      D: "tb_ticker",
+      E: "cusip",
       F: "quantity",
       G: "rate",
       H: "value",
       I: "trade_date",
       J: "settle_date",
-      K: "status",
-      L: "daily_debits",
-      M: "contract_id",
-      N: "is_new",
+      K: "profit_center",
+      L: "term_date",
+      M: "daily_accruals",
+      N: "settle_date_diff",
+      O: "contract_id",
+      P: "status",
+      Q: "is_new",
     };
 
     const rowData_ = rowData;
@@ -318,13 +324,17 @@ const Contract = ({ height, title }: ContractPageProps) => {
         console.log("column ", columns[column]);
         row[columns[column]] = worksheet[column + rowIndex].w;
       });
+      row.status = "New";
       if (row.quantity < 0) {
         row.status = "Error";
       }
       if (row.dtc_no === "") {
         row.status = "Error";
       }
-      setRowData((pres) => [...pres!, row]);
+      if (row.status === "New") {
+        setStatusRow("Complete");
+      }
+      setRowData((pres) => [row, ...pres!]);
       rowIndex++;
     }
   };
@@ -336,10 +346,11 @@ const Contract = ({ height, title }: ContractPageProps) => {
 
   return (
     <>
+      <Header valid={false}/>
       <div style={{ height: `${height}rem`, overflow: "auto" }}>
         <div className="subHeaderContract">
           <SubHeader
-            title="Trade Entry"
+            title=" Single Trade Entry"
             onClick={onSubmit}
             borrowAndLoneFieldprop={(e:any) => {
               setBaLinContract(e);

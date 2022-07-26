@@ -5,6 +5,7 @@ import AgGrid from "../../components/AgGrid";
 import data from "../../contractsData.json";
 import ContractBooking from '../ContractBooking';
 import ShowcaseLayout from "../../components/ShowcaseLayout";
+import Header from "../../components/Header";
 const HomePage = () => {
   const [rowData] = useState<Array<object>>([...data.contractsData]);
   const [layout, setLayout] = useState<Array<object>>([]);
@@ -25,7 +26,8 @@ const HomePage = () => {
   }
   return (
     <>
-      <ShowcaseLayout
+        <Header valid={false}/>
+        <ShowcaseLayout
         onLayoutChange={onLayoutChange}
         child_list={[
           <ContractBooking height={heightC} />,
