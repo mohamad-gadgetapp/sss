@@ -11,7 +11,6 @@ import { AgGridReact } from "ag-grid-react";
 import { ColumnDefs } from "../../common/columDef";
 import { ColumnLoanDefs } from "../../common/columnLoan";
 import { ColumnDefsTradeBooking } from "../../common/columnTradeBooking";
-import ButtonCellRenderer from "../../common/ButtonCellRenderer";
 import "./style.css";
 import { ColDef, ColumnResizedEvent } from "ag-grid-community";
 import "ag-grid-enterprise";
@@ -72,7 +71,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
       });
       result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     })
-    result['dtc_no'] = 'Total:';
+    result['b/l'] = 'Total:';
     gridApi.setPinnedBottomRowData([result]);
   };
 
@@ -83,21 +82,21 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     return str;
   };
 
+  const rowClassRules = useMemo(() => {
+    return {
+      'is-new-warning': (params:any) => {
+        console.log("params ", params.data.is_new)
+        var isNew = params.data.is_new;
+        return isNew === "TRUE" ;
+      }
+    };
+  }, []);
+
   const onSelectionChanged = useCallback(() => {
     const selectedRows = gridRef.current!.api.getSelectedRows();
     localStorage.setItem("rowData", JSON.stringify(selectedRows));
     onClickHan(selectedRows);
   }, []);
-
-    const rowClassRules = useMemo(() => {
-        return {
-            'is-new-warning': (params:any) => {
-                console.log("params ", params.data.is_new)
-                var isNew = params.data.is_new;
-                return isNew === "TRUE" ;
-            }
-        };
-    }, []);
 
   return (
     <div
@@ -126,17 +125,10 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         suppressAggFuncInHeader={true}
         enableCellChangeFlash={true}
         enableRangeSelection={true}
-        // pagination={true}
-        // paginationPageSize={10}
         onGridReady={onGridReady}
         onColumnResized={onColumnResized}
         rowClassRules={rowClassRules}
         onSelectionChanged={onSelectionChanged}
-        // pinnedBottomRowData={pinnedBottomRowData}
-        // rowSelection={"multiple"}
-        // frameworkComponents={{
-        //   ButtonCellRenderer,
-        // }}
       ></AgGridReact>
     </div>
   );

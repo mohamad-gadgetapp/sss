@@ -22,8 +22,10 @@ function App() {
   // @ts-ignore
   return (
     <div>
-      <Header />
-      <div style={{ padding: '10px' }}>
+        {/*{*/}
+        {/*    window.location.pathname === "/loan" ? <Header valid={true}/> : <Header valid={false}/>*/}
+        {/*}*/}
+      <div style={{ padding: '0px' }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contractBooking" element={<ContractBooking />} />

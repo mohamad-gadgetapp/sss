@@ -4,6 +4,7 @@ import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import searchData from "../../dummyData.json";
 import data from "../../loansData.json";
+import Header from "../../components/Header";
 import {Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -378,6 +379,8 @@ const TradeBlotter = () => {
   };
 
   return (
+      <>
+      <Header valid={false}/>
     <div className="main-div-TradeBlotter">
       <div id="tablePart" className="left-part">
         <div className="main-div-TradeBooking">
@@ -1141,6 +1144,7 @@ const TradeBlotter = () => {
         </div>
       </div>
     </div>
+      </>
   );
 };
 
