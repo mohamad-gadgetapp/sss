@@ -57,13 +57,30 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
   const onGridReady = (params: any) => {
     params.api.sizeColumnsToFit();
     gridApi = params.api;
+    var gridColumnApi = params.columnApi;
+    let result:any = {};
+    gridColumnApi.getAllGridColumns().forEach((item:any) => {
+      result[item.colId] = null;
+    });
+    let columnsWithAggregation = ['quantity','value','daily_debits']
+    columnsWithAggregation.forEach(element => {
+      gridApi.forEachNodeAfterFilter((rowNode:any) => {
+        if (rowNode.data[element]) {
+         let numberWithoutCommas = removeCommas(rowNode.data[element]);
+          result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
+        }
+      });
+      result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    })
+    result['dtc_no'] = 'Total:';
+    gridApi.setPinnedBottomRowData([result]);
   };
 
-  const getData = () => {
-    let selectedNodes = gridApi.getSelectedNodes();
-    let selectedData = selectedNodes.map((node: any) => node.data);
-    alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
-    return selectedData;
+  const removeCommas = (str:string) => {
+    while (str.search(",") >= 0) {
+      str = (str + "").replace(',', '');
+    }
+    return str;
   };
 
   const onSelectionChanged = useCallback(() => {
@@ -109,12 +126,13 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         suppressAggFuncInHeader={true}
         enableCellChangeFlash={true}
         enableRangeSelection={true}
-        pagination={true}
-        paginationPageSize={10}
+        // pagination={true}
+        // paginationPageSize={10}
         onGridReady={onGridReady}
         onColumnResized={onColumnResized}
         rowClassRules={rowClassRules}
         onSelectionChanged={onSelectionChanged}
+        // pinnedBottomRowData={pinnedBottomRowData}
         // rowSelection={"multiple"}
         // frameworkComponents={{
         //   ButtonCellRenderer,

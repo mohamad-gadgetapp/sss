@@ -14,7 +14,7 @@
       "settle_date": "06/14/2022",
       "term_date": "-",
       "status": "Complete",
-      "daily_debits": 956.22,
+      "daily_debits": "956.22",
       "contract_id": "14-JUN 22-C2257-1"
     },
     {
@@ -31,7 +31,7 @@
       "settle_date": "06/14/2022",
       "term_date": "-",
       "status": "Error",
-      "daily_debits": 956.22,
+      "daily_debits": "956.22",
       "contract_id": "14-JUN 22-C2257-1"
     },
     {
@@ -48,7 +48,7 @@
       "settle_date": "06/14/2022",
       "term_date": "-",
       "status": "Pending",
-      "daily_debits": 956.22,
+      "daily_debits": "956.22",
       "contract_id": "14-JUN 22-C2257-1"
     }
   ],

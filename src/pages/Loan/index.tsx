@@ -24,9 +24,9 @@ const Loan = () => {
     <>
       <div className="loanPage-MainDiv">
         <div className="logo-main-HeaderPart">
-          <div>
-            <img src={logo} className="loanLogo-img" alt="loanLogoImage"/>
-          </div>
+          {/*<div>*/}
+          {/*  <img src={logo} className="loanLogo-img" alt="loanLogoImage"/>*/}
+          {/*</div>*/}
           {card.map((item, index) => {
             return (
               <div className="borrow-ticket">
@@ -37,7 +37,7 @@ const Loan = () => {
           })}
         </div>
         <div className="react-grid-item-loan">
-          <div className="title-subHeaderTitle"> Loan </div>
+          <div className="title-subHeaderTitle"> Loans </div>
           <AgGrid rowData={rowData} height={heightAG_1} type="loan" />
         </div>
         <div className="react-grid-item-loan">

@@ -1,5 +1,6 @@
 import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
+import ButtonCellRenderer from "./ButtonCellRenderer";
 
 export const ColumnLoanDefs = [
     {
@@ -92,6 +93,19 @@ export const ColumnLoanDefs = [
         type: 'quarterFigure',
         floatingFilter: true,
         floatingFilterComponentParams: { suppressFilterButton: true },
+        // cellRendererSelector: (params: any) => {
+        //     if (params.node.rowPinned) {
+        //         return {
+        //             component: ButtonCellRenderer,
+        //             params: {
+        //                 style: { 'font-style': 'italic' },
+        //             },
+        //         };
+        //     } else {
+        //         // rows that are not pinned don't use any cell renderer
+        //         return undefined;
+        //     }
+        // },
         cellStyle: {
             backgroundColor: colors.primary_light_grey,
             display: "flex",

@@ -4,7 +4,8 @@ import AgGrid from "../../components/AgGrid";
 import tradingData from "../../tradeBooking.json";
 import searchData from "../../dummyData.json";
 import data from "../../loansData.json";
-import Select from "react-select";
+import {Modal, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TradeBlotter = () => {
   const obj: any = {};
@@ -21,6 +22,10 @@ const TradeBlotter = () => {
   const [heightAG_1] = useState(30);
   const [details, setDetails] = useState<any>(null);
   const [checkStatus, setCheckStatus] = useState(false);
+  const [cpartyInputStatus, setCpartyInputStatus] = useState(false);
+  const [cpartyBorrowInputStatus, setCpartyBorrowInputStatus] = useState(false);
+  const [securityInputStatus, setSecurityInputStatus] = useState(false);
+  const [securityBorrowInputStatus, setSecurityBorrowInputStatus] = useState(false);
   const [selectBorrow, setSelectBorrow] = useState("B");
   const [selectLoan, setSelectLoan] = useState<any>("L");
   const [cpartyField, setCpartyField] = useState<any>("");
@@ -41,6 +46,9 @@ const TradeBlotter = () => {
   const [securityFieldError, setSecurityFieldError] = useState<any>("");
   const [quantityFieldError, setQuantityFieldError] = useState<any>("");
   const [loanValueFieldError, setLoanValueFieldError] = useState<any>("");
+  const [loanValueFieldExceedStatus, setLoanValueFieldExceedStatus] = useState(false);
+  const [loanValueFieldExceedWarningNo, setLoanValueFieldExceedWarningNo] = useState(false);
+  const [loanValueFieldExceedWarningYes, setLoanValueFieldExceedWarningYes] = useState(false);
   const [rateFieldError, setRateFieldError] = useState<any>("");
   const [hairCutFieldError, setHairCutFieldError] = useState<any>("");
   const [profitCenterFieldError, setProfitCenterFieldError] = useState<any>("");
@@ -59,6 +67,17 @@ const TradeBlotter = () => {
   const onSearch = (searchTerm: any) => {
     setHairCutField(searchTerm.LOAN_MARK);
     setCpartyField(searchTerm.NAME);
+    setCpartyInputStatus(false);
+    console.log("search", searchTerm);
+  };
+
+  const onSearchSecurity = (searchTerm: any) => {
+    setSecurityField(searchTerm.NAME);
+  };
+
+  const onSearchBorrow = (searchTerm: any) => {
+    setHairCutFieldBorrow(searchTerm.LOAN_MARK);
+    setCpartyFieldBorrow(searchTerm.NAME);
     console.log("search", searchTerm);
   };
 
@@ -69,6 +88,55 @@ const TradeBlotter = () => {
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
   };
+
+  const warningNo = () => {
+    setLoanValueFieldExceedWarningNo(true);
+    setLoanValueFieldExceedStatus(false);
+  }
+
+  const warningYes = () => {
+    setLoanValueFieldExceedWarningYes(true);
+    setLoanValueFieldExceedStatus(false);
+    console.log("exceed: ", loanValueFieldExceedWarningNo);
+  }
+
+  const addData = () => {
+    if (checkStatus === true) {
+      obj["status"] = "Sent";
+      obj["trade_type"] = selectLoan;
+      obj["cparty"] = cpartyField;
+      obj["security"] = securityField;
+      obj["quantity"] = quantityField;
+      obj["loan_value"] = loanValueField;
+      obj["rate"] = rateField;
+      obj["haircut"] = hairCutField;
+      obj["profit_center"] = profitCenterField;
+      obj["term_date"] = termDateField;
+      objSecond["status"] = "Pending";
+      objSecond["trade_type"] = selectBorrow;
+      objSecond["cparty"] = cpartyFieldBorrow;
+      objSecond["security"] = securityField;
+      objSecond["quantity"] = quantityField;
+      objSecond["loan_value"] = loanValueFieldBorrow;
+      objSecond["rate"] = rateField;
+      objSecond["haircut"] = hairCutFieldBorrow;
+      objSecond["profit_center"] = profitCenterFieldBorrow;
+      objSecond["term_date"] = termDateFieldBorrow;
+      setRowData([...rowData, obj, objSecond]);
+    } else {
+      obj["status"] = "Sent";
+      obj["trade_type"] = selectLoan;
+      obj["cparty"] = cpartyField;
+      obj["security"] = securityField;
+      obj["quantity"] = quantityField;
+      obj["loan_value"] = loanValueField;
+      obj["rate"] = rateField;
+      obj["haircut"] = hairCutField;
+      obj["profit_center"] = profitCenterField;
+      obj["term_date"] = termDateField;
+      setRowData([...rowData, obj]);
+    }
+  }
 
   const clearTextFn = () => {
     if (checkStatus === true) {
@@ -115,7 +183,6 @@ const TradeBlotter = () => {
 
   const bookFn = () => {
     let hasError = true;
-    console.log("length", profitCenterField.length);
     if (checkStatus === true) {
       console.log("errorBorrow");
       if (cpartyField === "") {
@@ -133,13 +200,21 @@ const TradeBlotter = () => {
       if (quantityField === "") {
         setQuantityFieldError("Enter the field");
         hasError = false;
+      } else if (quantityField < 0) {
+        setQuantityFieldError("Enter Valid Quantity");
+        hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
         hasError = false;
-      } else {
+      }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
+      else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
@@ -169,10 +244,21 @@ const TradeBlotter = () => {
       } else {
         setCpartyFieldErrorBorrow("");
       }
+      if (securityField === "") {
+        setSecurityFieldError("Enter the field");
+        hasError = false;
+      } else {
+        setSecurityFieldError("");
+      }
       if (loanValueFieldBorrow === "") {
         setLoanValueFieldErrorBorrow("Enter the field");
         hasError = false;
-      } else {
+      }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
+      else {
         setLoanValueFieldErrorBorrow("");
       }
       if (hairCutFieldBorrow === "") {
@@ -203,13 +289,21 @@ const TradeBlotter = () => {
       if (quantityField === "") {
         setQuantityFieldError("Enter the field");
         hasError = false;
+      }else if (quantityField < 0) {
+        setQuantityFieldError("Enter Valid Quantity");
+        hasError = false;
       } else {
         setQuantityFieldError("");
       }
       if (loanValueField === "") {
         setLoanValueFieldError("Enter the field");
         hasError = false;
-      } else {
+      }
+      // else if (loanValueField > 250e+6) {
+      //   setLoanValueFieldExceedStatus(true)
+      //   hasError = false;
+      // }
+      else {
         setLoanValueFieldError("");
       }
       if (rateField === "") {
@@ -236,41 +330,48 @@ const TradeBlotter = () => {
     }
 
     if (hasError === true) {
-      if (checkStatus === true) {
-        obj["status"] = "Sent";
-        obj["trade_type"] = selectLoan;
-        obj["cparty"] = cpartyField;
-        obj["security"] = securityField;
-        obj["quantity"] = quantityField;
-        obj["loan_value"] = loanValueField;
-        obj["rate"] = rateField;
-        obj["haircut"] = hairCutField;
-        obj["profit_center"] = profitCenterField;
-        obj["term_date"] = termDateField;
-        objSecond["status"] = "Pending";
-        objSecond["trade_type"] = selectBorrow;
-        objSecond["cparty"] = cpartyFieldBorrow;
-        objSecond["security"] = securityField;
-        objSecond["quantity"] = quantityField;
-        objSecond["loan_value"] = loanValueFieldBorrow;
-        objSecond["rate"] = rateField;
-        objSecond["haircut"] = hairCutFieldBorrow;
-        objSecond["profit_center"] = profitCenterFieldBorrow;
-        objSecond["term_date"] = termDateFieldBorrow;
-        setRowData([...rowData, obj, objSecond]);
-      } else {
-        obj["status"] = "Sent";
-        obj["trade_type"] = selectLoan;
-        obj["cparty"] = cpartyField;
-        obj["security"] = securityField;
-        obj["quantity"] = quantityField;
-        obj["loan_value"] = loanValueField;
-        obj["rate"] = rateField;
-        obj["haircut"] = hairCutField;
-        obj["profit_center"] = profitCenterField;
-        obj["term_date"] = termDateField;
-        setRowData([...rowData, obj]);
+      console.log("add data");
+      if (loanValueField > 250e+6) {
+        setLoanValueFieldExceedStatus(true);
+        if(loanValueFieldExceedWarningYes === true) {
+          addData();
+        }
       }
+      // if (checkStatus === true) {
+      //   obj["status"] = "Sent";
+      //   obj["trade_type"] = selectLoan;
+      //   obj["cparty"] = cpartyField;
+      //   obj["security"] = securityField;
+      //   obj["quantity"] = quantityField;
+      //   obj["loan_value"] = loanValueField;
+      //   obj["rate"] = rateField;
+      //   obj["haircut"] = hairCutField;
+      //   obj["profit_center"] = profitCenterField;
+      //   obj["term_date"] = termDateField;
+      //   objSecond["status"] = "Pending";
+      //   objSecond["trade_type"] = selectBorrow;
+      //   objSecond["cparty"] = cpartyFieldBorrow;
+      //   objSecond["security"] = securityField;
+      //   objSecond["quantity"] = quantityField;
+      //   objSecond["loan_value"] = loanValueFieldBorrow;
+      //   objSecond["rate"] = rateField;
+      //   objSecond["haircut"] = hairCutFieldBorrow;
+      //   objSecond["profit_center"] = profitCenterFieldBorrow;
+      //   objSecond["term_date"] = termDateFieldBorrow;
+      //   setRowData([...rowData, obj, objSecond]);
+      // } else {
+      //   obj["status"] = "Sent";
+      //   obj["trade_type"] = selectLoan;
+      //   obj["cparty"] = cpartyField;
+      //   obj["security"] = securityField;
+      //   obj["quantity"] = quantityField;
+      //   obj["loan_value"] = loanValueField;
+      //   obj["rate"] = rateField;
+      //   obj["haircut"] = hairCutField;
+      //   obj["profit_center"] = profitCenterField;
+      //   obj["term_date"] = termDateField;
+      //   setRowData([...rowData, obj]);
+      // }
       clearTextFn();
       document.getElementsByTagName("input")[0].focus();
     }
@@ -352,6 +453,8 @@ const TradeBlotter = () => {
                               className="input-style"
                               value={cpartyField}
                               onChange={(e) => setCpartyField(e.target.value)}
+                              onFocus={() => setCpartyInputStatus(true)}
+                              // onBlur={() => setCpartyInputStatus(false)}
                             />
                             {/*<Select*/}
                             {/*  styles={customStyles}*/}
@@ -368,29 +471,33 @@ const TradeBlotter = () => {
                               {cpartyFieldError}
                             </span>
                           </div>
-                          <div className="dropdown-dummyData-trade">
-                            {searchlist
-                              .filter((value: any) => {
-                                const searchTerm = cpartyField.toLowerCase();
-                                const partyName = value.NAME.toLowerCase();
+                          {
+                            cpartyInputStatus && (
+                                  <div className="dropdown-dummyData-trade">
+                                    {searchlist
+                                        .filter((value: any) => {
+                                          const searchTerm = cpartyField.toLowerCase();
+                                          const partyName = value.NAME.toLowerCase();
 
-                                return (
-                                  searchTerm &&
-                                  partyName.startsWith(searchTerm) &&
-                                  partyName !== searchTerm
-                                );
-                              })
-                              .slice(0, 10)
-                              .map((item: any, index) => (
-                                <div
-                                  onClick={() => onSearch(item)}
-                                  key={index}
-                                  className="dropdown-row"
-                                >
-                                  {item.NAME}
-                                </div>
-                              ))}
-                          </div>
+                                          return (
+                                              searchTerm &&
+                                              partyName.startsWith(searchTerm) &&
+                                              partyName !== searchTerm
+                                          );
+                                        })
+                                        .slice(0, 10)
+                                        .map((item: any, index) => (
+                                            <div
+                                                onClick={() => onSearch(item)}
+                                                key={index}
+                                                className="dropdown-row"
+                                            >
+                                              {item.NAME}
+                                            </div>
+                                        ))}
+                                  </div>
+                              )
+                          }
                         </div>
                       </td>
                       <td className="table-data-cell">
@@ -403,35 +510,41 @@ const TradeBlotter = () => {
                               className="input-style"
                               value={securityField}
                               onChange={(e) => setSecurityField(e.target.value)}
+                              onFocus={() => setSecurityInputStatus(true)}
+                              onBlur={() => setSecurityInputStatus(false)}
                               required
                             />
                             <span className="error-style">
                               {securityFieldError}
                             </span>
                           </div>
-                          <div className="dropdown-dummyData-trade">
-                            {searchlist
-                              .filter((value: any) => {
-                                const searchTerm = securityField.toLowerCase();
-                                const partyName = value.NAME.toLowerCase();
+                          {
+                            securityInputStatus && (
+                                  <div className="dropdown-dummyData-trade">
+                                    {searchlist
+                                        .filter((value: any) => {
+                                          const searchTerm = securityField.toLowerCase();
+                                          const partyName = value.NAME.toLowerCase();
 
-                                return (
-                                  searchTerm &&
-                                  partyName.startsWith(searchTerm) &&
-                                  partyName !== searchTerm
-                                );
-                              })
-                              .slice(0, 10)
-                              .map((item: any, index) => (
-                                <div
-                                  onClick={() => onSearch(item)}
-                                  key={index}
-                                  className="dropdown-row"
-                                >
-                                  {item.NAME}
-                                </div>
-                              ))}
-                          </div>
+                                          return (
+                                              searchTerm &&
+                                              partyName.startsWith(searchTerm) &&
+                                              partyName !== searchTerm
+                                          );
+                                        })
+                                        .slice(0, 10)
+                                        .map((item: any, index) => (
+                                            <div
+                                                onClick={() => onSearchSecurity(item)}
+                                                key={index}
+                                                className="dropdown-row"
+                                            >
+                                              {item.NAME}
+                                            </div>
+                                        ))}
+                                  </div>
+                              )
+                          }
                         </div>
                       </td>
                       <td className="table-data-cell">
@@ -465,6 +578,30 @@ const TradeBlotter = () => {
                             {loanValueFieldError}
                           </span>
                         </div>
+                        {/*{*/}
+                        {/*  loanValueFieldExceedStatus && (*/}
+                        {/*        <div className="modal" tabIndex={-1} role="dialog">*/}
+                        {/*          <div className="modal-dialog" role="document">*/}
+                        {/*            <div className="modal-content">*/}
+                        {/*              <div className="modal-header">*/}
+                        {/*                <h5 className="modal-title">Modal title</h5>*/}
+                        {/*                <button type="button" className="close" data-dismiss="modal" aria-label="Close">*/}
+                        {/*                  <span aria-hidden="true">&times;</span>*/}
+                        {/*                </button>*/}
+                        {/*              </div>*/}
+                        {/*              <div className="modal-body">*/}
+                        {/*                <p>Modal body text goes here.</p>*/}
+                        {/*              </div>*/}
+                        {/*              <div className="modal-footer">*/}
+                        {/*                <button type="button" className="btn btn-primary">Save changes</button>*/}
+                        {/*                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close*/}
+                        {/*                </button>*/}
+                        {/*              </div>*/}
+                        {/*            </div>*/}
+                        {/*          </div>*/}
+                        {/*        </div>*/}
+                        {/*    )*/}
+                        {/*}*/}
                       </td>
                       <td className="table-data-cell">
                         <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
@@ -542,37 +679,101 @@ const TradeBlotter = () => {
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
-                            <input
-                              type="text"
-                              name=""
-                              id="cparty"
-                              required
-                              className="input-style"
-                              value={cpartyFieldBorrow}
-                              onChange={(e) =>
-                                setCpartyFieldBorrow(e.target.value)
-                              }
-                            />
-                            <span className="error-style">
-                              {cpartyFieldErrorBorrow}
-                            </span>
+                          <div className="counterParty-dummyData-trade">
+                            <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
+                              <input
+                                type="text"
+                                name=""
+                                id="cparty"
+                                required
+                                className="input-style"
+                                value={cpartyFieldBorrow}
+                                onChange={(e) =>
+                                  setCpartyFieldBorrow(e.target.value)
+                                }
+                                onFocus={() => setCpartyBorrowInputStatus(true)}
+                                onBlur={() => setCpartyBorrowInputStatus(false)}
+                              />
+                              <span className="error-style">
+                                {cpartyFieldErrorBorrow}
+                              </span>
+                            </div>
+                            {
+                              cpartyBorrowInputStatus && (
+                                    <div className="dropdown-dummyData-trade">
+                                      {searchlist
+                                          .filter((value: any) => {
+                                            const searchTerm =
+                                                cpartyFieldBorrow.toLowerCase();
+                                            const partyName = value.NAME.toLowerCase();
+
+                                            return (
+                                                searchTerm &&
+                                                partyName.startsWith(searchTerm) &&
+                                                partyName !== searchTerm
+                                            );
+                                          })
+                                          .slice(0, 10)
+                                          .map((item: any, index) => (
+                                              <div
+                                                  onClick={() => onSearchBorrow(item)}
+                                                  key={index}
+                                                  className="dropdown-row"
+                                              >
+                                                {item.NAME}
+                                              </div>
+                                          ))}
+                                    </div>
+                                )
+                            }
                           </div>
                         </td>
                         <td className="table-data-cell">
-                          <div className="table-data-cell-innerDiv counterParty-dummyData-trade">
-                            <input
-                              type="text"
-                              name=""
-                              id="security"
-                              className="input-style"
-                              value={securityField}
-                              onChange={(e) => setSecurityField(e.target.value)}
-                              required
-                            />
-                            <span className="error-style">
-                              {securityFieldError}
-                            </span>
+                          <div className="counterParty-dummyData-trade">
+                            <div className="table-data-cell-innerDiv">
+                              <input
+                                type="text"
+                                name=""
+                                id="security"
+                                className="input-style"
+                                value={securityField}
+                                onChange={(e) =>
+                                  setSecurityField(e.target.value)
+                                }
+                                onFocus={() => setSecurityBorrowInputStatus(true)}
+                                onBlur={() => setSecurityBorrowInputStatus(false)}
+                                required
+                              />
+                              <span className="error-style">
+                                {securityFieldError}
+                              </span>
+                            </div>
+                            {securityBorrowInputStatus && (
+                                <div className="dropdown-dummyData-trade">
+                                  {searchlist
+                                      .filter((value: any) => {
+                                        const searchTerm =
+                                            securityField.toLowerCase();
+                                        const partyName = value.NAME.toLowerCase();
+
+                                        return (
+                                            searchTerm &&
+                                            partyName.startsWith(searchTerm) &&
+                                            partyName !== searchTerm
+                                        );
+                                      })
+                                      .slice(0, 10)
+                                      .map((item: any, index) => (
+                                          <div
+                                              onClick={() => onSearchSecurity(item)}
+                                              key={index}
+                                              className="dropdown-row"
+                                          >
+                                            {item.NAME}
+                                          </div>
+                                      ))}
+                                </div>
+                            )}
                           </div>
                         </td>
                         <td className="table-data-cell">
@@ -667,6 +868,7 @@ const TradeBlotter = () => {
                               name=""
                               id="termDate"
                               className="input-style"
+                              min={disablePastDate()}
                               onChange={(e) =>
                                 setTermDateFieldBorrow(e.target.value)
                               }
@@ -679,13 +881,32 @@ const TradeBlotter = () => {
                 </table>
               </div>
               <div className="book-div">
-                <button
-                  type="submit"
-                  className="button-style"
-                  onClick={() => bookFn()}
-                >
+                {/*<button*/}
+                {/*  type="button"*/}
+                {/*  className="button-style btn btn-primary"*/}
+                {/*  // onClick={() => bookFn()}*/}
+                {/*  data-toggle="modal" data-target="#exampleModal"*/}
+                {/*>*/}
+                {/*  Book*/}
+                {/*</button>*/}
+                <Button variant="primary" onClick={() => bookFn()} className="button-style">
                   Book
-                </button>
+                </Button>
+
+                <Modal show={loanValueFieldExceedStatus} onHide={() => setLoanValueFieldExceedStatus(false)}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Warning</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Loan value entered is bigger than 250M. Do you want to continue?</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="danger" onClick={() => warningNo()}>
+                      No
+                    </Button>
+                    <Button variant="success" onClick={() => warningYes()}>
+                      Yes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
             {/* </form> */}
