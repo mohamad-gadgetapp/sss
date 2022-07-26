@@ -30,21 +30,26 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [quantityContract, setQuantityContract] = useState<any>("");
   const [rateFieldContract, setRateFieldContract] = useState("");
   const [markFieldContract, setMarkFieldContract] = useState("");
-  const [contractValueContract,setContractValueContract] = useState("");
-  const [profitCenterFieldContract, setProfitCenterFieldContract] = useState("");
-  const [termDateFieldContract,setTermDateFieldContract] = useState("")
+  const [contractValueContract, setContractValueContract] = useState("");
+  const [profitCenterFieldContract, setProfitCenterFieldContract] =
+    useState("");
+  const [termDateFieldContract, setTermDateFieldContract] = useState("");
 
   const [baLinConttractisMatch, setBaLinContractisMatch] = useState("");
-  const [counterPartyinConttractisMatch, setCounterPartyinContractisMatch] = useState("");
+  const [counterPartyinConttractisMatch, setCounterPartyinContractisMatch] =
+    useState("");
   const [tickerContractisMatch, setTickerContractisMatch] = useState("");
   const [quantityContractisMatch, setQuantityContractisMatch] = useState("");
   const [rateFieldContractisMatch, setRateFieldContractisMatch] = useState("");
   const [markFieldContractisMatch, setMarkFieldContractisMatch] = useState("");
-  const [contractValueContractisMatch,setContractValueContractisMatch] = useState("");
-  const [profitCenterFieldContractisMatch, setProfitCenterFieldContractisMatch] = useState("");
-  const [termDateFieldContractisMatch,setTermDateFieldContractisMatch] = useState("")
-
-
+  const [contractValueContractisMatch, setContractValueContractisMatch] =
+    useState("");
+  const [
+    profitCenterFieldContractisMatch,
+    setProfitCenterFieldContractisMatch,
+  ] = useState("");
+  const [termDateFieldContractisMatch, setTermDateFieldContractisMatch] =
+    useState("");
 
   const [errorBaL, setErrorBaL] = useState("");
   const [errorCounterParty, setErrorCounterParty] = useState("");
@@ -52,7 +57,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [errorQuantity, setErrorQuantity] = useState("");
   const [errorRate, setErrorRate] = useState("");
   const [errorMark, setErrorMark] = useState("");
-  const [errorContractValue, setErrorContractValue] = useState("")
+  const [errorContractValue, setErrorContractValue] = useState("");
   const [errorProfitCenter, setErrorProfitCenter] = useState("");
   const [errorTermDate, setErrorTermDate] = useState("");
 
@@ -62,83 +67,84 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [errorQuantityisMatch, setErrorQuantityisMatch] = useState("");
   const [errorRateisMatch, setErrorRateisMatch] = useState("");
   const [errorMarkisMatch, setErrorMarkisMatch] = useState("");
-  const [errorContractValueisMatch, setErrorContractValueisMatch] = useState("")
+  const [errorContractValueisMatch, setErrorContractValueisMatch] =
+    useState("");
   const [errorProfitCenterisMatch, setErrorProfitCenterisMatch] = useState("");
   const [errorTermDateisMatch, setErrorTermDateisMatch] = useState("");
 
   const [counterPartySearch, setCounterPartySearch] = useState("");
   const [tickerSearch, setTickerSearch] = useState("");
-  const [counterPartySearchisMatch, setCounterPartySearchisMatch] = useState("");
+  const [counterPartySearchisMatch, setCounterPartySearchisMatch] =
+    useState("");
   const [tickerSearchisMatch, setTickerSearchisMatch] = useState("");
 
-
   const onSubmit = () => {
-    alert("on Submit");
-    const objData ={
-      "b/l":baLinConttract,
-      "cpty_name":counterPartySearch,
-      "tb_ticker":tickerSearch,
-      "quantity":quantityContract,
-      "rate":rateFieldContract,
-      "cpty_id":markFieldContract,
-      "value":contractValueContract,
-      "profit_center":profitCenterFieldContract,
-      "term_date":termDateFieldContract,
-      "status": "sent",
-      "cusip": "-",
-      "daily_accruals": "-",
-      "settle_date_diff": "-",
-      "contract_id": "-",
-    }
-    const objDataMatch ={
-      "b/l":baLinConttractisMatch,
-      "cpty_name":counterPartySearchisMatch,
-      "tb_ticker":tickerSearchisMatch,
-      "quantity":quantityContractisMatch,
-      "rate":rateFieldContractisMatch,
-      "cpty_id":markFieldContractisMatch,
-      "value":contractValueContractisMatch,
-      "profit_center":profitCenterFieldContractisMatch,
-      "term_date":termDateFieldContractisMatch,
-      "status": "sent",
-      "cusip": "-",
-      "daily_accruals": "-",
-      "settle_date_diff": "-",
-      "contract_id": "-",
-    }
- 
-      
+    // alert("on Submit");
+    const objData = {
+      "b/l": "Loan",
+      cpty_name: counterPartySearch,
+      tb_ticker: tickerSearch,
+      quantity: quantityContract,
+      rate: rateFieldContract,
+      cpty_id: markFieldContract,
+      value: contractValueContract,
+      profit_center: profitCenterFieldContract,
+      term_date: termDateFieldContract,
+      status: "sent",
+      cusip: "@37833100",
+      daily_accruals: "956.22",
+      settle_date_diff: "14-JUN 22-C2257-1",
+      contract_id: "14-JUN 22-C2257-1",
+    };
+    const objDataMatch = {
+      "b/l": "Borrow",
+      cpty_name: counterPartySearchisMatch,
+      tb_ticker: tickerSearchisMatch,
+      quantity: quantityContractisMatch,
+      rate: rateFieldContractisMatch,
+      cpty_id: markFieldContractisMatch,
+      value: contractValueContractisMatch,
+      profit_center: profitCenterFieldContractisMatch,
+      term_date: termDateFieldContractisMatch,
+      status: "sent",
+      cusip: "@37833100",
+      daily_accruals: "956.22",
+      settle_date_diff: "14-JUN 22-C2257-1",
+      contract_id: "14-JUN 22-C2257-1",
+    };
+
     document.getElementsByTagName("input")[0].focus();
-        let hasError = true;
+    let hasError = true;
     // if (baLinConttract === "") {
     //   setErrorBaL("Please enter the value");
-       
+
     //   hasError = false;
     // } else {
     //   setErrorBaL("");
     // }
-    if(counterPartyinConttract == ""){
+    console.log("borrowandLoan", baLinConttract);
+    if (counterPartyinConttract == "") {
       setErrorCounterParty("Please enter the value");
       hasError = false;
     } else {
       setErrorCounterParty("");
     }
-    if(tickerContract == "") {
+    if (tickerContract == "") {
       setErrorTicker("Please enter the value");
       hasError = false;
     } else {
       setErrorTicker("");
     }
-    if(quantityContract == "") {
+    if (quantityContract == "") {
       setErrorQuantity("Please enter the value");
       hasError = false;
-    }else if(quantityContract < 0) {
+    } else if (quantityContract < 0) {
       setErrorQuantity("Please enter positive number");
       hasError = false;
     } else {
       setErrorQuantity("");
     }
-    if(rateFieldContract == ""){
+    if (rateFieldContract == "") {
       setErrorRate("Please enter the value");
       hasError = false;
     } else {
@@ -150,22 +156,22 @@ const Contract = ({ height, title }: ContractPageProps) => {
     // }else{
     //   setErrorMark("");
     // }
-    if(contractValueContract == ""){
+    if (contractValueContract == "") {
       setErrorContractValue("Please enter the value");
       hasError = false;
-    }else{
+    } else {
       setErrorContractValue("");
     }
-    if(profitCenterFieldContract == ""){
+    if (profitCenterFieldContract == "") {
       setErrorProfitCenter("Please enter the value");
       hasError = false;
-    }else{
+    } else {
       setErrorProfitCenter("");
     }
-    if(termDateFieldContract == ""){
+    if (termDateFieldContract == "") {
       setErrorTermDate("Please enter the date");
       hasError = false;
-    }else{
+    } else {
       setErrorTermDate("");
     }
     // if(baLinConttractisMatch == ""){
@@ -174,29 +180,29 @@ const Contract = ({ height, title }: ContractPageProps) => {
     // }else{
     //   setErrorBaLisMatch("")
     // }
-    if(counterPartyinConttractisMatch == ""){
-      setErrorCounterPartyisMatch("Please enter the value")
+    if (counterPartyinConttractisMatch == "") {
+      setErrorCounterPartyisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorCounterPartyisMatch("")
+    } else {
+      setErrorCounterPartyisMatch("");
     }
-    if(tickerContractisMatch == ""){
-      setErrorTickerisMatch("Please enter the value")
+    if (tickerContractisMatch == "") {
+      setErrorTickerisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorTickerisMatch("")
+    } else {
+      setErrorTickerisMatch("");
     }
-    if(quantityContractisMatch == ""){
-      setErrorQuantityisMatch("Please enter the value")
+    if (quantityContractisMatch == "") {
+      setErrorQuantityisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorQuantityisMatch("")
+    } else {
+      setErrorQuantityisMatch("");
     }
-    if(rateFieldContractisMatch == ""){
-      setErrorRateisMatch("Please enter the value")
+    if (rateFieldContractisMatch == "") {
+      setErrorRateisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorRateisMatch("")
+    } else {
+      setErrorRateisMatch("");
     }
     // if(markFieldContractisMatch == ""){
     //   setErrorMarkisMatch("Please enter the value")
@@ -204,35 +210,31 @@ const Contract = ({ height, title }: ContractPageProps) => {
     // }else{
     //   setErrorMarkisMatch("")
     // }
-    if(contractValueContractisMatch == ""){
-      setErrorContractValueisMatch("Please enter the value")
+    if (contractValueContractisMatch == "") {
+      setErrorContractValueisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorContractValueisMatch("")
+    } else {
+      setErrorContractValueisMatch("");
     }
-    if(profitCenterFieldContractisMatch == ""){
-      setErrorProfitCenterisMatch("Please enter the value")
+    if (profitCenterFieldContractisMatch == "") {
+      setErrorProfitCenterisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorProfitCenterisMatch("")
+    } else {
+      setErrorProfitCenterisMatch("");
     }
-    if(termDateFieldContractisMatch == ""){
-      setErrorTermDateisMatch("Please enter the value")
+    if (termDateFieldContractisMatch == "") {
+      setErrorTermDateisMatch("Please enter the value");
       hasError = false;
-    }else{
-      setErrorTermDateisMatch("")
+    } else {
+      setErrorTermDateisMatch("");
     }
-    console.log(hasError)
-    if(hasError === true){
-      console.log("InputData")
-      setRowData([...rowData, objData, objDataMatch])
-    }else{
-      
+    console.log(hasError);
+    if (hasError === true) {
+      console.log("InputData");
+      setRowData([objData, objDataMatch, ...rowData]);
+    } else {
     }
   };
-
-
-
 
   const onClear = () => {
     setRowData([...data.contractsData]);
@@ -342,44 +344,81 @@ const Contract = ({ height, title }: ContractPageProps) => {
     console.log("rowData ", rowData);
   }, [rowData]);
 
-
-
   return (
     <>
-      <Header valid={false}/>
+      <Header valid={false} />
       <div style={{ height: `${height}rem`, overflow: "auto" }}>
         <div className="subHeaderContract">
           <SubHeader
             title=" Single Trade Entry"
             onClick={onSubmit}
-            borrowAndLoneFieldprop={(e:any) => {
+            borrowAndLoneFieldprop={(e: any) => {
               setBaLinContract(e);
             }}
-            counterPartyFieldprop={(e:any) => {setCounterPartyinContract(e.target.value)}}
-            TickerFieldprop={(e:any) => {setTickerContract(e.target.value)}}
-            QuantityFieldprop={(e:any) => {setQuantityContract(e.target.value)}}
-            RateFieldprop={(e:any) => {setRateFieldContract(e.target.value)}}
-            MarkFieldprop={(e:any) => {setMarkFieldContract(e)}}
-            ContractValueFieldprop={(e:any) => {setContractValueContract(e.target.value)}}
-            ProfitCenterFieldprop={(e:any) => {setProfitCenterFieldContract(e.target.value)}}
-            TermDateFieldprop={(e:any) => {setTermDateFieldContract(e.target.value)}}
-            borrowAndLoneFieldisMatchprop={(e:any) => {
+            counterPartyFieldprop={(e: any) => {
+              setCounterPartyinContract(e.target.value);
+            }}
+            TickerFieldprop={(e: any) => {
+              setTickerContract(e.target.value);
+            }}
+            QuantityFieldprop={(e: any) => {
+              setQuantityContract(e.target.value);
+            }}
+            RateFieldprop={(e: any) => {
+              setRateFieldContract(e.target.value);
+            }}
+            MarkFieldprop={(e: any) => {
+              setMarkFieldContract(e);
+            }}
+            ContractValueFieldprop={(e: any) => {
+              setContractValueContract(e.target.value);
+            }}
+            ProfitCenterFieldprop={(e: any) => {
+              setProfitCenterFieldContract(e.target.value);
+            }}
+            TermDateFieldprop={(e: any) => {
+              setTermDateFieldContract(e.target.value);
+            }}
+            borrowAndLoneFieldisMatchprop={(e: any) => {
               setBaLinContractisMatch(e.target.value);
             }}
-            CounterPartyClick={(item: any) => {setCounterPartySearch(item.NAME)}}
-            CounterPartyClickisMatch={(item: any) => {setCounterPartySearchisMatch(item.NAME)}}
+            CounterPartyClick={(item: any) => {
+              setCounterPartySearch(item.NAME);
+            }}
+            CounterPartyClickisMatch={(item: any) => {
+              setCounterPartySearchisMatch(item.NAME);
+            }}
             // CounterPartyClickisMatch={(item: any) => {console.log(item)}}
-            TickerSearch={(item: any) => {setTickerSearch(item.NAME)}}
-            TickerSearchMatch={(item: any)=> {setTickerSearchisMatch(item.NAME)}}
-            counterPartyFieldisMatchprop={(e:any) => {setCounterPartyinContractisMatch(e.target.value)}}
-            TickerFieldisMatchprop={(e:any) => {setTickerContractisMatch(e.target.value)}}
-            QuantityFieldisMatchprop={(e:any) => {setQuantityContractisMatch(e.target.value)}}
-            RateFieldisMatchprop={(e:any) => {setRateFieldContractisMatch(e.target.value)}}
-            MarkFieldisMatchprop={(e:any) => {setMarkFieldContractisMatch(e)}}
-            ContractValueFieldisMatchprop={(e:any) => {setContractValueContractisMatch(e.target.value)}}
-            ProfitCenterFieldisMatchprop={(e:any) => {setProfitCenterFieldContractisMatch(e.target.value)}}
-            TermDateFieldisMatchprop={(e:any) => {setTermDateFieldContractisMatch(e.target.value)}}
-
+            TickerSearch={(item: any) => {
+              setTickerSearch(item.NAME);
+            }}
+            TickerSearchMatch={(item: any) => {
+              setTickerSearchisMatch(item.NAME);
+            }}
+            counterPartyFieldisMatchprop={(e: any) => {
+              setCounterPartyinContractisMatch(e.target.value);
+            }}
+            TickerFieldisMatchprop={(e: any) => {
+              setTickerContractisMatch(e.target.value);
+            }}
+            QuantityFieldisMatchprop={(e: any) => {
+              setQuantityContractisMatch(e.target.value);
+            }}
+            RateFieldisMatchprop={(e: any) => {
+              setRateFieldContractisMatch(e.target.value);
+            }}
+            MarkFieldisMatchprop={(e: any) => {
+              setMarkFieldContractisMatch(e);
+            }}
+            ContractValueFieldisMatchprop={(e: any) => {
+              setContractValueContractisMatch(e.target.value);
+            }}
+            ProfitCenterFieldisMatchprop={(e: any) => {
+              setProfitCenterFieldContractisMatch(e.target.value);
+            }}
+            TermDateFieldisMatchprop={(e: any) => {
+              setTermDateFieldContractisMatch(e.target.value);
+            }}
             errorCounterParty={errorCounterParty}
             errorTicker={errorTicker}
             errorQuantity={errorQuantity}
@@ -388,7 +427,6 @@ const Contract = ({ height, title }: ContractPageProps) => {
             errorContractValue={errorContractValue}
             errorProfitCenter={errorProfitCenter}
             errorTermDate={errorTermDate}
-
             errorCounterPartyisMatch={errorCounterPartyisMatch}
             errorTickerisMatch={errorTickerisMatch}
             errorQuantityisMatch={errorQuantityisMatch}
@@ -397,7 +435,6 @@ const Contract = ({ height, title }: ContractPageProps) => {
             errorContractValueisMatch={errorContractValueisMatch}
             errorProfitCenterisMatch={errorProfitCenterisMatch}
             errorTermDateisMatch={errorTermDateisMatch}
-            
           />
         </div>
         <div className="react-grid-item-contract">

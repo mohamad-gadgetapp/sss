@@ -161,6 +161,7 @@ const SubHeader = ({
 
   const onChangeCounterParty = (e: any) => {
     setCounterPartyField(e.target.value);
+    setCounterPartyFieldisMatch(e.target.value)
     if (counterPartyFieldprop) {
       counterPartyFieldprop(e);
     }
