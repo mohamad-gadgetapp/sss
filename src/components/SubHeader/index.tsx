@@ -4,6 +4,7 @@ import TextFieldonMatch from "../../components/TextFieldonMatch";
 import Button from "../../components/Button";
 import "./style.css";
 import dummyData from "../../dummyData.json";
+import symbol from "../../symbol.json";
 
 interface SubHeaderProps {
   title?: string;
@@ -27,9 +28,7 @@ interface SubHeaderProps {
   QuantityFieldisMatchprop?: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => any;
-  ContractValueFieldisMatchprop?: (
-    event: any
-  ) => any;
+  ContractValueFieldisMatchprop?: (event: any) => any;
   ProfitCenterFieldisMatchprop?: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => any;
@@ -133,8 +132,14 @@ const SubHeader = ({
   const [termDateFieldisMatch, setTermDateFieldisMatch] = useState("");
 
   const [list, setList] = useState<Array<object>>(dummyData.dummyData);
+  const [tickerList, setTickerList] = useState<Array<object>>(
+    symbol.Sec_master
+  );
 
-  
+  const [counterPartyName, setCounterPartyName] = useState("");
+  const [tickerName, setTickerName] = useState("");
+  const [tickerPrice, setTickerPrice] = useState("");
+  // const [counterPartyselectedItem, setCounterPartyselectedItem] = useState<any>("");
 
   const handleClick = (event: any) => {
     setCheckedRadio(event.target.checked);
@@ -150,10 +155,11 @@ const SubHeader = ({
 
   const onChangeBorrowAndLoan = (e: any) => {
     setBorrowAndLoan(e.target.value);
+    console.log("subheader bali", e.target.value);
     if (borrowAndLoneFieldprop) {
-      if(e.target.value != ""){
+      if (e.target.value != "") {
         borrowAndLoneFieldprop(e.target.value);
-      }else{
+      } else {
         borrowAndLoneFieldprop("Loan");
       }
     }
@@ -172,6 +178,9 @@ const SubHeader = ({
     if (TickerFieldprop) {
       TickerFieldprop(e);
     }
+    if (e.target.value === "") {
+      setTickerFieldisMatch("");
+    }
   };
 
   const onChangeRate = (e: any) => {
@@ -179,8 +188,8 @@ const SubHeader = ({
     if (RateFieldprop) {
       RateFieldprop(e);
     }
-    let contractValue = parseInt(quantityField)* parseInt(e.target.value)
-    console.log("contractValue ",contractValue)
+    let contractValue = parseInt(quantityField) * parseInt(e.target.value);
+    console.log("contractValue ", contractValue);
     setContractValueField(JSON.stringify(contractValue));
     if (ContractValueFieldprop) {
       ContractValueFieldprop(JSON.stringify(contractValue));
@@ -189,11 +198,11 @@ const SubHeader = ({
 
   const onChangeQuantity = (e: any) => {
     setQuantityField(e.target.value);
-    setQuantityFieldisMatch(e.target.value)
+    setQuantityFieldisMatch(e.target.value);
     if (QuantityFieldprop) {
       QuantityFieldprop(e);
     }
-    let contractValue = parseInt(e.target.value)* parseInt(rateField)
+    let contractValue = parseInt(e.target.value) * parseInt(rateField);
     setContractValueField(JSON.stringify(contractValue));
     if (ContractValueFieldprop) {
       ContractValueFieldprop(JSON.stringify(contractValue));
@@ -255,8 +264,9 @@ const SubHeader = ({
     if (RateFieldisMatchprop) {
       RateFieldisMatchprop(e);
     }
-    let contractValue = parseInt(quantityFieldisMatch)* parseInt(e.target.value)
-    setContractFieldisMatch(JSON.stringify(contractValue))
+    let contractValue =
+      parseInt(quantityFieldisMatch) * parseInt(e.target.value);
+    setContractFieldisMatch(JSON.stringify(contractValue));
     if (ContractValueFieldisMatchprop) {
       ContractValueFieldisMatchprop(JSON.stringify(contractValue));
     }
@@ -267,8 +277,8 @@ const SubHeader = ({
     if (QuantityFieldisMatchprop) {
       QuantityFieldisMatchprop(e);
     }
-    let contractValue = parseInt(e.target.value)* parseInt(rateFieldisMatch)
-    setContractFieldisMatch(JSON.stringify(contractValue))
+    let contractValue = parseInt(e.target.value) * parseInt(rateFieldisMatch);
+    setContractFieldisMatch(JSON.stringify(contractValue));
     if (ContractValueFieldisMatchprop) {
       ContractValueFieldisMatchprop(JSON.stringify(contractValue));
     }
@@ -295,12 +305,12 @@ const SubHeader = ({
     }
   };
 
-  const onChangeTermDateisMatch = (e: any) => {
-    setTermDateFieldisMatch(e.target.value);
-    if (TermDateFieldisMatchprop) {
-      TermDateFieldisMatchprop(e);
-    }
-  };
+  // const onChangeTermDateisMatch = (e: any) => {
+  //   setTermDateFieldisMatch(e.target.value);
+  //   if (TermDateFieldisMatchprop) {
+  //     TermDateFieldisMatchprop(e);
+  //   }
+  // };
 
   const onSearch = (item: any) => {
     if (CounterPartyClick) {
@@ -308,67 +318,84 @@ const SubHeader = ({
       //   MarkFieldisMatchprop(item.CPTY_ID);
       // }
       CounterPartyClick(item);
+      // setCounterPartyselectedItem(item);
+      if (borrowAndLoanField === "Borrow") {
+        setMarkField(item.BORROW_MARK);
+      } else if (borrowAndLoanField === "Loan") {
+        setMarkField(item.LOAN_MARK);
+      }
       // CounterPartyClickisMatch(item);
       if (MarkFieldprop) {
         MarkFieldprop(item.CPTY_ID);
       }
-      
-     
     }
-    setMarkField(item.CPTY_ID);
+    // setMarkField(item.CPTY_ID);
     // setMarkFieldisMatch(item.CPTY_ID);
-    setCounterPartyField(item.NAME);
+    setCounterPartyField(item.CPTY_ID);
+    setCounterPartyName(item.NAME);
     if (item != "") {
       setCpartyInputStatus(true);
     }
   };
 
   const onTickerSearchValue = (item: any) => {
-    if(TickerSearch){
-      TickerSearch(item)
+    if (TickerSearch) {
+      
+      console.log("tickerItem 01", item)
+      TickerSearch(item);
     }
-    if(TickerSearchMatch){
-      TickerSearchMatch(item)
+    if (TickerSearchMatch) {
+      TickerSearchMatch(item);
     }
-    setTickerField(item.NAME);
-    setTickerFieldisMatch(item.NAME);
-    
+    setTickerField(item.Ticker);
+    setTickerFieldisMatch(item.Ticker);
+    setTickerName(item.Name);
+    setTickerPrice(item.Price);
+     console.log("tickerItem ", item)
+
     if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
-  }
-  
+  };
+
   const onCounterSearchisMatch = (item: any) => {
-    if(CounterPartyClickisMatch){
+    if (CounterPartyClickisMatch) {
       CounterPartyClickisMatch(item);
       if (MarkFieldisMatchprop) {
         MarkFieldisMatchprop(item.CPTY_ID);
       }
-      
     }
+    if (borrowAndLoanFieldisMatch === "Borrow") {
+      setMarkFieldisMatch(item.BORROW_MARK);
+    } else if (borrowAndLoanFieldisMatch === "Loan") {
+      setMarkFieldisMatch(item.LOAN_MARK);
+    }
+    console.log("markField item ", item)
+
     setCounterPartyFieldisMatch(item.NAME);
-    setMarkFieldisMatch(item.CPTY_ID);
     if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
-    
   };
 
   const onTickerSearchisMatch = (item: any) => {
-    if(TickerSearchMatch){
-      TickerSearchMatch(item)
+    if (TickerSearchMatch) {
+      TickerSearchMatch(item.Ticker);
     }
-    setTickerFieldisMatch(item.NAME)
+    setTickerFieldisMatch(item.Ticker);
     if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
-  }
+  };
 
   useEffect(() => {
     if (counterPartyField === "") {
       setMarkField("");
     }
-  }, [counterPartyField]);
+    if (counterPartyFieldisMatch === "") {
+      setMarkFieldisMatch("");
+    }
+  }, [counterPartyField, counterPartyFieldisMatch]);
 
   const selectLoanBorrow = () => {
     if (checkedRadio) {
@@ -384,8 +411,12 @@ const SubHeader = ({
 
   useEffect(() => {
     selectLoanBorrow();
-    console.log("kmdsaj");
   }, [borrowAndLoanField, borrowAndLoanFieldisMatch]);
+  useEffect(() => {
+   
+     console.log("tickerFieldisMatch.length ", tickerFieldisMatch.length);
+     console.log("securityInputStatus ", securityInputStatus);
+  }, [tickerFieldisMatch]);
 
   return (
     <div className="SubHeaderMainDiv">
@@ -436,19 +467,21 @@ const SubHeader = ({
                     placeholder="1111"
                     onChange={onChangeCounterParty}
                     value={counterPartyField}
-                    onFocus={() => setCpartyBorrowInputStatus(true)}
-                    onBlur={() => setCpartyBorrowInputStatus(false)}
+                    onFocus={() => setCpartyInputStatus(true)}
+                    onBlur={() => setCpartyInputStatus(false)}
                   />
-
+                  {counterPartyField != "" && (
+                    <div className="counterParty-Name">{counterPartyName}</div>
+                  )}
                   <div className="error-style">{errorCounterParty}</div>
                 </div>
                 {counterPartyField != "" && (
                   <div className="dropdown-dummyData">
                     <div
                       className={
-                        cpartyBorrowInputStatus == true
-                          ? "tablemaibdivhide"
-                          : "tablemaibdiv"
+                        cpartyInputStatus == true
+                          ? "tablemaibdiv"
+                          : "tablemaibdivhide"
                       }
                     >
                       <div className="tabelrowhade">CPTY_ID</div>
@@ -498,29 +531,36 @@ const SubHeader = ({
                     placeholder="GOOG"
                     value={tickerField}
                     onChange={onChangeTicker}
-                    onFocus={() => setCpartyBorrowInputStatus(true)}
-                    onBlur={() => setCpartyBorrowInputStatus(false)}
+                    onFocus={() => setSecurityInputStatus(true)}
+                    onBlur={() => setSecurityInputStatus(false)}
                   />
+                  {tickerField != "" && (
+                    <div className="counterParty-Name">
+                      {tickerName}(${tickerPrice})
+                    </div>
+                  )}
                   <div className="error-style">{errorTicker}</div>
                 </div>
                 {tickerField != "" && (
                   <div className="dropdown-dummyData">
                     <div
                       className={
-                        cpartyBorrowInputStatus == true
-                          ? "tablemaibdivhide"
-                          : "tablemaibdiv"
+                        securityInputStatus == true
+                          ? "tablemaibdiv"
+                          : "tablemaibdivhide"
                       }
                     >
-                      <div className="tabelrowhade">CPTY_ID</div>
-                      <div className="tabelrowhadename">NAME</div>
-                      <div className="tabelrowhade">BORROW</div>
-                      <div className="tabelrowhade">LOAN</div>
+                      <div className="tabelrowhade">TICKER</div>
+                      <div className="tabelrowhadename">CUSIP</div>
+                      <div className="tabelrowhade">NAME</div>
+                      <div className="tabelrowhade">PRICE</div>
+                      <div className="tabelrowhade">DATE</div>
                     </div>
-                    {list
+                    {tickerList
                       .filter((item: any) => {
+                        // console.log("item ", item)
                         const searchTerm = tickerField.toLowerCase();
-                        const partyName = item.NAME.toLowerCase();
+                        const partyName = item.Ticker.toLowerCase();
 
                         return (
                           searchTerm &&
@@ -535,10 +575,11 @@ const SubHeader = ({
                           key={index}
                           className="dropdown-row"
                         >
-                          <div className="tabelrowhade">{item.CPTY_ID}</div>
-                          <div className="tabelrowhadename">{item.NAME}</div>
-                          <div className="tabelrowhade">{item.BORROW_MARK}</div>
-                          <div className="tabelrowhade">{item.LOAN_MARK}</div>
+                          <div className="tabelrowhade">{item.Ticker}</div>
+                          <div className="tabelrowhadename">{item.CUSIP}</div>
+                          <div className="tabelrowhade">{item.Name}</div>
+                          <div className="tabelrowhade">{item.Price}</div>
+                          <div className="tabelrowhade">{item.Date}</div>
                         </div>
                       ))}
                   </div>
@@ -557,6 +598,7 @@ const SubHeader = ({
                   placeholder="Quantity"
                   value={quantityField}
                   onChange={onChangeQuantity}
+                  type="number"
                 />
                 <div className="error-style">{errorQuantity}</div>
               </div>
@@ -572,6 +614,7 @@ const SubHeader = ({
                   placeholder="Rate"
                   value={rateField}
                   onChange={onChangeRate}
+                  type="number"
                 />
                 <div className="error-style">{errorRate}</div>
               </div>
@@ -603,7 +646,7 @@ const SubHeader = ({
                   className="form-control input-style inputBorderNone"
                   placeholder="Contract Value"
                   value={contractValueField}
-                  disabled={true}
+                  // disabled={true}
                   onChange={onChangeContractValue}
                 />
                 <div className="error-style">{errorContractValue}</div>
@@ -621,7 +664,7 @@ const SubHeader = ({
                   value={profitCenterField}
                   onChange={onChangeProfitCenter}
                 />
-                <div className="error-style">{errorProfitCenter}</div>
+                {/* <div className="error-style">{errorProfitCenter}</div> */}
               </div>
               <div className="mb-3 inputFieldDiv">
                 <label
@@ -637,7 +680,7 @@ const SubHeader = ({
                   onChange={onChangeTermDate}
                   min={disablePastDate()}
                 />
-                <div className="error-style">{errorTermDate}</div>
+                {/* <div className="error-style">{errorTermDate}</div> */}
               </div>
             </div>
 
@@ -676,7 +719,9 @@ const SubHeader = ({
                       onBlur={() => setCpartyBorrowInputStatus(false)}
                       // onKeyDown={handleKeyDown}
                     />
-
+                    {counterPartyFieldisMatch != "" && (
+                    <div className="counterParty-Name">{counterPartyName}</div>
+                  )}
                     <div className="error-style">
                       {errorCounterPartyisMatch}
                     </div>
@@ -697,7 +742,8 @@ const SubHeader = ({
                       </div>
                       {list
                         .filter((item: any) => {
-                          const searchTerm = counterPartyFieldisMatch.toLowerCase();
+                          const searchTerm =
+                            counterPartyFieldisMatch.toLowerCase();
                           const partyName = item.NAME.toLowerCase();
 
                           return (
@@ -738,29 +784,34 @@ const SubHeader = ({
                       placeholder="GOOG"
                       value={tickerFieldisMatch}
                       onChange={onChangeTickerisMatch}
-                      onFocus={() => setCpartyBorrowInputStatus(true)}
-                      onBlur={() => setCpartyBorrowInputStatus(false)}
+                      onFocus={() => setSecurityBorrowInputStatus(true)}
+                      onBlur={() => setSecurityBorrowInputStatus(false)}
                     />
+                    {tickerFieldisMatch != "" && (
+                    <div className="counterParty-Name">
+                      {tickerName}(${tickerPrice})
+                    </div>)}
                     <div className="error-style">{errorTickerisMatch}</div>
                   </div>
                   {tickerFieldisMatch != "" && (
                     <div className="dropdown-dummyData">
                       <div
                         className={
-                          cpartyBorrowInputStatus == true
-                            ? "tablemaibdivhide"
-                            : "tablemaibdiv"
+                          securityInputStatus == true
+                            ? "tablemaibdiv"
+                            : "tablemaibdivhide"
                         }
                       >
-                        <div className="tabelrowhade">CPTY_ID</div>
-                        <div className="tabelrowhadename">NAME</div>
-                        <div className="tabelrowhade">BORROW</div>
-                        <div className="tabelrowhade">LOAN</div>
+                        <div className="tabelrowhade">TICKER</div>
+                        <div className="tabelrowhadename">CUSIP</div>
+                        <div className="tabelrowhade">NAME</div>
+                        <div className="tabelrowhade">PRICE</div>
+                        <div className="tabelrowhade">DATE</div>
                       </div>
-                      {list
+                      {tickerList
                         .filter((item: any) => {
                           const searchTerm = tickerFieldisMatch.toLowerCase();
-                          const partyName = item.NAME.toLowerCase();
+                          const partyName = item.Ticker.toLowerCase();
 
                           return (
                             searchTerm &&
@@ -770,18 +821,22 @@ const SubHeader = ({
                         })
                         .slice(0, 10)
                         .map((item: any, index) => (
-                          <div
-                            onClick={() => onTickerSearchisMatch(item)}
-                            key={index}
-                            className="dropdown-row"
-                          >
-                            <div className="tabelrowhade">{item.CPTY_ID}</div>
-                            <div className="tabelrowhadename">{item.NAME}</div>
-                            <div className="tabelrowhade">
-                              {item.BORROW_MARK}
+                          <>
+                      
+                            <div
+                              onClick={() => onTickerSearchisMatch(item)}
+                              key={index}
+                              className="dropdown-row"
+                            >
+                              <div className="tabelrowhade">{item.Ticker}</div>
+                              <div className="tabelrowhadename">
+                                {item.CUSIP}
+                              </div>
+                              <div className="tabelrowhade">{item.Name}</div>
+                              <div className="tabelrowhade">{item.Price}</div>
+                              <div className="tabelrowhade">{item.Date}</div>
                             </div>
-                            <div className="tabelrowhade">{item.LOAN_MARK}</div>
-                          </div>
+                          </>
                         ))}
                     </div>
                   )}
@@ -797,7 +852,8 @@ const SubHeader = ({
                     className="form-control input-style inputBorderNone"
                     placeholder="Quantity"
                     value={quantityFieldisMatch}
-                    onChange={onChangeQuantity}
+                    onChange={onChangeQuantityisMatch}
+                    type="number"
                   />
                   <div className="error-style">{errorQuantityisMatch}</div>
                 </div>
@@ -813,6 +869,7 @@ const SubHeader = ({
                     placeholder="Rate"
                     value={rateFieldisMatch}
                     onChange={onChangeRateisMatch}
+                    type="number"
                   />
                   <div className="error-style">{errorRateisMatch}</div>
                 </div>
@@ -844,7 +901,7 @@ const SubHeader = ({
                     className="form-control input-style inputBorderNone"
                     placeholder="Contract Value"
                     value={contractFieldisMatch}
-                    disabled={true}
+                    // disabled={true}
                     onChange={onChangeContractValueisMatch}
                   />
                   <div className="error-style">{errorContractValueisMatch}</div>
@@ -862,7 +919,7 @@ const SubHeader = ({
                     value={profitCenterFieldisMatch}
                     onChange={onChangeProfitCenterisMatch}
                   />
-                  <div className="error-style">{errorProfitCenterisMatch}</div>
+                  {/* <div className="error-style">{errorProfitCenterisMatch}</div> */}
                 </div>
                 <div className="mb-3 inputFieldDiv">
                   <label
@@ -877,10 +934,10 @@ const SubHeader = ({
                     value={termDateFieldisMatch}
                     onChange={onChangeTermDate}
                     min={disablePastDate()}
-
                   />
-                  {termDateField != "" && <div className="error-style">{errorTermDateisMatch}</div>}
-                  
+                  {/* {termDateField != "" && (
+                    <div className="error-style">{errorTermDateisMatch}</div>
+                  )} */}
                 </div>
               </div>
             )}

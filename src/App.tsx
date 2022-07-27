@@ -21,7 +21,7 @@ function App() {
   // @ts-ignore
   // @ts-ignore
   return (
-    <div>
+    <div className="font-family">
         {/*{*/}
         {/*    window.location.pathname === "/loan" ? <Header valid={true}/> : <Header valid={false}/>*/}
         {/*}*/}

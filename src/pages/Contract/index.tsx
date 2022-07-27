@@ -79,9 +79,9 @@ const Contract = ({ height, title }: ContractPageProps) => {
   const [tickerSearchisMatch, setTickerSearchisMatch] = useState("");
 
   const onSubmit = () => {
-    // alert("on Submit");
+     console.log("on Submit",baLinConttract);
     const objData = {
-      "b/l": "Loan",
+      b_l: baLinConttract == "" ? "Loan" : baLinConttract,
       cpty_name: counterPartySearch,
       tb_ticker: tickerSearch,
       quantity: quantityContract,
@@ -97,10 +97,10 @@ const Contract = ({ height, title }: ContractPageProps) => {
       contract_id: "14-JUN 22-C2257-1",
     };
     const objDataMatch = {
-      "b/l": "Borrow",
+      b_l: baLinConttract == "Borrow" ? "Loan" : "Borrow",
       cpty_name: counterPartySearchisMatch,
       tb_ticker: tickerSearchisMatch,
-      quantity: quantityContractisMatch,
+      quantity: quantityContract,
       rate: rateFieldContractisMatch,
       cpty_id: markFieldContractisMatch,
       value: contractValueContractisMatch,
@@ -162,18 +162,18 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorContractValue("");
     }
-    if (profitCenterFieldContract == "") {
-      setErrorProfitCenter("Please enter the value");
-      hasError = false;
-    } else {
-      setErrorProfitCenter("");
-    }
-    if (termDateFieldContract == "") {
-      setErrorTermDate("Please enter the date");
-      hasError = false;
-    } else {
-      setErrorTermDate("");
-    }
+    // if (profitCenterFieldContract == "") {
+    //   setErrorProfitCenter("Please enter the value");
+    //   hasError = false;
+    // } else {
+    //   setErrorProfitCenter("");
+    // }
+    // if (termDateFieldContract == "") {
+    //   setErrorTermDate("Please enter the date");
+    //   hasError = false;
+    // } else {
+    //   setErrorTermDate("");
+    // }
     // if(baLinConttractisMatch == ""){
     //   setErrorBaLisMatch("Please enter the value")
     //   hasError = false;
@@ -192,16 +192,16 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorTickerisMatch("");
     }
-    if (quantityContractisMatch == "") {
-      setErrorQuantityisMatch("Please enter the value");
-      hasError = false;
-    }
-    else if(parseInt(quantityContractisMatch) < 0){
-      setErrorQuantityisMatch("Please enter positive value");
-      hasError = false;
-    } else {
-      setErrorQuantityisMatch("");
-    }
+    // if (quantityContractisMatch == "") {
+    //   setErrorQuantityisMatch("Please enter the value");
+    //   hasError = false;
+    // }
+    // else if(parseInt(quantityContractisMatch) < 0){
+    //   setErrorQuantityisMatch("Please enter positive value");
+    //   hasError = false;
+    // } else {
+    //   setErrorQuantityisMatch("");
+    // }
     if (rateFieldContractisMatch == "") {
       setErrorRateisMatch("Please enter the value");
       hasError = false;
@@ -220,22 +220,24 @@ const Contract = ({ height, title }: ContractPageProps) => {
     } else {
       setErrorContractValueisMatch("");
     }
-    if (profitCenterFieldContractisMatch == "") {
-      setErrorProfitCenterisMatch("Please enter the value");
-      hasError = false;
-    } else {
-      setErrorProfitCenterisMatch("");
-    }
-    if (termDateFieldContractisMatch == "") {
-      setErrorTermDateisMatch("Please enter the value");
-      hasError = false;
-    } else {
-      setErrorTermDateisMatch("");
-    }
+    // if (profitCenterFieldContractisMatch == "") {
+    //   setErrorProfitCenterisMatch("Please enter the value");
+    //   hasError = false;
+    // } else {
+    //   setErrorProfitCenterisMatch("");
+    // }
+    // if (termDateFieldContractisMatch == "") {
+    //   setErrorTermDateisMatch("Please enter the value");
+    //   hasError = false;
+    // } else {
+    //   setErrorTermDateisMatch("");
+    // }
     console.log(hasError);
     if (hasError === true) {
       console.log("InputData");
       setRowData([objData, objDataMatch, ...rowData]);
+      console.log("data ", objData)
+      console.log("matchdata ", objDataMatch)
     } else {
     }
   };
@@ -358,6 +360,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
             onClick={onSubmit}
             borrowAndLoneFieldprop={(e: any) => {
               setBaLinContract(e);
+              // console.log("bali",e)
             }}
             counterPartyFieldprop={(e: any) => {
               setCounterPartyinContract(e.target.value);
@@ -395,11 +398,12 @@ const Contract = ({ height, title }: ContractPageProps) => {
             }}
             // CounterPartyClickisMatch={(item: any) => {console.log(item)}}
             TickerSearch={(item: any) => {
-              setTickerSearch(item.NAME);
+              console.log("ticketdu ", item.Ticker)
+              setTickerSearch(item.Ticker);
             }}
             TickerSearchMatch={(item: any) => {
-            
-              setTickerSearchisMatch(item.NAME);
+              console.log("tickeryu 02", item.Ticker)
+              setTickerSearchisMatch(item.Ticker);
             }}
             counterPartyFieldisMatchprop={(e: any) => {
               setCounterPartyinContractisMatch(e.target.value);
@@ -439,8 +443,8 @@ const Contract = ({ height, title }: ContractPageProps) => {
             errorRateisMatch={errorRateisMatch}
             errorMarkisMatch={errorMarkisMatch}
             errorContractValueisMatch={errorContractValueisMatch}
-            errorProfitCenterisMatch={errorProfitCenterisMatch}
-            errorTermDateisMatch={errorTermDateisMatch}
+            // errorProfitCenterisMatch={errorProfitCenterisMatch}
+            // errorTermDateisMatch={errorTermDateisMatch}
           />
         </div>
         <div className="react-grid-item-contract">
