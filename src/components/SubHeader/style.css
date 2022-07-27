@@ -198,7 +198,7 @@ input{
 
 
 .tablemaibdiv{
-  display: flex;
+  display: none;
   text-align: center;
   font-weight: 500;
 }
@@ -206,3 +206,6 @@ input{
   display: none;
 }
 
+.counterParty-Name{
+  font-size: 0.7rem;
+}
