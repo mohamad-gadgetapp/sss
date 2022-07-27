@@ -47,7 +47,27 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
 
   useEffect(() => {
     console.log("type ", type);
-  }, [type]);
+    gridApi = gridRef.current!.api;
+    var gridColumnApi = gridRef.current!.columnApi;
+    let result:any = {};
+    gridColumnApi?.getAllGridColumns().forEach((item:any) => {
+      result[item.colId] = null;
+    });
+    let columnsWithAggregation = ['quantity','value','daily_accruals']
+    columnsWithAggregation.forEach(element => {
+      gridApi?.forEachNodeAfterFilter((rowNode:any) => {
+        console.log("footer: ", rowNode);
+        if (rowNode.data[element]) {
+          let numberWithoutCommas = removeCommas(rowNode.data[element]);
+          result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
+        }
+      });
+      result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      console.log("result", result);
+    });
+    result['b_l'] = 'Total:';
+    gridApi?.setPinnedBottomRowData([result]);
+  }, [rowData]);
 
   const onColumnResized = useCallback((params: ColumnResizedEvent) => {
     console.log("params ", params);
@@ -61,7 +81,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     gridColumnApi.getAllGridColumns().forEach((item:any) => {
       result[item.colId] = null;
     });
-    let columnsWithAggregation = ['quantity','value','daily_debits']
+    let columnsWithAggregation = ['quantity','value','daily_accruals']
     columnsWithAggregation.forEach(element => {
       gridApi.forEachNodeAfterFilter((rowNode:any) => {
         console.log("footer: ", rowNode);
@@ -94,10 +114,10 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     };
   }, []);
 
-  const getRowStyle = (params:any) => {
+  const getRowStyle:any = (params:any) => {
     console.log("pin: ", params.node.RowNode)
     if (params.node.rowPinned === 'bottom') {
-      return { "background-color": "#6a7587" };
+      return { "background-color": "#6a7587", color: "white" };
     } else {
       return { "background-color": "white" };
     }
@@ -107,6 +127,10 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     const selectedRows = gridRef.current!.api.getSelectedRows();
     localStorage.setItem("rowData", JSON.stringify(selectedRows));
     onClickHan(selectedRows);
+  }, []);
+
+  const onCellValueChanged = useCallback((event) => {
+    console.log('Data after change is', event.data);
   }, []);
 
   return (
@@ -142,6 +166,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         onSelectionChanged={onSelectionChanged}
         rowSelection={'multiple'}
         getRowStyle={getRowStyle}
+        onCellValueChanged={onCellValueChanged}
       ></AgGridReact>
     </div>
   );

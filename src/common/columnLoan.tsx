@@ -2,6 +2,16 @@ import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
 import ButtonCellRenderer from "./ButtonCellRenderer";
 
+var numberFormatter = Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2
+});
+
+var myValueFormatter = (p:any) => {
+    numberFormatter.format(p.value);
+}
+
 export const ColumnLoanDefs = [
     {
         headerName: "B/L",
@@ -106,8 +116,6 @@ export const ColumnLoanDefs = [
                     alignItems: "center",
                     border:"2px solid red",
                     // backgroundColor: "#ffffff",
-                    borderBottom: "1px solid #DFDFDF",
-                    borderRight: "1px solid #DFDFDF"
                 }
             }else{
                 return {
@@ -147,6 +155,7 @@ export const ColumnLoanDefs = [
         field: "value",
         floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
+        // valueFormatter: myValueFormatter,
         cellStyle: {
             display: "flex",
             alignItems: "center",
@@ -231,6 +240,7 @@ export const ColumnLoanDefs = [
         field: "daily_accruals",
         floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
+        // valueFormatter: myValueFormatter,
         cellStyle: {
             display: "flex",
             alignItems: "center",

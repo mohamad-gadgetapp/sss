@@ -1,12 +1,22 @@
-import searchLogo from "../assets/searchLogo.svg";
+
+var numberFormatter = Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 2
+});
+
+var myValueFormatter = (p:any) => {
+  numberFormatter.format(p.value);
+}
 
 export const ColumnDefs = [
   {
-    headerName: "Select",
+    headerName: "",
     field: "",
     floatingFilter: false,
-    checkboxSelection: true,
     floatingFilterComponentParams: { suppressFilterButton: true },
+    headerCheckboxSelection: true,
+    checkboxSelection: true,
     cellStyle: {
       display: "flex",
       alignItems: "center",
@@ -19,7 +29,7 @@ export const ColumnDefs = [
     maxWidth: 100,
     suppressSizeToFit: false,
   },
-  {
+    {
     headerName: "B/L",
     field: "b_l",
     floatingFilter: false,
@@ -32,8 +42,8 @@ export const ColumnDefs = [
       borderRight: "1px solid #DFDFDF"
     },
     width: 100,
-    minWidth: 100,
-    maxWidth: 150,
+    minWidth: 60,
+    maxWidth: 100,
     suppressSizeToFit: false,
   },
   {
@@ -115,6 +125,29 @@ export const ColumnDefs = [
     field: "quantity",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
+    valueGetter: (params) => {
+      if (params.data.quantity) {
+        return params.data.quantity;
+      } else {
+        return undefined;
+      }
+    },
+    valueSetter: (params) => {
+      var newValInt = parseInt(params.newValue);
+      if (!params.data.quantity) {
+        params.data.quantity = {};
+      }
+      var valueChanged = params.data.quantity !== newValInt;
+      if (valueChanged) {
+        params.data.quantity = newValInt;
+        if(params.data.quantity > 0) {
+          params.data.status = "New"
+        } else if(params.data.quantity < 0 || {}) {
+          params.data.status = "Error"
+        }
+      }
+      return valueChanged;
+    },
     cellStyle:function (params: any) {
       if (params.node.data.quantity < 0) {
         return {
@@ -122,8 +155,6 @@ export const ColumnDefs = [
           alignItems: "center",
           border:"2px solid red",
           // backgroundColor: "#ffffff",
-          borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
         }
       }else{
         return {
@@ -134,13 +165,13 @@ export const ColumnDefs = [
           borderRight: "1px solid #DFDFDF"
         }
       }
-      
+
     },
     width: 90,
     minWidth: 90,
     maxWidth: 100,
     suppressSizeToFit: false,
-   
+
   },
   {
     headerName: "RATE",
@@ -163,6 +194,7 @@ export const ColumnDefs = [
     field: "value",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
+    // valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
@@ -247,6 +279,7 @@ export const ColumnDefs = [
     field: "daily_accruals",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
+    // valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
