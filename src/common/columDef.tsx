@@ -1,18 +1,19 @@
 
-var numberFormatter = Intl.NumberFormat('en-US', {
+var numberFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
-  maximumFractionDigits: 2
+  maximumFractionDigits: 3
 });
 
 var myValueFormatter = (p:any) => {
   numberFormatter.format(p.value);
+  // console.log("number: ", p);
 }
 
 export const ColumnDefs = [
   {
     headerName: "",
-    field: "",
+    field: "select",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     headerCheckboxSelection: true,
@@ -194,7 +195,7 @@ export const ColumnDefs = [
     field: "value",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    // valueFormatter: myValueFormatter,
+    valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
@@ -279,7 +280,7 @@ export const ColumnDefs = [
     field: "daily_accruals",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    // valueFormatter: myValueFormatter,
+    valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
