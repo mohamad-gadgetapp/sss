@@ -120,6 +120,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         }
       });
       result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      // result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     });
     result['select'] = 'Total:';
     api?.setPinnedBottomRowData([result]);
@@ -179,7 +180,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
         columnDefs={columnDefs}
         rowData={rowData}
         suppressRowClickSelection={true}
-        floatingFiltersHeight={30}
+        // floatingFiltersHeight={30}
         defaultColDef={defaultColDef}
         suppressAggFuncInHeader={true}
         enableCellChangeFlash={true}

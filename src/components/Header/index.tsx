@@ -116,7 +116,7 @@ const Header = ({ title,valid }: HeaderProps) => {
                     className="ms-2"
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <div onClick={() => onClickNavigate("/contract")}>
+                    <div className="loanHeader-NavigatePage" onClick={() => onClickNavigate("/contract")}>
                       Contract
                     </div>
                     <a onClick={() => handleClickNewTab("/contract")}>
@@ -132,7 +132,7 @@ const Header = ({ title,valid }: HeaderProps) => {
                     className="ms-2"
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <div onClick={() => onClickNavigate("/loan")}>Loan</div>
+                    <div className="loanHeader-NavigatePage" onClick={() => onClickNavigate("/loan")}>Loan</div>
                     <div onClick={() => handleClickNewTab("/loan")}>
                       <OpenInNewIcon />
                     </div>

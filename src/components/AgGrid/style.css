@@ -18,17 +18,17 @@
 .ag-pivot-on .ag-header-cell-label {
     color: #1b6d85;
     font-weight: bold;
-    width: 50px;
-    max-width: 70px;
-    min-width: 20px;
+    /* width: 100px;
+    max-width: 100px;
+    min-width: 100px; */
     
 }
 
 .ag-pivot-off .ag-header-cell-label {
     color: #fff;
-    width: 50px;
-    max-width: 70px;
-    min-width: 20px;
+    /* width: 100px;
+    max-width: 100px;
+    min-width: 100px; */
 }
 
 .ag-input-field-input {

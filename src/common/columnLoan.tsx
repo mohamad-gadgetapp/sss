@@ -2,15 +2,26 @@ import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
 import ButtonCellRenderer from "./ButtonCellRenderer";
 
-var numberFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'GBP',
-    maximumFractionDigits: 2
-});
+// var numberFormatter = new Intl.NumberFormat('en-US', {
+//     style: 'currency',
+//     currency: 'GBP',
+//     maximumFractionDigits: 2
+// });
+
+// var myValueFormatter = (p:any) => {
+//     numberFormatter.format(p.value);
+// }
 
 var myValueFormatter = (p:any) => {
-    numberFormatter.format(p.value);
-}
+    console.log("number: ", p);
+    return "$" + formatNumber(p.value)
+  };
+  const formatNumber = (number:any) => {
+    return parseFloat(number)
+    .toFixed(2)
+    .toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  };
 
 export const ColumnLoanDefs = [
     {
@@ -25,9 +36,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 100,
-        minWidth: 60,
-        maxWidth: 100,
+        minWidth: 100,
+        maxWidth: 120,
         suppressSizeToFit: false,
     },
     {
@@ -42,9 +52,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 60,
-        maxWidth: 130,
+        minWidth: 170,
+        maxWidth: 200,
         suppressSizeToFit: false,
     },
     {
@@ -59,9 +68,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 250,
-        minWidth: 150,
-        maxWidth: 300,
+        minWidth: 190,
+        maxWidth: 250,
         suppressSizeToFit: false,
     },
     {
@@ -76,8 +84,7 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 60,
+        minWidth: 100,
         maxWidth: 130,
         suppressSizeToFit: false,
     },
@@ -93,7 +100,6 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 150,
         minWidth: 100,
         maxWidth: 180,
         suppressSizeToFit: false,
@@ -128,9 +134,8 @@ export const ColumnLoanDefs = [
             }
 
         },
-        width: 90,
-        minWidth: 90,
-        maxWidth: 100,
+        minWidth: 120,
+        maxWidth: 150,
         suppressSizeToFit: false,
 
     },
@@ -146,7 +151,6 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 90,
         minWidth: 90,
         maxWidth: 100,
     },
@@ -163,8 +167,7 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 150,
-        minWidth: 150,
+        minWidth: 160,
         maxWidth: 180,
     },
     {
@@ -179,8 +182,7 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 100,
+        minWidth: 130,
         maxWidth: 150,
         suppressSizeToFit: false,
     },
@@ -196,9 +198,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 100,
-        maxWidth: 150,
+        minWidth: 140,
+        maxWidth: 180,
         suppressSizeToFit: false,
     },
     {
@@ -213,9 +214,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 100,
-        maxWidth: 150,
+        minWidth: 150,
+        maxWidth: 180,
         suppressSizeToFit: false,
     },
     {
@@ -230,8 +230,7 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 100,
+        minWidth: 130,
         maxWidth: 150,
         suppressSizeToFit: false,
     },
@@ -248,8 +247,7 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 150,
-        minWidth: 100,
+        minWidth: 160,
         maxWidth: 180,
         suppressSizeToFit: false,
     },
@@ -265,9 +263,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 120,
-        minWidth: 100,
-        maxWidth: 150,
+        minWidth: 160,
+        maxWidth: 180,
         suppressSizeToFit: false,
     },
     {
@@ -282,9 +279,8 @@ export const ColumnLoanDefs = [
             borderBottom: "1px solid #DFDFDF",
             borderRight: "1px solid #DFDFDF"
         },
-        width: 200,
-        minWidth: 100,
-        maxWidth: 220,
+        minWidth: 160,
+        maxWidth: 180,
         suppressSizeToFit: false,
     }
 ];

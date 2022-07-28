@@ -1,14 +1,19 @@
+// var numberFormatter =  Intl.NumberFormat('en-US', {
+//   style: 'currency',
+//   currency: 'USD',
+//   maximumFractionDigits: 0
+// });
 
-var numberFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 3
-});
-
-var myValueFormatter = (p:any) => {
-  numberFormatter.format(p.value);
-  // console.log("number: ", p);
-}
+var myValueFormatter = (p: any) => {
+  console.log("number: ", p);
+  return "$" + formatNumber(p.value);
+};
+const formatNumber = (number: any) => {
+  return parseFloat(number)
+    .toFixed(2)
+    .toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+};
 
 export const ColumnDefs = [
   {
@@ -23,14 +28,13 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 100,
-    minWidth: 60,
-    maxWidth: 100,
+    minWidth: 70,
+    maxWidth: 80,
     suppressSizeToFit: false,
   },
-    {
+  {
     headerName: "B/L",
     field: "b_l",
     floatingFilter: false,
@@ -40,11 +44,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 100,
-    minWidth: 60,
-    maxWidth: 100,
+    minWidth: 100,
+    maxWidth: 120,
     suppressSizeToFit: false,
   },
   {
@@ -57,11 +60,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 60,
-    maxWidth: 130,
+    minWidth: 170,
+    maxWidth: 200,
     suppressSizeToFit: false,
   },
   {
@@ -74,11 +76,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 250,
-    minWidth: 150,
-    maxWidth: 300,
+    minWidth: 190,
+    maxWidth: 250,
     suppressSizeToFit: false,
   },
   {
@@ -91,10 +92,9 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 60,
+    minWidth: 100,
     maxWidth: 130,
     suppressSizeToFit: false,
   },
@@ -108,9 +108,8 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 150,
     minWidth: 100,
     maxWidth: 180,
     suppressSizeToFit: false,
@@ -126,14 +125,14 @@ export const ColumnDefs = [
     field: "quantity",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    valueGetter: (params:any) => {
+    valueGetter: (params: any) => {
       if (params.data.quantity) {
         return params.data.quantity;
       } else {
         return undefined;
       }
     },
-    valueSetter: (params:any) => {
+    valueSetter: (params: any) => {
       var newValInt = parseInt(params.newValue);
       if (!params.data.quantity) {
         params.data.quantity = {};
@@ -141,38 +140,35 @@ export const ColumnDefs = [
       var valueChanged = params.data.quantity !== newValInt;
       if (valueChanged) {
         params.data.quantity = newValInt;
-        if(params.data.quantity > 0) {
-          params.data.status = "New"
-        } else if(params.data.quantity < 0 || {}) {
-          params.data.status = "Error"
+        if (params.data.quantity > 0) {
+          params.data.status = "New";
+        } else if (params.data.quantity < 0 || {}) {
+          params.data.status = "Error";
         }
       }
       return valueChanged;
     },
-    cellStyle:function (params: any) {
+    cellStyle: function (params: any) {
       if (params.node.data.quantity < 0) {
         return {
           display: "flex",
           alignItems: "center",
-          border:"2px solid red",
+          border: "2px solid red",
           // backgroundColor: "#ffffff",
-        }
-      }else{
+        };
+      } else {
         return {
           display: "flex",
           alignItems: "center",
           // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
-        }
+          borderRight: "1px solid #DFDFDF",
+        };
       }
-
     },
-    width: 90,
-    minWidth: 90,
-    maxWidth: 100,
+    minWidth: 120,
+    maxWidth: 150,
     suppressSizeToFit: false,
-
   },
   {
     headerName: "RATE",
@@ -184,27 +180,25 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 90,
     minWidth: 90,
     maxWidth: 100,
   },
   {
     headerName: "CONTRACT VALUE",
     field: "value",
+    valueFormatter: myValueFormatter,
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 150,
-    minWidth: 150,
+    minWidth: 160,
     maxWidth: 180,
   },
   {
@@ -217,10 +211,9 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 100,
+    minWidth: 130,
     maxWidth: 150,
     suppressSizeToFit: false,
   },
@@ -234,11 +227,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 100,
-    maxWidth: 150,
+    minWidth: 140,
+    maxWidth: 180,
     suppressSizeToFit: false,
   },
   {
@@ -251,11 +243,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 100,
-    maxWidth: 150,
+    minWidth: 150,
+    maxWidth: 180,
     suppressSizeToFit: false,
   },
   {
@@ -268,10 +259,9 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 100,
+    minWidth: 130,
     maxWidth: 150,
     suppressSizeToFit: false,
   },
@@ -286,10 +276,9 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 150,
-    minWidth: 100,
+    minWidth: 160,
     maxWidth: 180,
     suppressSizeToFit: false,
   },
@@ -303,11 +292,10 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 120,
-    minWidth: 100,
-    maxWidth: 150,
+    minWidth: 160,
+    maxWidth: 180,
     suppressSizeToFit: false,
   },
   {
@@ -320,18 +308,17 @@ export const ColumnDefs = [
       alignItems: "center",
       // backgroundColor: "#ffffff",
       borderBottom: "1px solid #DFDFDF",
-      borderRight: "1px solid #DFDFDF"
+      borderRight: "1px solid #DFDFDF",
     },
-    width: 200,
-    minWidth: 100,
-    maxWidth: 220,
+    minWidth: 160,
+    maxWidth: 180,
     suppressSizeToFit: false,
   },
   {
     headerName: "STATUS",
     field: "status",
     floatingFilter: false,
-    editable:false,
+    editable: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     minWidth: 100,
     cellStyle: function (params: any) {
@@ -342,7 +329,7 @@ export const ColumnDefs = [
           color: "#039100",
           // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
+          borderRight: "1px solid #DFDFDF",
         };
       } else if (params.node.data.status === "Error") {
         return {
@@ -351,7 +338,7 @@ export const ColumnDefs = [
           color: "#E90909",
           // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
+          borderRight: "1px solid #DFDFDF",
         };
       } else if (params.node.data.status === "Pending") {
         return {
@@ -360,7 +347,7 @@ export const ColumnDefs = [
           color: "#0D34FF",
           // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
+          borderRight: "1px solid #DFDFDF",
         };
       } else {
         return {
@@ -368,7 +355,7 @@ export const ColumnDefs = [
           alignItems: "center",
           // backgroundColor: "#ffffff",
           borderBottom: "1px solid #DFDFDF",
-          borderRight: "1px solid #DFDFDF"
+          borderRight: "1px solid #DFDFDF",
         };
       }
     },
