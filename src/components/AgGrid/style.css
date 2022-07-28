@@ -12,8 +12,13 @@
 }
 
 .ag-theme-material .ag-checkbox-input-wrapper.ag-checked::after {
-    color: #152541 !important;
+    color: #152541;
   }
+
+  /* .ag-checkbox-input-wrapper.ag-checked:checked{
+    background-color: red;
+    color: black;
+  } */
 
 .ag-pivot-on .ag-header-cell-label {
     color: #1b6d85;
@@ -43,6 +48,11 @@
     border-top: none !important;
 }
 
+.ag-theme-balham{
+    --ag-checkbox-checked-color: #152541;
+    --ag-checkbox-indeterminate-color: grey;
+}
+
 
 .ag-header-cell-text {
     font-family: 'Cairo';
@@ -64,11 +74,26 @@
 .title-subHeaderTitle{
     font-family: 'Cairo';
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.75rem;
+    line-height: 3rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 0rem 1rem;
+    height: 4rem;
+    /* background-color: white; */
+    padding: 0rem 1rem;
+}
+.title-subHeaderTitle-Loan{
+    font-family: 'Cairo';
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 4rem;
+    background-color: white;
+    padding: 0rem 1rem;
 }
 
 .is-new-warning {

@@ -175,6 +175,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
           justifyContent: "center",
           borderBottom: "0.5px solid #6A7587",
           backgroundColor: "#EAECEF",
+          color: "#131416",
         }}
         rowHeight={23}
         columnDefs={columnDefs}

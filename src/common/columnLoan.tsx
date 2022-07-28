@@ -1,27 +1,28 @@
 import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
 import ButtonCellRenderer from "./ButtonCellRenderer";
+import searchLogo from "../assets/searchLogo.svg";
 
-// var numberFormatter = new Intl.NumberFormat('en-US', {
-//     style: 'currency',
-//     currency: 'GBP',
-//     maximumFractionDigits: 2
-// });
-
-// var myValueFormatter = (p:any) => {
-//     numberFormatter.format(p.value);
-// }
+var numberFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'GBP',
+    maximumFractionDigits: 2
+});
 
 var myValueFormatter = (p:any) => {
-    console.log("number: ", p);
-    return "$" + formatNumber(p.value)
-  };
-  const formatNumber = (number:any) => {
-    return parseFloat(number)
-    .toFixed(2)
-    .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-  };
+    numberFormatter.format(p.value);
+}
+
+// var myValueFormatter = (p:any) => {
+//     console.log("number: ", p);
+//     return "$" + formatNumber(p.value)
+//   };
+//   const formatNumber = (number:any) => {
+//     return parseFloat(number)
+//     .toFixed(2)
+//     .toString()
+//     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+//   };
 
 export const ColumnLoanDefs = [
     {
@@ -39,6 +40,9 @@ export const ColumnLoanDefs = [
         minWidth: 100,
         maxWidth: 120,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "COUNTERPARTY_ID",
@@ -55,6 +59,9 @@ export const ColumnLoanDefs = [
         minWidth: 170,
         maxWidth: 200,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "COUNTERPARTY_NAME",
@@ -71,6 +78,9 @@ export const ColumnLoanDefs = [
         minWidth: 190,
         maxWidth: 250,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "TICKER",
@@ -87,6 +97,9 @@ export const ColumnLoanDefs = [
         minWidth: 100,
         maxWidth: 130,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "CUSIP",
@@ -103,6 +116,9 @@ export const ColumnLoanDefs = [
         minWidth: 100,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
         filterParams: {
             allowedCharPattern: "\\d\\-\\,", // note: ensure you escape as if you were creating a RegExp from a string
             numberParser: (text: any) => {
@@ -137,6 +153,9 @@ export const ColumnLoanDefs = [
         minWidth: 120,
         maxWidth: 150,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
 
     },
     {
@@ -153,6 +172,9 @@ export const ColumnLoanDefs = [
         },
         minWidth: 90,
         maxWidth: 100,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "CONTRACT VALUE",
@@ -169,6 +191,9 @@ export const ColumnLoanDefs = [
         },
         minWidth: 160,
         maxWidth: 180,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "TRADE_DATE",
@@ -185,6 +210,9 @@ export const ColumnLoanDefs = [
         minWidth: 130,
         maxWidth: 150,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "SETTLE_DATE",
@@ -201,6 +229,9 @@ export const ColumnLoanDefs = [
         minWidth: 140,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "PROFIT CENTER",
@@ -217,6 +248,9 @@ export const ColumnLoanDefs = [
         minWidth: 150,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "TERM_DATE",
@@ -233,6 +267,9 @@ export const ColumnLoanDefs = [
         minWidth: 130,
         maxWidth: 150,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "DAILY_ACCRUALS",
@@ -250,6 +287,9 @@ export const ColumnLoanDefs = [
         minWidth: 160,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "SETTLE_DATE",
@@ -266,6 +306,9 @@ export const ColumnLoanDefs = [
         minWidth: 160,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     },
     {
         headerName: "CONTRACT_ID",
@@ -282,5 +325,8 @@ export const ColumnLoanDefs = [
         minWidth: 160,
         maxWidth: 180,
         suppressSizeToFit: false,
+        icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     }
 ];

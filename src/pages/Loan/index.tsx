@@ -79,11 +79,11 @@ const Loan = () => {
           })}
         </div>
         <div className="react-grid-item-loan">
-          <div className="title-subHeaderTitle"> Loans </div>
+          <div className="title-subHeaderTitle-Loan"> Loans </div>
           <AgGrid rowData={rowData} height={heightAG_1} type="loan"/>
         </div>
         <div className="react-grid-item-loan">
-          <div className="title-subHeaderTitle"> Borrow </div>
+          <div className="title-subHeaderTitle-Loan"> Borrow </div>
           <AgGrid rowData={rowData} height={heightAG_1} type="loan"/>
         </div>
       </div>

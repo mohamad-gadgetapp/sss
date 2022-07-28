@@ -3,17 +3,28 @@
 //   currency: 'USD',
 //   maximumFractionDigits: 0
 // });
+import searchLogo from "../assets/searchLogo.svg";
 
-var myValueFormatter = (p: any) => {
-  console.log("number: ", p);
-  return "$" + formatNumber(p.value);
-};
-const formatNumber = (number: any) => {
-  return parseFloat(number)
-    .toFixed(2)
-    .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-};
+// var myValueFormatter = (p: any) => {
+//   console.log("number: ", p);
+//   return "$" + formatNumber(p.value);
+// };
+// const formatNumber = (number: any) => {
+//   return parseFloat(number)
+//     .toFixed(2)
+//     .toString()
+//     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+// };
+
+var numberFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'GBP',
+  maximumFractionDigits: 2
+});
+
+var myValueFormatter = (p:any) => {
+  numberFormatter.format(p.value);
+}
 
 export const ColumnDefs = [
   {
@@ -23,6 +34,7 @@ export const ColumnDefs = [
     floatingFilterComponentParams: { suppressFilterButton: true },
     headerCheckboxSelection: true,
     checkboxSelection: true,
+    editable: false,
     cellStyle: {
       display: "flex",
       alignItems: "center",
@@ -49,6 +61,9 @@ export const ColumnDefs = [
     minWidth: 100,
     maxWidth: 120,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "COUNTERPARTY_ID",
@@ -65,6 +80,9 @@ export const ColumnDefs = [
     minWidth: 170,
     maxWidth: 200,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "COUNTERPARTY_NAME",
@@ -81,11 +99,17 @@ export const ColumnDefs = [
     minWidth: 190,
     maxWidth: 250,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "TICKER",
     field: "tb_ticker",
     floatingFilter: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
       display: "flex",
@@ -102,6 +126,9 @@ export const ColumnDefs = [
     headerName: "CUSIP",
     field: "cusip",
     floatingFilter: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     floatingFilterComponentParams: { suppressFilterButton: true },
     cellStyle: {
       display: "flex",
@@ -169,6 +196,9 @@ export const ColumnDefs = [
     minWidth: 120,
     maxWidth: 150,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "RATE",
@@ -184,6 +214,9 @@ export const ColumnDefs = [
     },
     minWidth: 90,
     maxWidth: 100,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "CONTRACT VALUE",
@@ -200,6 +233,9 @@ export const ColumnDefs = [
     },
     minWidth: 160,
     maxWidth: 180,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "TRADE_DATE",
@@ -216,6 +252,9 @@ export const ColumnDefs = [
     minWidth: 130,
     maxWidth: 150,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "SETTLE_DATE",
@@ -232,6 +271,9 @@ export const ColumnDefs = [
     minWidth: 140,
     maxWidth: 180,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "PROFIT CENTER",
@@ -248,6 +290,9 @@ export const ColumnDefs = [
     minWidth: 150,
     maxWidth: 180,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "TERM_DATE",
@@ -264,6 +309,9 @@ export const ColumnDefs = [
     minWidth: 130,
     maxWidth: 150,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "DAILY_ACCRUALS",
@@ -281,6 +329,9 @@ export const ColumnDefs = [
     minWidth: 160,
     maxWidth: 180,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "SETTLE_DATE",
@@ -297,6 +348,9 @@ export const ColumnDefs = [
     minWidth: 160,
     maxWidth: 180,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "CONTRACT_ID",
@@ -313,12 +367,18 @@ export const ColumnDefs = [
     minWidth: 160,
     maxWidth: 180,
     suppressSizeToFit: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
   },
   {
     headerName: "STATUS",
     field: "status",
     floatingFilter: false,
     editable: false,
+    icons: {
+      menu: `<img src="${searchLogo}" />`,
+    },
     floatingFilterComponentParams: { suppressFilterButton: true },
     minWidth: 100,
     cellStyle: function (params: any) {

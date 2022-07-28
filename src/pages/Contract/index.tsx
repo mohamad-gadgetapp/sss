@@ -353,7 +353,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
   return (
     <>
       <Header valid={false} />
-      <div style={{ height: `${height}rem`, overflow: "auto" }}>
+      <div style={{ height: `${height}rem`, overflow: "auto", backgroundColor: "#EAECEF" }}>
         <div className="subHeaderContract">
           <SubHeader
             title=" Single Trade Entry"
