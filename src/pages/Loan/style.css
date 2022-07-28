@@ -3,7 +3,7 @@
 }
 
 .filter-loan-div {
-    background-color: white;
+    /* background-color: white; */
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,8 @@
     box-sizing: border-box;
     border: 1px solid var(--primary_grey);
     box-shadow: 0px 2px 5px var(--primary_grey);
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
+    margin: 0.5rem;
 }
 
 .loanLogo-img{
@@ -52,7 +53,7 @@
 
 .logo-main-HeaderPart{
     display: flex;
-    padding: 1rem 0rem;
+    padding: 2.5rem 0rem;
 }
 
 .borrow-ticket{

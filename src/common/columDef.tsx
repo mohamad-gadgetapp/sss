@@ -125,14 +125,14 @@ export const ColumnDefs = [
     field: "quantity",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    valueGetter: (params) => {
+    valueGetter: (params:any) => {
       if (params.data.quantity) {
         return params.data.quantity;
       } else {
         return undefined;
       }
     },
-    valueSetter: (params) => {
+    valueSetter: (params:any) => {
       var newValInt = parseInt(params.newValue);
       if (!params.data.quantity) {
         params.data.quantity = {};

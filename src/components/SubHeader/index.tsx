@@ -119,6 +119,7 @@ const SubHeader = ({
   const [securityInputStatus, setSecurityInputStatus] = useState(false);
   const [securityBorrowInputStatus, setSecurityBorrowInputStatus] =
     useState(false);
+  const [allIndex, setAllIndex] = useState<any>("")
 
   const [borrowAndLoanFieldisMatch, setBorrowAndLoanFieldisMatch] =
     useState("Borrow");
@@ -189,7 +190,7 @@ const SubHeader = ({
       RateFieldprop(e);
     }
     let contractValue = parseInt(quantityField) * parseInt(e.target.value);
-    console.log("contractValue ", contractValue);
+    // console.log("contractValue ", contractValue);
     setContractValueField(JSON.stringify(contractValue));
     if (ContractValueFieldprop) {
       ContractValueFieldprop(JSON.stringify(contractValue));
@@ -336,12 +337,13 @@ const SubHeader = ({
     if (item != "") {
       setCpartyInputStatus(true);
     }
+    console.log("counterParty Length ", item.length)
   };
 
   const onTickerSearchValue = (item: any) => {
     if (TickerSearch) {
       
-      console.log("tickerItem 01", item)
+      // console.log("tickerItem 01", item)
       TickerSearch(item);
     }
     if (TickerSearchMatch) {
@@ -353,9 +355,10 @@ const SubHeader = ({
     setTickerPrice(item.Price);
      console.log("tickerItem ", item)
 
-    if (item != "") {
-      setCpartyBorrowInputStatus(true);
+    if (tickerField != "") {
+      setSecurityInputStatus(false);
     }
+    
   };
 
   const onCounterSearchisMatch = (item: any) => {
@@ -386,6 +389,8 @@ const SubHeader = ({
     if (item != "") {
       setCpartyBorrowInputStatus(true);
     }
+    // setCpartyBorrowInputStatus(true)
+
   };
 
   useEffect(() => {
@@ -414,8 +419,9 @@ const SubHeader = ({
   }, [borrowAndLoanField, borrowAndLoanFieldisMatch]);
   useEffect(() => {
    
-     console.log("tickerFieldisMatch.length ", tickerFieldisMatch.length);
+     console.log("tickerField.length ", tickerField.length);
      console.log("securityInputStatus ", securityInputStatus);
+    
   }, [tickerFieldisMatch]);
 
   return (
@@ -560,8 +566,7 @@ const SubHeader = ({
                       .filter((item: any) => {
                         // console.log("item ", item)
                         const searchTerm = tickerField.toLowerCase();
-                        const partyName = item.Ticker.toLowerCase();
-
+                        const partyName = item.Ticker.toLowerCase();  
                         return (
                           searchTerm &&
                           partyName.startsWith(searchTerm) &&
@@ -570,11 +575,15 @@ const SubHeader = ({
                       })
                       .slice(0, 10)
                       .map((item: any, index) => (
+                        
+                        // console.log("tickerItem 05", index),
                         <div
                           onClick={() => onTickerSearchValue(item)}
                           key={index}
                           className="dropdown-row"
                         >
+                          
+ 
                           <div className="tabelrowhade">{item.Ticker}</div>
                           <div className="tabelrowhadename">{item.CUSIP}</div>
                           <div className="tabelrowhade">{item.Name}</div>
@@ -797,7 +806,7 @@ const SubHeader = ({
                     <div className="dropdown-dummyData">
                       <div
                         className={
-                          securityInputStatus == true
+                          securityBorrowInputStatus == true
                             ? "tablemaibdiv"
                             : "tablemaibdivhide"
                         }

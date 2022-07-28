@@ -129,7 +129,7 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     onClickHan(selectedRows);
   }, []);
 
-  const onCellValueChanged = useCallback((event) => {
+  const onCellValueChanged = useCallback((event:any) => {
     console.log('Data after change is', event.data);
   }, []);
 
