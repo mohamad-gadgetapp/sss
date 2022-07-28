@@ -51,10 +51,5 @@
       "daily_debits": "956.22",
       "contract_id": "14-JUN 22-C2257-1"
     }
-  ],
-  "totals": {
-    "quantity": 25343.256,
-    "value": 25343.256,
-    "daily_debits": 25343.256
-  }
+  ]
 }

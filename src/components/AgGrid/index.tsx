@@ -46,55 +46,56 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
   }, []);
 
   useEffect(() => {
-    console.log("type ", type);
+    console.log("type ");
     gridApi = gridRef.current!.api;
     var gridColumnApi = gridRef.current!.columnApi;
-    let result:any = {};
-    gridColumnApi?.getAllGridColumns().forEach((item:any) => {
-      result[item.colId] = null;
-    });
-    let columnsWithAggregation = ['quantity','value','daily_accruals']
-    columnsWithAggregation.forEach(element => {
-      gridApi?.forEachNodeAfterFilter((rowNode:any) => {
-        console.log("footer: ", rowNode);
-        if (rowNode.data[element]) {
-          let numberWithoutCommas = removeCommas(rowNode.data[element]);
-          result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
-        }
-      });
-      result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-      console.log("result", result);
-    });
-    result['b_l'] = 'Total:';
-    gridApi?.setPinnedBottomRowData([result]);
+    // let result:any = {};
+    // gridColumnApi?.getAllGridColumns().forEach((item:any) => {
+    //   result[item.colId] = null;
+    // });
+    // let columnsWithAggregation = ['quantity','value','daily_accruals']
+    // columnsWithAggregation.forEach(element => {
+    //   gridApi?.forEachNodeAfterFilter((rowNode:any) => {
+    //     console.log("footer: ", rowNode);
+    //     if (rowNode.data[element]) {
+    //       let numberWithoutCommas = removeCommas(rowNode.data[element]);
+    //       result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
+    //     }
+    //   });
+    //   result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    //   console.log("result", result);
+    // });
+    // result['b_l'] = 'Total:';
+    // gridApi?.setPinnedBottomRowData([result]);
+    getTotal(gridApi, gridColumnApi);
   }, [rowData]);
 
   const onColumnResized = useCallback((params: ColumnResizedEvent) => {
-    console.log("params ", params);
+    // console.log("params ", params);
   }, []);
 
   const onGridReady = (params: any) => {
     params.api.sizeColumnsToFit();
     gridApi = params.api;
     var gridColumnApi = params.columnApi;
-    let result:any = {};
-    gridColumnApi.getAllGridColumns().forEach((item:any) => {
-      result[item.colId] = null;
-    });
-    let columnsWithAggregation = ['quantity','value','daily_accruals']
-    columnsWithAggregation.forEach(element => {
-      gridApi.forEachNodeAfterFilter((rowNode:any) => {
-        console.log("footer: ", rowNode);
-        if (rowNode.data[element]) {
-         let numberWithoutCommas = removeCommas(rowNode.data[element]);
-          result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
-        }
-      });
-      result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    console.log("result", result);
-    });
-    result['b_l'] = 'Total:';
-    gridApi.setPinnedBottomRowData([result]);
+    // let result:any = {};
+    // gridColumnApi.getAllGridColumns().forEach((item:any) => {
+    //   result[item.colId] = null;
+    // });
+    // let columnsWithAggregation = ['quantity','value','daily_accruals']
+    // columnsWithAggregation.forEach(element => {
+    //   gridApi.forEachNodeAfterFilter((rowNode:any) => {
+    //     if (rowNode.data[element]) {
+    //      let numberWithoutCommas = removeCommas(rowNode.data[element]);
+    //       result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
+    //     }
+    //   });
+    //   result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    // });
+    // result['b_l'] = 'Total:';
+    // gridApi.setPinnedBottomRowData([result]);
+
+    getTotal(gridApi, gridColumnApi);
   };
 
   const removeCommas = (str:string) => {
@@ -104,10 +105,30 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     return str;
   };
 
+  const getTotal = (api:any, columnApi:any) => {
+    let result:any = {};
+    columnApi?.getAllGridColumns().forEach((item:any) => {
+      result[item.colId] = null;
+    });
+    let columnsWithAggregation = ['quantity','value','daily_accruals']
+    columnsWithAggregation.forEach(element => {
+      api?.forEachNodeAfterFilter((rowNode:any) => {
+        if (rowNode.data[element]) {
+          // let numberWithoutCommas = removeCommas(rowNode.data[element]);
+          // result[element] += Number(parseFloat(numberWithoutCommas).toFixed(2));
+          result[element] += Number(parseFloat(rowNode.data[element]).toFixed(2));
+        }
+      });
+      result[element]=(Number(result[element])).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    });
+    result['select'] = 'Total:';
+    api?.setPinnedBottomRowData([result]);
+  }
+
   const rowClassRules = useMemo(() => {
     return {
       'is-new-warning': (params:any) => {
-        console.log("params ", params.data.is_new)
+        // console.log("params ", params.data.is_new);
         var isNew = params.data.is_new;
         return isNew === "TRUE" ;
       }
@@ -115,11 +136,11 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
   }, []);
 
   const getRowStyle:any = (params:any) => {
-    console.log("pin: ", params.node.RowNode)
+    // console.log("pin: ", params.node.RowNode)
     if (params.node.rowPinned === 'bottom') {
-      return { "background-color": "#6a7587", color: "white" };
+      return { "backgroundColor": "#6a7587", "color": "white", "borderBottom": "none", "border": "none" };
     } else {
-      return { "background-color": "white" };
+      return { "backgroundColor": "white" };
     }
   };
 
@@ -129,8 +150,11 @@ const AgGrid = ({ title, rowData, height, type, onClickHan }: AgGridProps) => {
     onClickHan(selectedRows);
   }, []);
 
-  const onCellValueChanged = useCallback((event) => {
-    console.log('Data after change is', event.data);
+  const onCellValueChanged = useCallback((event:any) => {
+    // console.log('Data after change is', event.data);
+    gridApi = gridRef.current!.api;
+    var gridColumnApi = gridRef.current!.columnApi;
+    getTotal(gridApi, gridColumnApi);
   }, []);
 
   return (

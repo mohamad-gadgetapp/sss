@@ -1,18 +1,19 @@
 
-var numberFormatter = Intl.NumberFormat('en-US', {
+var numberFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
-  maximumFractionDigits: 2
+  maximumFractionDigits: 3
 });
 
 var myValueFormatter = (p:any) => {
   numberFormatter.format(p.value);
+  // console.log("number: ", p);
 }
 
 export const ColumnDefs = [
   {
     headerName: "",
-    field: "",
+    field: "select",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
     headerCheckboxSelection: true,
@@ -125,14 +126,14 @@ export const ColumnDefs = [
     field: "quantity",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    valueGetter: (params) => {
+    valueGetter: (params:any) => {
       if (params.data.quantity) {
         return params.data.quantity;
       } else {
         return undefined;
       }
     },
-    valueSetter: (params) => {
+    valueSetter: (params:any) => {
       var newValInt = parseInt(params.newValue);
       if (!params.data.quantity) {
         params.data.quantity = {};
@@ -194,7 +195,7 @@ export const ColumnDefs = [
     field: "value",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    // valueFormatter: myValueFormatter,
+    valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",
@@ -279,7 +280,7 @@ export const ColumnDefs = [
     field: "daily_accruals",
     floatingFilter: false,
     floatingFilterComponentParams: { suppressFilterButton: true },
-    // valueFormatter: myValueFormatter,
+    valueFormatter: myValueFormatter,
     cellStyle: {
       display: "flex",
       alignItems: "center",

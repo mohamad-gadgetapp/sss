@@ -2,9 +2,9 @@ import { colors } from "./color";
 import symbol from "../assets/Symbol.svg";
 import ButtonCellRenderer from "./ButtonCellRenderer";
 
-var numberFormatter = Intl.NumberFormat('en-US', {
+var numberFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'GBP',
     maximumFractionDigits: 2
 });
 
@@ -155,7 +155,7 @@ export const ColumnLoanDefs = [
         field: "value",
         floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
-        // valueFormatter: myValueFormatter,
+        valueFormatter: myValueFormatter,
         cellStyle: {
             display: "flex",
             alignItems: "center",
@@ -240,7 +240,7 @@ export const ColumnLoanDefs = [
         field: "daily_accruals",
         floatingFilter: false,
         floatingFilterComponentParams: { suppressFilterButton: true },
-        // valueFormatter: myValueFormatter,
+        valueFormatter: myValueFormatter,
         cellStyle: {
             display: "flex",
             alignItems: "center",
