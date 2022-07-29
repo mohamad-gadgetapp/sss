@@ -7,6 +7,7 @@ import * as XLSX from "xlsx";
 import data from "../../contractsData.json";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 interface ContractPageProps {
   height?: number;
@@ -352,11 +353,11 @@ const Contract = ({ height, title }: ContractPageProps) => {
 
   return (
     <>
-      <Header valid={false} />
+      {/* <Header valid={false} /> */}
       <div style={{ height: `${height}rem`, overflow: "auto", backgroundColor: "#EAECEF" }}>
         <div className="subHeaderContract">
           <SubHeader
-            title=" Single Trade Entry"
+            title="Single Trade Entry"
             onClick={onSubmit}
             borrowAndLoneFieldprop={(e: any) => {
               setBaLinContract(e);
@@ -495,6 +496,7 @@ const Contract = ({ height, title }: ContractPageProps) => {
           </div>
           <AgGrid rowData={rowData} height={heightAG_1} />
         </div>
+        <Footer/>
       </div>
     </>
   );

@@ -26,6 +26,7 @@ function App() {
         {/*    window.location.pathname === "/loan" ? <Header valid={true}/> : <Header valid={false}/>*/}
         {/*}*/}
       <div style={{ padding: '0px' }}>
+        <Header/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contractBooking" element={<ContractBooking />} />

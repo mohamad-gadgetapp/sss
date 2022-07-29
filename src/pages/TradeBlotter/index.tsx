@@ -380,7 +380,7 @@ const TradeBlotter = () => {
 
   return (
       <>
-      <Header valid={false}/>
+      {/* <Header valid={false}/> */}
     <div className="main-div-TradeBlotter">
       <div id="tablePart" className="left-part">
         <div className="main-div-TradeBooking">

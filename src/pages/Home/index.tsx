@@ -6,6 +6,8 @@ import data from "../../contractsData.json";
 import ContractBooking from '../ContractBooking';
 import ShowcaseLayout from "../../components/ShowcaseLayout";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
 const HomePage = () => {
   const [rowData] = useState<Array<object>>([...data.contractsData]);
   const [layout, setLayout] = useState<Array<object>>([]);
@@ -25,8 +27,8 @@ const HomePage = () => {
     setHeightAG_3(((layout[3].h * 20.3) / 7))
   }
   return (
-    <>
-        <Header valid={false}/>
+    <div>
+        {/* <Header valid={false}/> */}
         <ShowcaseLayout
         onLayoutChange={onLayoutChange}
         child_list={[
@@ -37,7 +39,8 @@ const HomePage = () => {
         ]}
         height={7}
       ></ShowcaseLayout>
-    </>
+      <Footer/>
+    </div>
   )
 }
 

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import AgGrid from "../../components/AgGrid";
-import data from "../../contractsData.json";
+import data from "../../loansData.json";
 import symbolData from "../../symbol.json";
 import cpartyData from "../../dummyData.json";
 import "./style.css";
 import Header from "../../components/Header";
 import logo from "../../assets/SouthLogoLoan.png";
+import Footer from "../../components/Footer";
+
 
 const Loan = () => {
-  const [rowData] = useState<Array<object>>([...data.contractsData]);
+  const [rowData] = useState<Array<object>>([...data.loansData]);
   const [symbolSelect] = useState<Array<object>>([...symbolData.Sec_master]);
   const [cpartySelect] = useState<Array<object>>([...cpartyData.dummyData]);
   const [heightAG_1] = useState(25);
@@ -27,7 +29,7 @@ const Loan = () => {
   ]);
   return (
     <div style={{backgroundColor: '#EAECEF'}}>
-      <Header valid={true}/>
+      {/* <Header valid={true}/> */}
       <div className="loanPage-MainDiv" >
       <div className="filter-loan-div" >
         <div className="title-subHeaderTitle">
@@ -87,6 +89,7 @@ const Loan = () => {
           <AgGrid rowData={rowData} height={heightAG_1} type="loan"/>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

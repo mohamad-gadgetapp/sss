@@ -1,0 +1,31 @@
+.stagingBtn {
+    background-color: #ffffff;
+    color: #000000;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    border-radius: 0.1rem;
+}
+
+.stagingDiv{
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    background-color: #1E355E;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.copyRight-footer{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.copy{
+    padding-top: 0.1rem;
+}

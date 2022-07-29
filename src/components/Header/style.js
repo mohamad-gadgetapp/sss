@@ -5,7 +5,7 @@ export const styles = {
   navBarButton: { marginRight: 0},
   userBar: {
     display: "flex",
-    width: "170px",
+    width: "22%",
     alignItems: "center",
     justifyContent: 'space-between'
   },

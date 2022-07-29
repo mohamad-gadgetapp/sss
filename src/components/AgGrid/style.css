@@ -85,9 +85,9 @@
 }
 .title-subHeaderTitle-Loan{
     font-family: 'Cairo';
-    font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 3rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    /* line-height: 3rem; */
     display: flex;
     align-items: center;
     justify-content: flex-start;

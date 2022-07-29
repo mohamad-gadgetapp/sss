@@ -17,8 +17,8 @@ body {
   }
   .react-grid-item {
     box-sizing: border-box;
-    border: 1px solid var(--primary_grey);
-    box-shadow: 0px 2px 5px var(--primary_grey);
+    box-shadow: 0px 1px 5px var(--primary_grey);
+    
   }
   
   .react-grid-item:not(.react-grid-placeholder) {
